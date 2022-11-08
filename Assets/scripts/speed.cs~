@@ -1,0 +1,39 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Mono.Data.Sqlite;
+
+
+
+public class speed : MonoBehaviour
+{
+    [SerializeField] public  float speed2 = 10f;
+    [SerializeField] private GameObject Camera;
+    float p;
+    public Transform panel;
+    void Start()
+    {
+        GetComponent<Animator>().SetBool("isRuning", true);
+        StartCoroutine(Flage());
+        p = this.transform.position.z - Camera.transform.position.z;
+    }
+
+    IEnumerator Flage()
+    {
+        while (Enable_Scripts.count_begin != true)
+        {
+            Instantiate(panel, new Vector3(0, 1.31f, transform.position.z + 50), panel.rotation);
+            yield return new WaitForSeconds(3);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        GetComponent<Rigidbody>().velocity = new Vector3(0, GetComponent<Rigidbody>().velocity.y, speed2);
+        Camera.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, this.transform.position.z - p );
+        GetComponent<Animator>().SetBool("isRuning", true);
+        
+    }
+}

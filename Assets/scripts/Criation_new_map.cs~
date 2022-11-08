@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Criation_new_map : MonoBehaviour
+{
+    // Start is called before the first frame update
+    [SerializeField]
+    private Texture2D ImageRaw;
+    void Start()
+    {
+
+        Color[] pixels = ImageRaw.GetPixels();
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
