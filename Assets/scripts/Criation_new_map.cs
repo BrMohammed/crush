@@ -10,7 +10,8 @@ public class Criation_new_map : MonoBehaviour
     private Texture2D ImageRaw;
     [SerializeField]
     private GameObject cube;
-    GameObject c;
+    [SerializeField]
+    private GameObject parent;
 
     private void Start()
     {
@@ -43,13 +44,13 @@ public class Criation_new_map : MonoBehaviour
             Color cc = pixels[counter];
             if (cc.a != 0)
             {
-                GameObject c = Instantiate(cube, pos, cube.transform.rotation);
+                GameObject c = Instantiate(cube, pos, cube.transform.rotation, parent.transform);
                 c.GetComponent<MeshRenderer>().material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
                 c.GetComponent<MeshRenderer>().material.color = new Color(cc.r, cc.g, cc.b, 0.2f);
                 GameObject child = c.transform.GetChild(0).gameObject;
-                child.GetComponent<TextMeshPro>().text = "2";
+                child.GetComponent<TextMeshPro>().text = "";
                 child = c.transform.GetChild(1).gameObject;
-                child.GetComponent<TextMeshPro>().text = "2";
+                child.GetComponent<TextMeshPro>().text = "";
             }
             counter++;
         }

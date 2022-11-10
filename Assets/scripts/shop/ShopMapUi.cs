@@ -14,14 +14,14 @@ namespace ShopSystem
         public Button Next, Prev, Select;
         private int curentIndex = 0;
         private int SelectedIndex = 0;
-        //[SerializeField] private SaveLodeData saveLodeData;
+        [SerializeField] private SaveLodeData saveLodeData;
         public GameObject SoundObj;
         private int MapsSelect;
 
         void Start()
         {
             HighScore = int.Parse(SimpelDb.read("score"));
-           // saveLodeData.Initialized();
+            saveLodeData.Initialized();
             SelectedIndex = ShopMapDataUI.SelectedIndex;
             curentIndex = SelectedIndex;
             Next.onClick.AddListener(() => NextBtnMeth());
@@ -109,7 +109,7 @@ namespace ShopSystem
                 UnlockBtnText.text = "Select";
                 yes_is_selected = true;
                 ShopMapDataUI.ShopItems[curentIndex].IsUnlocked = true;
-               // saveLodeData.SaveMapData();
+                saveLodeData.SaveMapData();
             }
             if (yes_is_selected == true)
             {
@@ -117,7 +117,7 @@ namespace ShopSystem
                 SelectedIndex = curentIndex;
                 ShopMapDataUI.SelectedIndex = SelectedIndex;
                 Select.gameObject.SetActive(false);
-                //saveLodeData.SaveMapData();
+                saveLodeData.SaveMapData();
             }
         }
 

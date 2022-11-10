@@ -56,6 +56,7 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/scripts/InitBall.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanTween.cs" />
     <Compile Include="Assets/LeanTween/Framework/LTDescr.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanTweenExt.cs" />
@@ -78,7 +79,9 @@
     <Compile Include="Assets/Props Animations/Scripts/General/CameraBumper.cs" />
     <Compile Include="Assets/scripts/ads/inter.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSplines.cs" />
+    <Compile Include="Assets/scripts/destroy.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralEventsListeners.cs" />
+    <Compile Include="Assets/scripts/FlipControlRight.cs" />
     <Compile Include="Assets/scripts/Audio/AudioManager.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/TestingZLegacy.cs" />
     <Compile Include="Assets/scripts/Loading.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Assets/Props Animations/Scripts/GUIScript.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSpline.cs" />
     <Compile Include="Assets/scripts/FlipControlLeft.cs" />
+    <Compile Include="Assets/scripts/Ball_pass.cs" />
     <Compile Include="Assets/scripts/shop/ShopUi.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralAdvancedTechniques.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanSmooth.cs" />
@@ -117,8 +121,8 @@
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralBasic.cs" />
     <Compile Include="Assets/LeanTween/Examples/Archived/TestingRigidbodyCS.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/Following.cs" />
-    <Compile Include="Assets/scripts/FlipControlRight.cs" />
-    <Compile Include="Assets/scripts/destroy.cs" />
+    <Compile Include="Assets/scripts/timer.cs" />
+    <Compile Include="Assets/scripts/GamePlayControler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

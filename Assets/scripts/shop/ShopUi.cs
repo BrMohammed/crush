@@ -15,7 +15,7 @@ namespace ShopSystem
         public Button Next, Prev, Select;
         private int curentIndex = 0;
         private int SelectedIndex = 0;
-        //[SerializeField] private SaveLodeData saveLodeData;
+        [SerializeField] private SaveLodeData saveLodeData;
         public GameObject MapObj, CharCanvObj, CharactersObj, SoundObj, SoundOnObj, SounOffObj, MusicOnObj, MusicOffObj,
                                     homeiconobj, charicoobj, mapicoobj, SoundicoObj;
         private int MapsSelect;
@@ -25,7 +25,7 @@ namespace ShopSystem
             SoinAndMusicFromDb();
             UiAnimeShop.ui.betwen_scines();
             Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
-//            saveLodeData.Initialized();
+            saveLodeData.Initialized();
             SelectedIndex = ShopDataUI.SelectedIndex;
             curentIndex = SelectedIndex;
             Totalcoin.text = "" + Shopcoin;
@@ -136,7 +136,7 @@ namespace ShopSystem
                 SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
                 yes_is_selected = true;
                 ShopDataUI.ShopItems[curentIndex].isUnlocked = true;
-                //saveLodeData.SaveData();
+                saveLodeData.SaveData();
             }
             if(yes_is_selected == true)
             {
@@ -144,7 +144,7 @@ namespace ShopSystem
                 SelectedIndex = curentIndex;
                 ShopDataUI.SelectedIndex = SelectedIndex;
                 Select.gameObject.SetActive(false);
-                //saveLodeData.SaveData();
+                saveLodeData.SaveData();
             }
         }
         public void GoHme()
@@ -207,7 +207,7 @@ namespace ShopSystem
             M_Music();
             FindObjectOfType<AudioManager>().PlaySound("click_on");
             SimpelDb.update(0.ToString(), "Music");
-           // Debug.Log(SimpelDb.read("Music"));
+            Debug.Log(SimpelDb.read("Music"));
             MusicOffObj.SetActive(false);
             MusicOnObj.SetActive(true);
 

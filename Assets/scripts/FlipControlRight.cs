@@ -33,12 +33,10 @@ public class FlipControlRight : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             isKeyPress = true;
-            Debug.Log("Right");
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             isKeyPress = false;
-            Debug.Log("Right");
         }
 
     }

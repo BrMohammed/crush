@@ -33,12 +33,10 @@ public class FlipControlLeft : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             isKeyPress = true;
-            Debug.Log("Right");
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             isKeyPress = false;
-            Debug.Log("Right");
         }
 
     }
@@ -51,13 +49,13 @@ public class FlipControlLeft : MonoBehaviour
         {
 
             // #3
-            motor.targetVelocity = -speed;
+            motor.targetVelocity = speed;
             myHingeJoint.motor = motor;
         }
         else
         {
             // #4
-            motor.targetVelocity = speed;
+            motor.targetVelocity = -speed;
             myHingeJoint.motor = motor;
         }
 

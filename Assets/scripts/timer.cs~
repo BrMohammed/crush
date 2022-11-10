@@ -1,0 +1,40 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class timer : MonoBehaviour
+{
+    Image timerbar;
+    public float maxtime = 5f;
+    public static float timelift;
+    //private GameConterolerFromMenu gp;
+
+    void Start()
+    {
+        timerbar = GetComponent<Image>();
+        timelift = maxtime;
+        //gp = GameObject.Find("Gameplay Controller gp").GetComponent<GameConterolerFromMenu>();
+
+
+    }
+
+    
+    void Update()
+    {
+        
+        if (timelift > 0)
+        {
+            timelift -= Time.deltaTime;
+            timerbar.fillAmount = timelift / maxtime;
+        }
+        else
+        {
+            Debug.Log("time out");
+            //GameplayController.instance.gameover();
+            gp.gameover();
+        }
+            
+    }
+    
+}

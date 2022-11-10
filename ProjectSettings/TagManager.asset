@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - cube
+  - ball
+  - ball_enter
   layers:
   - Default
   - TransparentFX
