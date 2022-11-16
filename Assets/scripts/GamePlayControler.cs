@@ -8,12 +8,30 @@ public class GamePlayControler : MonoBehaviour
 {
     [Header("Buttons :\n")]
     [SerializeField] private Button pause_btn;
+
     [SerializeField] private Button resume_btn1;
     [SerializeField] private Button resume_btn_2;
     [SerializeField] private Button home_btn;
+
+    [SerializeField] private Button home_btn_gameover;
+    [SerializeField] private Button levels_btn_gameover; 
+    [SerializeField] private Button returne_btn_gameover;
+
+    [SerializeField] private Button home_btn_winning;
+    [SerializeField] private Button settings_btn_winning;
+    [SerializeField] private Button next_btn_winning;
+
+    [SerializeField] private Button play_from_home;
     [SerializeField] private Button level_from_home;
-    [SerializeField] private Button setting_btn_from_levels;
+    [SerializeField] private Button setting_btn_from_home;
+
+
     [SerializeField] private Button home_from_levels;
+    [SerializeField] private Button settings_from_levels;
+
+    [SerializeField] private Button home_from_settings;
+    [SerializeField] private Button levels_from_settings;
+
 
     [Header("menus : \n")]
     [SerializeField] private GameObject pause_panel;
@@ -39,7 +57,7 @@ public class GamePlayControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        setting_btn_from_levels.onClick.AddListener(() => On_setting_click_form_main());
+        Listners();
         Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
         for (int i = 0; i < Criation_new_map.maps_count; i++)
         {
@@ -64,6 +82,36 @@ public class GamePlayControler : MonoBehaviour
         }
             
     }
+    private void Listners()
+    {
+        //pause_pannel
+        pause_btn.onClick.AddListener(() => OnPauseBtn_click());
+        resume_btn1.onClick.AddListener(() => On_resume_Click());
+        resume_btn_2.onClick.AddListener(() => On_resume_Click());
+        //begingam pannel
+        home_btn.onClick.AddListener(() => On_home_Click_from_pause_panel());
+        //gameover
+        home_btn_gameover.onClick.AddListener(() => On_home_Click_from_Gameover_panel());
+        levels_btn_gameover.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
+        returne_btn_gameover.onClick.AddListener(() => Returne());
+        //winning
+        //home_btn_winning.onClick.AddListener(() =>());
+        //settings_btn_winning.onClick.AddListener(() =>());
+        //next_btn_winning.onClick.AddListener(() =>()); ;
+
+        //home
+        play_from_home.onClick.AddListener(() =>On_Play_Click());
+        level_from_home.onClick.AddListener(() =>On_Levels_Click_from_main());
+        setting_btn_from_home.onClick.AddListener(() => On_setting_click_form_main());
+        //levels
+        home_from_levels.onClick.AddListener(() =>OnHomeBtn_click_from_levelse());
+        settings_from_levels.onClick.AddListener(() => On_setting_click_form_main());
+        //settings
+        home_from_settings.onClick.AddListener(() => On_home_Click_from_Gameover_panel());
+        levels_from_settings.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
+
+    }
+
     #region Levels_panel ------------------------------------------------
     public void OnHomeBtn_click_from_levelse()
     {
@@ -87,11 +135,6 @@ public class GamePlayControler : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public void On_setting_click_form_main()
-    {
-        All_panel_desactive();
-        settings_Panel.SetActive(true);
-    }
     #endregion
 
     #region Pause Menue ------------------------------------------------
@@ -183,16 +226,19 @@ public class GamePlayControler : MonoBehaviour
         All_panel_desactive();
         levels_panel.SetActive(true);
     }
+
+    public void On_setting_click_form_main()
+    {
+        All_panel_desactive();
+        settings_Panel.SetActive(true);
+    }
     #endregion
 
+    #region Seting_pannel -------------------------------------
 
-    #region Seting_pannel
 
-    
 
     #endregion
-
-
 
     public void All_panel_desactive()
     {
