@@ -6,24 +6,22 @@ using UnityEngine.UI;
 public class timer : MonoBehaviour
 {
     Image timerbar;
-    public float maxtime = 5f;
+    public static float maxtime;
     public static float timelift;
-    bool gameover;
     //private GameConterolerFromMenu gp;
 
-    void Start()
+    void Awake()
     {
+        maxtime = Criation_new_map.count_of_cubes * 2;
         timerbar = GetComponent<Image>();
         timelift = maxtime;
         //gp = GameObject.Find("Gameplay Controller gp").GetComponent<GameConterolerFromMenu>();
-
-        gameover = true;
     }
 
     
     void Update()
     {
-        
+        //
         if (timelift > 0)
         {
             timelift -= Time.deltaTime;
@@ -38,12 +36,12 @@ public class timer : MonoBehaviour
             //gp.gameover();
         }
        
-        if (timelift <= 0 && gameover == true)
-        {
-            Debug.Log("time out");
-            Time.timeScale = 0;
-            gameover = false;
-        }
+        //if (timelift <= 0 && gameover == true)
+        //{
+        //    Debug.Log("time out");
+        //    Time.timeScale = 0;
+        //    gameover = false;
+        //}
 
     }
     

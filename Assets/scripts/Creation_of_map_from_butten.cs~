@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class Creation_of_map_from_butten : MonoBehaviour
+{
+
+    [SerializeField] private GameObject parent_of_map;
+
+    private Criation_new_map Criation_of_map_obj;
+    private GamePlayControler Game_Play;
+
+    public void On_butten_level_click()
+    {
+        foreach (Transform child in parent_of_map.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        Criation_of_map_obj.Make_map(int.Parse(transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text));
+        Game_Play.All_panel_desactive();
+        Game_Play.begin_game_panel.SetActive(true);
+        Time.timeScale = 1;
+    }
+    // Start is called before the first frame update
+
+}
