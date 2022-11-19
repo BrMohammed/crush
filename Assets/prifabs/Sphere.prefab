@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7535985931460344907}
   - component: {fileID: 408504487}
   - component: {fileID: 125295533}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: ball
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2bb59a4d1adc143ff82ff10929b3e34d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

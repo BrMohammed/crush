@@ -7,11 +7,12 @@ TagManager:
   - cube
   - ball
   - ball_enter
+  - pauseBt
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - pp
   - Water
   - UI
   - 

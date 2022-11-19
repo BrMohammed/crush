@@ -67,6 +67,11 @@ public class Criation_new_map : MonoBehaviour
                 GameObject c = Instantiate(cube, pos, cube.transform.rotation, parent.transform);
                 c.GetComponent<MeshRenderer>().material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
                 c.GetComponent<MeshRenderer>().material.color = new Color(cc.r, cc.g, cc.b, 0.2f);
+                MeshRenderer renderer = c.GetComponent<MeshRenderer>();
+                Material material = renderer.material;
+                material.SetColor("_EmissionColor", cc);
+                material.EnableKeyword("_EMISSION");
+               
                 GameObject child = c.transform.GetChild(0).gameObject;
                 child.GetComponent<TextMeshPro>().text = "";
                 child = c.transform.GetChild(1).gameObject;
@@ -111,7 +116,10 @@ public class Criation_new_map : MonoBehaviour
             {
                 GameObject c = Instantiate(cube, pos, cube.transform.rotation, parent.transform);
                 c.GetComponent<MeshRenderer>().material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-                c.GetComponent<MeshRenderer>().material.color = new Color(cc.r, cc.g, cc.b, 0.2f);
+                MeshRenderer renderer = c.GetComponent<MeshRenderer>();
+                Material material = renderer.material;
+                material.SetColor("_EmissionColor", cc);
+                material.EnableKeyword("_EMISSION");
                 GameObject child = c.transform.GetChild(0).gameObject;
                 child.GetComponent<TextMeshPro>().text = "";
                 child = c.transform.GetChild(1).gameObject;
