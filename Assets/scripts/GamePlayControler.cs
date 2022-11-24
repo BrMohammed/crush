@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class GamePlayControler : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button home_btn;
 
     [SerializeField] private Button home_btn_gameover;
-    [SerializeField] private Button levels_btn_gameover; 
+    //[SerializeField] private Button levels_btn_gameover;
     [SerializeField] private Button returne_btn_gameover;
 
     [SerializeField] private Button home_btn_winning;
@@ -24,23 +25,27 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button play_from_home;
     [SerializeField] private Button level_from_home;
     [SerializeField] private Button setting_btn_from_home;
+    [SerializeField] private Button Balls_btn_from_home;
+    [SerializeField] private Button Shop_btn_from_home;
 
 
     [SerializeField] private Button home_from_levels;
-    [SerializeField] private Button settings_from_levels;
+
 
     [SerializeField] private Button home_from_settings;
     [SerializeField] private Button levels_from_settings;
 
 
     [Header("menus : \n")]
-    [SerializeField] private GameObject pause_panel;
-    [SerializeField] private GameObject main_panel;
-    [SerializeField] private GameObject winning_panel;
-    [SerializeField] private GameObject game_over_panel;
     [SerializeField] public GameObject begin_game_panel;
+    [SerializeField] private GameObject pause_panel;
+    [SerializeField] private GameObject game_over_panel;
+    [SerializeField] private GameObject winning_panel;
+    [SerializeField] private GameObject main_panel;
     [SerializeField] private GameObject levels_panel;
     [SerializeField] private GameObject settings_Panel;
+    [SerializeField] private GameObject Balls_Panel;
+    [SerializeField] private GameObject Shop_Panel;
 
     [Header("items : \n")]
     [SerializeField] private Text target_score;
@@ -49,7 +54,7 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private GameObject level_pref;
 
 
-
+    GameObject c;
     static public int score;
     private bool gameover;
     static public  int corent_scene;
@@ -61,7 +66,7 @@ public class GamePlayControler : MonoBehaviour
         Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
         for (int i = 0; i < Criation_new_map.maps_count; i++)
         {
-            GameObject c = Instantiate(level_pref, level_pref.transform.position, level_pref.transform.rotation, maps_parent_panel.transform);
+            c = Instantiate(level_pref, maps_parent_panel.transform.position, maps_parent_panel.transform.rotation, maps_parent_panel.transform);
             GameObject child = c.transform.GetChild(0).gameObject;
             child.GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
         }
@@ -92,7 +97,7 @@ public class GamePlayControler : MonoBehaviour
         home_btn.onClick.AddListener(() => On_home_Click_from_pause_panel());
         //gameover
         home_btn_gameover.onClick.AddListener(() => On_home_Click_from_Gameover_panel());
-        levels_btn_gameover.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
+       // levels_btn_gameover.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
         returne_btn_gameover.onClick.AddListener(() => Returne());
         //winning
         //home_btn_winning.onClick.AddListener(() =>());
@@ -103,13 +108,30 @@ public class GamePlayControler : MonoBehaviour
         play_from_home.onClick.AddListener(() =>On_Play_Click());
         level_from_home.onClick.AddListener(() =>On_Levels_Click_from_main());
         setting_btn_from_home.onClick.AddListener(() => On_setting_click_form_main());
+        Balls_btn_from_home.onClick.AddListener(() => On_Balls_btn_Click__from_home_panel());
+        Shop_btn_from_home.onClick.AddListener(() => On_Shop_btn_Click_from_home_panel());
         //levels
         home_from_levels.onClick.AddListener(() =>OnHomeBtn_click_from_levelse());
-        settings_from_levels.onClick.AddListener(() => On_setting_click_form_main());
+       
         //settings
         home_from_settings.onClick.AddListener(() => On_home_Click_from_Gameover_panel());
         levels_from_settings.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
+        //Shop
 
+        //Balls
+
+    }
+
+    private void On_Shop_btn_Click_from_home_panel()
+    {
+        All_panel_desactive();
+        Shop_Panel.SetActive(true);
+    }
+
+    private void On_Balls_btn_Click__from_home_panel()
+    {
+        All_panel_desactive();
+        Balls_Panel.SetActive(true);
     }
 
     #region Levels_panel ------------------------------------------------
@@ -249,5 +271,9 @@ public class GamePlayControler : MonoBehaviour
         begin_game_panel.SetActive(false);
         levels_panel.SetActive(false);
         settings_Panel.SetActive(false);
+
+
+        Balls_Panel.SetActive(false);
+        Shop_Panel.SetActive(false);
     }
 }

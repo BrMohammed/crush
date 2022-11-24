@@ -116,6 +116,7 @@ public class Criation_new_map : MonoBehaviour
             {
                 GameObject c = Instantiate(cube, pos, cube.transform.rotation, parent.transform);
                 c.GetComponent<MeshRenderer>().material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+                c.GetComponent<MeshRenderer>().material.color = new Color(cc.r, cc.g, cc.b, 0.2f);
                 MeshRenderer renderer = c.GetComponent<MeshRenderer>();
                 Material material = renderer.material;
                 material.SetColor("_EmissionColor", cc);

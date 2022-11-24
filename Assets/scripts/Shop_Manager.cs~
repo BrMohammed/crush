@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Shop_Manager : MonoBehaviour
+{
+    public Button[] Buttons;
+    void Start()
+    {
+        for(int i = 0; i < Buttons.Length; i++)
+            Buttons[i].onClick.AddListener(() => On_click_Up_butten(Buttons[i], i));
+        
+    }
+
+    private void On_click_Up_butten(Button button,int i)
+    {
+        button.gameObject.GetComponent<Image>().color = new Color(255, 52, 197, 226);
+        if (i++ > Buttons.Length)
+            i = 0;
+        else
+            i++;
+        Buttons[i].gameObject.GetComponent<Image>().color = new Color(255, 52, 197, 226);
+    }
+    void Update()
+    {
+        
+    }
+}
