@@ -389,6 +389,9 @@
     <Reference Include="GoogleMobileAds.Placement">
       <HintPath>Assets/GoogleMobileAds/GoogleMobileAds.Placement.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets/asset/LitJson.dll</HintPath>
+    </Reference>
     <Reference Include="GoogleMobileAds.Core">
       <HintPath>Assets/GoogleMobileAds/GoogleMobileAds.Core.dll</HintPath>
     </Reference>

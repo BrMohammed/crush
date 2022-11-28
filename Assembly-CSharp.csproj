@@ -63,7 +63,6 @@
     <Compile Include="Assets/scripts/Audio/Sound.cs" />
     <Compile Include="Assets/Props Animations/Scripts/General/LimitedFloat.cs" />
     <Compile Include="Assets/scripts/shop/ShopData.cs" />
-    <Compile Include="Assets/scripts/shop/ShopMapData.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/TestingUnitTests.cs" />
     <Compile Include="Assets/LeanTween/Framework/LTSeq.cs" />
     <Compile Include="Assets/scripts/UiAnimation.cs" />
@@ -89,21 +88,22 @@
     <Compile Include="Assets/Props Animations/Scripts/General/CameraControl.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/TestingZLegacyExt.cs" />
     <Compile Include="Assets/scripts/ads/Adreward.cs" />
-    <Compile Include="Assets/scripts/Shop_Manager.cs" />
+    <Compile Include="Assets/scripts/shop/Shop_Manager.cs" />
     <Compile Include="Assets/scripts/Creation_of_map_from_butten.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathBezier2d.cs" />
     <Compile Include="Assets/Props Animations/Scripts/CharacterMovementController.cs" />
     <Compile Include="Assets/Props Animations/Scripts/PropsUnityObject.cs" />
     <Compile Include="Assets/LeanTween/Framework/LTDescrOptional.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralEasingTypes.cs" />
-    <Compile Include="Assets/scripts/shop/ShopMapUi.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralSequencer.cs" />
     <Compile Include="Assets/LeanTween/Examples/Archived/OldGUIExamplesCS.cs" />
+    <Compile Include="Assets/scripts/shop/ShopTrailUi.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/LogoCinematic.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralCameraShake.cs" />
     <Compile Include="Assets/scripts/shop/SaveLodeData.cs" />
     <Compile Include="Assets/LeanTween/Examples/Archived/TestingPunch.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanAudio.cs" />
+    <Compile Include="Assets/scripts/shop/ShopTrailData.cs" />
     <Compile Include="Assets/Props Animations/Scripts/GUIScript.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSpline.cs" />
     <Compile Include="Assets/scripts/FlipControlLeft.cs" />
@@ -151,6 +151,7 @@
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" />
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" />
     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
+    <None Include="Assets/asset/LitJson.dll" />
     <None Include="Assets/LeanTween/Examples/Archived/2dUnlitWithFade.shader" />
     <None Include="Assets/asset/Blur.shader" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" />
@@ -436,6 +437,9 @@
     </Reference>
     <Reference Include="GoogleMobileAds.Placement">
       <HintPath>Assets/GoogleMobileAds/GoogleMobileAds.Placement.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets/asset/LitJson.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Core">
       <HintPath>Assets/GoogleMobileAds/GoogleMobileAds.Core.dll</HintPath>

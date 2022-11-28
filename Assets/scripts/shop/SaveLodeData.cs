@@ -8,19 +8,18 @@ namespace ShopSystem
     {
 
         [SerializeField] private ShopUi shopUi;
-        [SerializeField] private ShopMapUi shopmapui;
+        [SerializeField] private ShopTrailUi shoptrailui;
         public void Initialized()
         {
             if (int.Parse(SimpelDb.read("gamestart")) == 1)
             {
-                LoadMapData();
+                //LoadTrailpData();
                 LoadData();
             }
-                
             else
             {
                 SaveData();
-                SaveMapData();
+               // SaveTrailpData();
                 SimpelDb.update(1.ToString(), "gamestart");
             }
         }
@@ -35,16 +34,16 @@ namespace ShopSystem
             shopUi.ShopDataUI = new ShopData();
             shopUi.ShopDataUI = JsonUtility.FromJson<ShopData>(shopDataString);
         }
-        public void SaveMapData()
+        public void SaveTrailpData()
         {
-            string ShopMapDataString = JsonUtility.ToJson(shopmapui.ShopMapDataUI);
-            SimpelDb.update(ShopMapDataString, "SaveMapDataShop");
+            string ShopTrailDataString = JsonUtility.ToJson(shoptrailui.ShopTrailDataUI);
+            SimpelDb.update(ShopTrailDataString, "SaveTrailDataShop");
         }
-        public void LoadMapData()
+        public void LoadTrailpData()
         {
-            string ShopMapDataString = SimpelDb.read("SaveMapDataShop");
-            shopmapui.ShopMapDataUI = new ShopMapData();
-            shopmapui.ShopMapDataUI = JsonUtility.FromJson<ShopMapData>(ShopMapDataString);
+            string ShopTrailDataString = SimpelDb.read("SaveTrailDataShop");
+            shoptrailui.ShopTrailDataUI = new ShopTrailData();
+            shoptrailui.ShopTrailDataUI = JsonUtility.FromJson<ShopTrailData>(ShopTrailDataString);
         }
         public void ClearData()
         {

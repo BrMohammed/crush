@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.IO;
+using LitJson;
 
 public class GamePlayControler : MonoBehaviour
 {
@@ -19,7 +21,7 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button returne_btn_gameover;
 
     [SerializeField] private Button home_btn_winning;
-    [SerializeField] private Button settings_btn_winning;
+    //[SerializeField] private Button settings_btn_winning;
     [SerializeField] private Button next_btn_winning;
 
     [SerializeField] private Button play_from_home;
@@ -32,7 +34,7 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button home_from_levels;
 
 
-    [SerializeField] private Button home_from_settings;
+    [SerializeField] private Button cancel_from_settings;
     [SerializeField] private Button levels_from_settings;
 
 
@@ -52,6 +54,7 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private GameObject parent_of_map;
     [SerializeField] private GameObject maps_parent_panel;
     [SerializeField] private GameObject level_pref;
+    [SerializeField] private GameObject Totalcoin;
 
 
     GameObject c;
@@ -62,6 +65,7 @@ public class GamePlayControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+      
         Listners();
         Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
         for (int i = 0; i < Criation_new_map.maps_count; i++)
@@ -82,7 +86,7 @@ public class GamePlayControler : MonoBehaviour
             Winning();
         if (timer.timelift <= 0 && gameover == false && begin_game_panel.active == true)
         {
-           
+            score = 0;
             Gameover();
         }
             
@@ -100,9 +104,8 @@ public class GamePlayControler : MonoBehaviour
        // levels_btn_gameover.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
         returne_btn_gameover.onClick.AddListener(() => Returne());
         //winning
-        //home_btn_winning.onClick.AddListener(() =>());
-        //settings_btn_winning.onClick.AddListener(() =>());
-        //next_btn_winning.onClick.AddListener(() =>()); ;
+        home_btn_winning.onClick.AddListener(() => On_home_Click_from_Gameover_panel());/////
+        next_btn_winning.onClick.AddListener(() => On_next_btn_Click_from_winning()); 
 
         //home
         play_from_home.onClick.AddListener(() =>On_Play_Click());
@@ -114,12 +117,17 @@ public class GamePlayControler : MonoBehaviour
         home_from_levels.onClick.AddListener(() =>OnHomeBtn_click_from_levelse());
        
         //settings
-        home_from_settings.onClick.AddListener(() => On_home_Click_from_Gameover_panel());
+        cancel_from_settings.onClick.AddListener(() => On_Cancel_click_form_main());
         levels_from_settings.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
         //Shop
 
         //Balls
 
+    }
+
+    private void On_next_btn_Click_from_winning()
+    {
+        
     }
 
     private void On_Shop_btn_Click_from_home_panel()
@@ -132,6 +140,12 @@ public class GamePlayControler : MonoBehaviour
     {
         All_panel_desactive();
         Balls_Panel.SetActive(true);
+        //balls
+        GameObject panelof_ball_scroll = Balls_Panel.transform.GetChild(1).gameObject;
+        panelof_ball_scroll.transform.GetChild(0).transform.position = new Vector3(panelof_ball_scroll.transform.position.x, 0, 0);
+        //trails
+        panelof_ball_scroll = Balls_Panel.transform.GetChild(3).gameObject;
+        panelof_ball_scroll.transform.GetChild(0).transform.position = new Vector3(panelof_ball_scroll.transform.position.x, 0, 0);
     }
 
     #region Levels_panel ------------------------------------------------
@@ -139,10 +153,12 @@ public class GamePlayControler : MonoBehaviour
     {
         All_panel_desactive();
         main_panel.SetActive(true);
+        Totalcoin.SetActive(true);
     }
     public void OnShopBtn_click_from_levelse()
     {
         All_panel_desactive();
+        Totalcoin.SetActive(true);
         main_panel.SetActive(true);
     }
 
@@ -175,6 +191,7 @@ public class GamePlayControler : MonoBehaviour
         }
         Time.timeScale = 0;
         All_panel_desactive();
+        Totalcoin.SetActive(true);
         main_panel.SetActive(true);
     }
     #endregion
@@ -184,6 +201,7 @@ public class GamePlayControler : MonoBehaviour
     private void Gameover()
     {
         All_panel_desactive();
+        Totalcoin.SetActive(false);
         game_over_panel.SetActive(true);
         Time.timeScale = 0;
     }
@@ -208,6 +226,7 @@ public class GamePlayControler : MonoBehaviour
         }
         Time.timeScale = 0;
         All_panel_desactive();
+        Totalcoin.SetActive(true);
         main_panel.SetActive(true);
     }
 
@@ -239,7 +258,15 @@ public class GamePlayControler : MonoBehaviour
     public void On_Play_Click()
     {
         All_panel_desactive();
+        Totalcoin.SetActive(false);
         begin_game_panel.SetActive(true);
+        //InitBall init = new InitBall();
+        //init.init_ball();
+        GameObject ball = GameObject.FindWithTag("ball");
+        if (ball != null)
+            Destroy(ball);
+        InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
+        temp.init_ball();
         Time.timeScale = 1;
 
     }
@@ -251,9 +278,15 @@ public class GamePlayControler : MonoBehaviour
 
     public void On_setting_click_form_main()
     {
-        All_panel_desactive();
         settings_Panel.SetActive(true);
+        play_from_home.gameObject.SetActive(false);
     }
+    public void On_Cancel_click_form_main()
+    {
+        settings_Panel.SetActive(false);
+        play_from_home.gameObject.SetActive(true);
+    }
+
     #endregion
 
     #region Seting_pannel -------------------------------------
@@ -271,8 +304,6 @@ public class GamePlayControler : MonoBehaviour
         begin_game_panel.SetActive(false);
         levels_panel.SetActive(false);
         settings_Panel.SetActive(false);
-
-
         Balls_Panel.SetActive(false);
         Shop_Panel.SetActive(false);
     }

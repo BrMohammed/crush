@@ -8,15 +8,11 @@ using ShopSystem;
 
 public class Loading : MonoBehaviour
 {
-	[SerializeField] [Range(2f, 8f)] float loadingDelay = 2f;
+	[SerializeField] [Range(1f, 8f)] float loadingDelay = 1f;
 	[SerializeField] GameObject GDPR_Popup;
-	[SerializeField] private Text t;
 	
 	void OnEnable()
 	{
-		string test = Application.persistentDataPath + "/mydatabase.db";
-		if (File.Exists(test))
-			t.text = test;
 		Time.timeScale = 1;
 		StartCoroutine(call());
 	}
@@ -74,7 +70,7 @@ public class Loading : MonoBehaviour
 	public void OnUserClickPrivacyPolicy()
 	{
 		FindObjectOfType<AudioManager>().PlaySound("click");
-		Application.OpenURL("https://sites.google.com/view/runlikecrazy"); //your privacy url
+		Application.OpenURL(""); //your privacy url
 	}
 
 	public void M_Sound()
