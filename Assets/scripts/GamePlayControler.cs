@@ -36,6 +36,10 @@ public class GamePlayControler : MonoBehaviour
 
     [SerializeField] private Button cancel_from_settings;
     [SerializeField] private Button back_from_settings;
+    [SerializeField] private Button About_from_settings;
+
+    [SerializeField] private Button cancel_about;
+    
 
 
     [Header("menus : \n")]
@@ -48,6 +52,7 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private GameObject settings_Panel;
     [SerializeField] private GameObject Balls_Panel;
     [SerializeField] private GameObject Shop_Panel;
+    [SerializeField] private GameObject About_pannel;
 
     [Header("items : \n")]
     [SerializeField] private Text target_score;
@@ -59,6 +64,8 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button SoundOnObj;
     [SerializeField] private Button MusicOffObj;
     [SerializeField] private Button MusicOnObj;
+    
+
 
 
     GameObject c;
@@ -135,10 +142,17 @@ public class GamePlayControler : MonoBehaviour
         SoundOnObj.onClick.AddListener(() => SoundOff());
         MusicOffObj.onClick.AddListener(() => MusicOn());
         MusicOnObj.onClick.AddListener(() => MusicOff());
-        //Shop
+        About_from_settings.onClick.AddListener(() => About_page());
 
-        //Balls
+        //About
 
+        cancel_about.onClick.AddListener(() => On_Cancel_click_form_main());
+    }
+
+    private void About_page()
+    {
+        settings_Panel.SetActive(false);
+        About_pannel.SetActive(true);
     }
 
     private void On_next_btn_Click_from_winning()
@@ -306,6 +320,7 @@ public class GamePlayControler : MonoBehaviour
     {
         settings_Panel.SetActive(false);
         play_from_home.gameObject.SetActive(true);
+        About_pannel.SetActive(false);
     }
 
     public void SoundOn()
