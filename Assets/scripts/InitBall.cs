@@ -14,12 +14,16 @@ public class InitBall : MonoBehaviour
         string s = SimpelDb.read("SaveDataShop");
         JsonData j = JsonMapper.ToObject(s);
         int index = (int)j["SelectedIndex"];
-        Debug.Log(index);
         if (Random.Range(0, 2) == 1)
             ball_pos = new Vector3(-1.5f, -7, 0);
         else
             ball_pos = new Vector3(1.5f, -7, 0);
-        Instantiate(ball[index], ball_pos, ball[index].transform.rotation);
+        GameObject G =  Instantiate(ball[index], ball_pos, ball[index].transform.rotation);
+         s = SimpelDb.read("SaveTrailDataShop");
+         j = JsonMapper.ToObject(s);
+         index = (int)j["SelectedIndex"];
+        if(index != 0)
+            G.transform.GetChild(index - 1).gameObject.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,7 +38,12 @@ public class InitBall : MonoBehaviour
             else
                 ball_pos = new Vector3(1.5f, -7, 0);
             Destroy(other.gameObject);
-            Instantiate(ball[index], ball_pos, ball[index].transform.rotation);
+            GameObject G = Instantiate(ball[index], ball_pos, ball[index].transform.rotation);
+            s = SimpelDb.read("SaveTrailDataShop");
+            j = JsonMapper.ToObject(s);
+            index = (int)j["SelectedIndex"];
+            if (index != 0)
+                G.transform.GetChild(index - 1).gameObject.SetActive(true);
         }
             
         

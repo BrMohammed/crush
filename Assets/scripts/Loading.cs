@@ -20,7 +20,7 @@ public class Loading : MonoBehaviour
 	{
 		yield return new WaitForSeconds(1);
 		if (int.Parse(SimpelDb.read("npa")) == 1)
-			Invoke("CheckForGDPR", 1f);
+			Invoke("CheckForGDPR", 0.5f);
 
 		Invoke("StartGame", loadingDelay);
 

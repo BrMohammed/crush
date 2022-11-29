@@ -35,7 +35,7 @@ public class GamePlayControler : MonoBehaviour
 
 
     [SerializeField] private Button cancel_from_settings;
-    [SerializeField] private Button levels_from_settings;
+    [SerializeField] private Button back_from_settings;
 
 
     [Header("menus : \n")]
@@ -55,6 +55,10 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private GameObject maps_parent_panel;
     [SerializeField] private GameObject level_pref;
     [SerializeField] private GameObject Totalcoin;
+    [SerializeField] private Button SounOffObj;
+    [SerializeField] private Button SoundOnObj;
+    [SerializeField] private Button MusicOffObj;
+    [SerializeField] private Button MusicOnObj;
 
 
     GameObject c;
@@ -65,7 +69,7 @@ public class GamePlayControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
+        
         Listners();
         Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
         for (int i = 0; i < Criation_new_map.maps_count; i++)
@@ -76,6 +80,14 @@ public class GamePlayControler : MonoBehaviour
         }
         Time.timeScale = 0;
         score = 0;
+        if (int.Parse(SimpelDb.read("Music")) == 0)
+            MusicOn();
+        else
+            MusicOff();
+        if (int.Parse(SimpelDb.read("Sound")) == 0)
+            SoundOn();
+        else
+            SoundOff();
     }
 
     // Update is called once per frame
@@ -118,7 +130,11 @@ public class GamePlayControler : MonoBehaviour
        
         //settings
         cancel_from_settings.onClick.AddListener(() => On_Cancel_click_form_main());
-        levels_from_settings.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
+        back_from_settings.onClick.AddListener(() => On_Cancel_click_form_main());
+        SounOffObj.onClick.AddListener(() => SoundOn());
+        SoundOnObj.onClick.AddListener(() => SoundOff());
+        MusicOffObj.onClick.AddListener(() => MusicOn());
+        MusicOnObj.onClick.AddListener(() => MusicOff());
         //Shop
 
         //Balls
@@ -281,17 +297,47 @@ public class GamePlayControler : MonoBehaviour
         settings_Panel.SetActive(true);
         play_from_home.gameObject.SetActive(false);
     }
+
+    #endregion
+
+    #region Seting_pannel -------------------------------------
+
     public void On_Cancel_click_form_main()
     {
         settings_Panel.SetActive(false);
         play_from_home.gameObject.SetActive(true);
     }
 
-    #endregion
+    public void SoundOn()
+    {
+        //FindObjectOfType<AudioManager>().PlaySound("click_on");
+        SimpelDb.update(0.ToString(), "Sound");
+        SounOffObj.gameObject.SetActive(false);
+        SoundOnObj.gameObject.SetActive(true);
+    }
+    public void SoundOff()
+    {
+        SimpelDb.update(1.ToString(), "Sound");
+        //FindObjectOfType<AudioManager>().PlaySound("click_off");
+        SounOffObj.gameObject.SetActive(true);
+        SoundOnObj.gameObject.SetActive(false);
+    }
+    public void MusicOn()
+    {
+        //FindObjectOfType<AudioManager>().PlaySound("click_on");
+        SimpelDb.update(0.ToString(), "Music");
+        // Debug.Log(SimpelDb.read("Music"));
+        MusicOffObj.gameObject.SetActive(false);
+        MusicOnObj.gameObject.SetActive(true);
 
-    #region Seting_pannel -------------------------------------
-
-
+    }
+    public void MusicOff()
+    {
+        SimpelDb.update(1.ToString(), "Music");
+        //FindObjectOfType<AudioManager>().PlaySound("click_off");
+        MusicOffObj.gameObject.SetActive(true);
+        MusicOnObj.gameObject.SetActive(false);
+    }
 
     #endregion
 
