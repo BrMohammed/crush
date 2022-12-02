@@ -45,7 +45,5 @@ public class InitBall : MonoBehaviour
             if (index != 0)
                 G.transform.GetChild(index - 1).gameObject.SetActive(true);
         }
-            
-        
     }
 }

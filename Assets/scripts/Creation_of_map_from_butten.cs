@@ -23,8 +23,14 @@ public class Creation_of_map_from_butten : MonoBehaviour
         Criation_of_map_obj.Make_map(int.Parse(transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text) - 1);
         GamePlayControler.corent_scene = int.Parse(transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text) - 1;
         Game_Play.All_panel_desactive();
+        Game_Play.Totalcoin.SetActive(false);
         Game_Play.begin_game_panel.SetActive(true);
         Time.timeScale = 1;
+        GameObject ball = GameObject.FindWithTag("ball");
+        if (ball != null)
+            Destroy(ball);
+        InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
+        temp.init_ball();
     }
     // Start is called before the first frame update
 

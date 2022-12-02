@@ -17,10 +17,11 @@ public class Criation_new_map : MonoBehaviour
     int counter;
     Vector3[] Spawnositions;
     Color[] pixels;
-    int courent_map = 0;
+    int courent_map ;
 
     private void Awake()
     {
+        courent_map = int.Parse(SimpelDb.read("level")) - 1;
         maps_count = ImageRaw.Length;
         pixels = ImageRaw[courent_map].GetPixels();
         count_of_cubes = 0;
@@ -58,6 +59,7 @@ public class Criation_new_map : MonoBehaviour
 
     public void init_map()
     {
+        Awake();
         counter = 0;
         foreach (Vector3 pos in Spawnositions)
         {

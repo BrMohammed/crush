@@ -13,6 +13,7 @@ public class Loading : MonoBehaviour
 	
 	void OnEnable()
 	{
+		
 		Time.timeScale = 1;
 		StartCoroutine(call());
 	}
@@ -21,7 +22,7 @@ public class Loading : MonoBehaviour
 		yield return new WaitForSeconds(1);
 		if (int.Parse(SimpelDb.read("npa")) == 1)
 			Invoke("CheckForGDPR", 0.5f);
-
+		///SimpelDb.update("", "score");
 		Invoke("StartGame", loadingDelay);
 
 	}

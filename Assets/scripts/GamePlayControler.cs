@@ -17,11 +17,9 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button home_btn;
 
     [SerializeField] private Button home_btn_gameover;
-    //[SerializeField] private Button levels_btn_gameover;
     [SerializeField] private Button returne_btn_gameover;
 
     [SerializeField] private Button home_btn_winning;
-    //[SerializeField] private Button settings_btn_winning;
     [SerializeField] private Button next_btn_winning;
 
     [SerializeField] private Button play_from_home;
@@ -59,11 +57,12 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private GameObject parent_of_map;
     [SerializeField] private GameObject maps_parent_panel;
     [SerializeField] private GameObject level_pref;
-    [SerializeField] private GameObject Totalcoin;
+    [SerializeField] public GameObject Totalcoin;
     [SerializeField] private Button SounOffObj;
     [SerializeField] private Button SoundOnObj;
     [SerializeField] private Button MusicOffObj;
     [SerializeField] private Button MusicOnObj;
+    public Button reset_dat;
     
 
 
@@ -73,11 +72,13 @@ public class GamePlayControler : MonoBehaviour
     private bool gameover;
     static public  int corent_scene;
     private Criation_new_map Criation_of_map_obj;
+    private bool winning_game;
     // Start is called before the first frame update
     void Start()
     {
-        
         Listners();
+        corent_scene = int.Parse(SimpelDb.read("level"));
+        winning_game = false;
         Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
         //loop on levels
         for (int i = 0; i < Criation_new_map.maps_count; i++)
@@ -92,7 +93,6 @@ public class GamePlayControler : MonoBehaviour
                 c.transform.GetChild(1).gameObject.SetActive(true);
                 c.GetComponent<Button>().interactable = false;
             }
-                
         }
         Time.timeScale = 0;
         score = 0;
@@ -109,9 +109,17 @@ public class GamePlayControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(begin_game_panel.active == true)
+        {
+            winning_game = false;
+            gameover = false;
+        }
         target_score.text = score + "/" + Criation_new_map.count_of_cubes.ToString();
-        if (score == Criation_new_map.count_of_cubes)
+        if (score == Criation_new_map.count_of_cubes && winning_game == false)
+        {
+            score = 0;
             Winning();
+        }
         if (timer.timelift <= 0 && gameover == false && begin_game_panel.active == true)
         {
             score = 0;
@@ -129,10 +137,9 @@ public class GamePlayControler : MonoBehaviour
         home_btn.onClick.AddListener(() => On_home_Click_from_pause_panel());
         //gameover
         home_btn_gameover.onClick.AddListener(() => On_home_Click_from_Gameover_panel());
-       // levels_btn_gameover.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
         returne_btn_gameover.onClick.AddListener(() => Returne());
         //winning
-        home_btn_winning.onClick.AddListener(() => OnHomeBtn_click_from_levelse());/////
+        home_btn_winning.onClick.AddListener(() => On_home_Click_from_Gameover_panel());/////
         next_btn_winning.onClick.AddListener(() => On_next_btn_Click_from_winning()); 
 
         //home
@@ -156,6 +163,15 @@ public class GamePlayControler : MonoBehaviour
         //About
 
         cancel_about.onClick.AddListener(() => On_Cancel_click_form_main());
+
+        ///reset
+        reset_dat.onClick.AddListener(() => Reset_data());
+    }
+
+    private void Reset_data()
+    {
+        SimpelDb.update("1", "level");
+        Loop_on_levels_card();
     }
 
     private void About_page()
@@ -166,7 +182,17 @@ public class GamePlayControler : MonoBehaviour
 
     private void On_next_btn_Click_from_winning()
     {
-        
+        corent_scene = int.Parse(SimpelDb.read("level")) - 1;
+        Criation_of_map_obj.Make_map(corent_scene);
+        All_panel_desactive();
+        Totalcoin.SetActive(false);
+        begin_game_panel.SetActive(true);
+        Time.timeScale = 1;
+        GameObject ball = GameObject.FindWithTag("ball");
+        if (ball != null)
+            Destroy(ball);
+        InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
+        temp.init_ball();
     }
 
     private void On_Shop_btn_Click_from_home_panel()
@@ -190,8 +216,10 @@ public class GamePlayControler : MonoBehaviour
     #region Levels_panel ------------------------------------------------
     public void OnHomeBtn_click_from_levelse()
     {
+       
         All_panel_desactive();
         main_panel.SetActive(true);
+        reset_dat.gameObject.SetActive(true);
         Totalcoin.SetActive(true);
     }
     public void OnShopBtn_click_from_levelse()
@@ -199,6 +227,7 @@ public class GamePlayControler : MonoBehaviour
         All_panel_desactive();
         Totalcoin.SetActive(true);
         main_panel.SetActive(true);
+        reset_dat.gameObject.SetActive(true);
     }
 
     #endregion
@@ -226,12 +255,14 @@ public class GamePlayControler : MonoBehaviour
     {
         foreach (Transform child in parent_of_map.transform)
         {
-            Destroy(child.gameObject);
+            if(child)
+                Destroy(child.gameObject);
         }
         Time.timeScale = 0;
         All_panel_desactive();
         Totalcoin.SetActive(true);
         main_panel.SetActive(true);
+        reset_dat.gameObject.SetActive(true);
     }
     #endregion
 
@@ -249,7 +280,8 @@ public class GamePlayControler : MonoBehaviour
     {
         foreach (Transform child in parent_of_map.transform)
         {
-            Destroy(child.gameObject);
+            if(child)
+                Destroy(child.gameObject);
         }
         Time.timeScale = 1;
         Criation_of_map_obj.Make_map(corent_scene);
@@ -261,12 +293,14 @@ public class GamePlayControler : MonoBehaviour
     {
         foreach (Transform child in parent_of_map.transform)
         {
-            Destroy(child.gameObject);
+            if(child)
+                Destroy(child.gameObject);
         }
         Time.timeScale = 0;
         All_panel_desactive();
         Totalcoin.SetActive(true);
         main_panel.SetActive(true);
+        reset_dat.gameObject.SetActive(true);
     }
 
     public void On_Levels_Click_from_Gameover_panel()
@@ -285,9 +319,38 @@ public class GamePlayControler : MonoBehaviour
 
     private void Winning()
     {
+        winning_game = true;
+        int level = int.Parse(SimpelDb.read("level"));
+        level++;
+        SimpelDb.update(level.ToString(), "level");
+        Loop_on_levels_card();
         All_panel_desactive();
         winning_panel.SetActive(true);
+        Totalcoin.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    private void Loop_on_levels_card()
+    {
+        GameObject parent_of_card_level =  levels_panel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+        int i = 0;
+        foreach (Transform child in parent_of_card_level.transform)
+        {
+            if (int.Parse(SimpelDb.read("level")) >= i + 1)
+            {
+                child.transform.GetChild(0).gameObject.SetActive(true);
+                child.transform.GetChild(1).gameObject.SetActive(false);
+                child.GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                child.transform.GetChild(0).gameObject.SetActive(false);
+                child.transform.GetChild(1).gameObject.SetActive(true);
+                child.GetComponent<Button>().interactable = false;
+            }
+                
+            i++;
+        }
     }
 
     #endregion
@@ -296,11 +359,10 @@ public class GamePlayControler : MonoBehaviour
 
     public void On_Play_Click()
     {
+        
         All_panel_desactive();
         Totalcoin.SetActive(false);
         begin_game_panel.SetActive(true);
-        //InitBall init = new InitBall();
-        //init.init_ball();
         GameObject ball = GameObject.FindWithTag("ball");
         if (ball != null)
             Destroy(ball);
@@ -376,5 +438,7 @@ public class GamePlayControler : MonoBehaviour
         settings_Panel.SetActive(false);
         Balls_Panel.SetActive(false);
         Shop_Panel.SetActive(false);
+        About_pannel.SetActive(false);
+        reset_dat.gameObject.SetActive(false);
     }
 }
