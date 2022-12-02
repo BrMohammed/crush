@@ -403,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f43ae924f48410886dc98117e4c909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Particle: {fileID: 2546369480165414188, guid: 1b8461c2b53da4958a5b7014ad8b6da4, type: 3}
 --- !u!75 &125295533
 ConstantForce:
   m_ObjectHideFlags: 0

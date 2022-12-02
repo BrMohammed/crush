@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class destroy : MonoBehaviour
 {
+    [SerializeField] private GameObject Particle;
+    private GameObject destroy_particle;
+    ParticleSystemRenderer p;
     // Start is called before the first frame update
     void Start()
     {
-        
+        p = Particle.GetComponent<ParticleSystemRenderer>();
     }
 
     // Update is called once per frame
@@ -25,6 +29,10 @@ public class destroy : MonoBehaviour
             {
                 Destroy(collision.gameObject);
                  GamePlayControler.score++;
+                p.material = collision.gameObject.GetComponent<MeshRenderer>().material;
+               destroy_particle =  Instantiate(Particle, transform.position, transform.rotation);
+
+                StartCoroutine(Destroy_particle(destroy_particle));
             }
             else
             {
@@ -50,5 +58,9 @@ public class destroy : MonoBehaviour
             
     }
 
-    
+    private IEnumerator Destroy_particle(GameObject obj)
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(obj);
+    }
 }

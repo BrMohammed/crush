@@ -79,11 +79,20 @@ public class GamePlayControler : MonoBehaviour
         
         Listners();
         Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
+        //loop on levels
         for (int i = 0; i < Criation_new_map.maps_count; i++)
         {
             c = Instantiate(level_pref, maps_parent_panel.transform.position, maps_parent_panel.transform.rotation, maps_parent_panel.transform);
             GameObject child = c.transform.GetChild(0).gameObject;
             child.GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
+            if (int.Parse(SimpelDb.read("level")) >= i + 1)
+                c.transform.GetChild(0).gameObject.SetActive(true);
+            else
+            {
+                c.transform.GetChild(1).gameObject.SetActive(true);
+                c.GetComponent<Button>().interactable = false;
+            }
+                
         }
         Time.timeScale = 0;
         score = 0;
@@ -123,7 +132,7 @@ public class GamePlayControler : MonoBehaviour
        // levels_btn_gameover.onClick.AddListener(() => On_Levels_Click_from_Gameover_panel());
         returne_btn_gameover.onClick.AddListener(() => Returne());
         //winning
-        home_btn_winning.onClick.AddListener(() => On_home_Click_from_Gameover_panel());/////
+        home_btn_winning.onClick.AddListener(() => OnHomeBtn_click_from_levelse());/////
         next_btn_winning.onClick.AddListener(() => On_next_btn_Click_from_winning()); 
 
         //home
