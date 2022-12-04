@@ -37,7 +37,7 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button About_from_settings;
 
     [SerializeField] private Button cancel_about;
-    
+
 
 
     [Header("menus : \n")]
@@ -63,6 +63,10 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button MusicOffObj;
     [SerializeField] private Button MusicOnObj;
     public Button reset_dat;
+
+
+    [Header("Endless Part \n")]
+    [SerializeField] private GameObject Parent_of_endless;
     
 
 
@@ -368,6 +372,7 @@ public class GamePlayControler : MonoBehaviour
             Destroy(ball);
         InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
         temp.init_ball();
+        Instantiate(Parent_of_endless, new Vector3(0, 5, 0), Parent_of_endless.transform.rotation);
         Time.timeScale = 1;
 
     }
