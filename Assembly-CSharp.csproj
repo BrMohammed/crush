@@ -98,6 +98,7 @@
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralEasingTypes.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralSequencer.cs" />
     <Compile Include="Assets/LeanTween/Examples/Archived/OldGUIExamplesCS.cs" />
+    <Compile Include="Assets/scripts/endles_game_scripts/ball_pass_for_hand.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/LogoCinematic.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralCameraShake.cs" />
     <Compile Include="Assets/scripts/shop/SaveLodeData.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSplineTrack.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanTest.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSpline2d.cs" />
+    <Compile Include="Assets/scripts/endles_game_scripts/Game_over_endlees.cs" />
     <Compile Include="Assets/scripts/UiAnimeShop.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSplinePerformance.cs" />
     <Compile Include="Assets/scripts/Criation_new_map.cs" />

@@ -4,38 +4,45 @@ using UnityEngine;
 
 public class Ball_pass : MonoBehaviour
 {
-    bool enter;
-    // Start is called before the first frame update
-    void Start()
-    {
-        enter = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "ball")
-            enter = true;
-                
+        
+        if (other.gameObject.tag == "ball" && ball_pass_for_hand.enter == true)
+        {
+            gameObject.GetComponent<MeshCollider>().isTrigger = true;
+        }
     }
-    private void OnTriggerStay(Collider other)
+
+    //private void OnTriggerStay(Collider collision)
+    //{
+    //    if (collision.gameObject.tag == "ball" && ball_pass_for_hand.enter == true)
+    //    {
+    //        gameObject.GetComponent<MeshCollider>().isTrigger = true;
+    //    }
+    //}
+
+    private void OnCollisionExit(Collision other)
     {
-        if (enter == true)
-            other.isTrigger = true;
+        if (other.gameObject.tag == "ball")
+        {
+            Debug.Log("false");
+            ball_pass_for_hand.enter = false;
+
+            gameObject.GetComponent<MeshCollider>().isTrigger = false;
+        }
     }
+
+
+
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "ball")
+        if (other.gameObject.tag == "ball")
         {
-            enter = false;
-            other.isTrigger = false;
+            Debug.Log("false");
+            ball_pass_for_hand.enter = false;
+
+            gameObject.GetComponent<MeshCollider>().isTrigger = false;
         }
-      
-        
     }
-   
 }

@@ -18,7 +18,7 @@ public class destroy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,7 +31,6 @@ public class destroy : MonoBehaviour
                  GamePlayControler.score++;
                 p.material = collision.gameObject.GetComponent<MeshRenderer>().material;
                destroy_particle =  Instantiate(Particle, transform.position, transform.rotation);
-
                 StartCoroutine(Destroy_particle(destroy_particle));
             }
             else
@@ -42,20 +41,14 @@ public class destroy : MonoBehaviour
                     tmp--;
                     collision.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text = tmp.ToString();
                     collision.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().text = tmp.ToString();
-
                 }
                 else
                 {
                     collision.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text = "";
                     collision.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().text = "";
                 }
-                    
-
-
             }
-           
         }
-            
     }
 
     private IEnumerator Destroy_particle(GameObject obj)

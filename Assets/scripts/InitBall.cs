@@ -15,9 +15,9 @@ public class InitBall : MonoBehaviour
         JsonData j = JsonMapper.ToObject(s);
         int index = (int)j["SelectedIndex"];
         if (Random.Range(0, 2) == 1)
-            ball_pos = new Vector3(-1.5f, -7, 0);
+            ball_pos = new Vector3(-1.5f, -7, 0.13f);
         else
-            ball_pos = new Vector3(1.5f, -7, 0);
+            ball_pos = new Vector3(1.5f, -7, 0.13f);
         GameObject G =  Instantiate(ball[index], ball_pos, ball[index].transform.rotation);
          s = SimpelDb.read("SaveTrailDataShop");
          j = JsonMapper.ToObject(s);
@@ -34,9 +34,9 @@ public class InitBall : MonoBehaviour
         if (other.gameObject.tag == "ball")
         {
             if (Random.Range(0, 2) == 1)
-                ball_pos = new Vector3(-1.5f, -7, 0);
+                ball_pos = new Vector3(-1.5f, -7, 0.13f);
             else
-                ball_pos = new Vector3(1.5f, -7, 0);
+                ball_pos = new Vector3(1.5f, -7, 0.13f);
             Destroy(other.gameObject);
             GameObject G = Instantiate(ball[index], ball_pos, ball[index].transform.rotation);
             s = SimpelDb.read("SaveTrailDataShop");

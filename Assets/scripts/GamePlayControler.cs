@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using LitJson;
 
-public class GamePlayControler : MonoBehaviour
+public partial class GamePlayControler : MonoBehaviour
 {
     [Header("Buttons :\n")]
     [SerializeField] private Button pause_btn;
@@ -28,17 +28,13 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button Balls_btn_from_home;
     [SerializeField] private Button Shop_btn_from_home;
 
-
     [SerializeField] private Button home_from_levels;
-
 
     [SerializeField] private Button cancel_from_settings;
     [SerializeField] private Button back_from_settings;
     [SerializeField] private Button About_from_settings;
 
     [SerializeField] private Button cancel_about;
-
-
 
     [Header("menus : \n")]
     [SerializeField] public GameObject begin_game_panel;
@@ -62,13 +58,8 @@ public class GamePlayControler : MonoBehaviour
     [SerializeField] private Button SoundOnObj;
     [SerializeField] private Button MusicOffObj;
     [SerializeField] private Button MusicOnObj;
+
     public Button reset_dat;
-
-
-    [Header("Endless Part \n")]
-    [SerializeField] private GameObject Parent_of_endless;
-    
-
 
 
     GameObject c;
@@ -77,10 +68,13 @@ public class GamePlayControler : MonoBehaviour
     static public  int corent_scene;
     private Criation_new_map Criation_of_map_obj;
     private bool winning_game;
+    public bool endlees_begin;
     // Start is called before the first frame update
     void Start()
     {
+        endlees_begin = false;
         Listners();
+        Listners_in_endlees();
         corent_scene = int.Parse(SimpelDb.read("level"));
         winning_game = false;
         Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
@@ -118,7 +112,12 @@ public class GamePlayControler : MonoBehaviour
             winning_game = false;
             gameover = false;
         }
-        target_score.text = score + "/" + Criation_new_map.count_of_cubes.ToString();
+        if (endlees_begin == false)
+            target_score.text = score + "/" + Criation_new_map.count_of_cubes.ToString();
+        else
+            begin_game_endlees.transform.GetChild(0).gameObject.transform.GetComponent<Text>().text = score.ToString();
+
+
         if (score == Criation_new_map.count_of_cubes && winning_game == false)
         {
             score = 0;
@@ -129,7 +128,10 @@ public class GamePlayControler : MonoBehaviour
             score = 0;
             Gameover();
         }
-            
+        
+        
+
+
     }
     private void Listners()
     {
@@ -175,6 +177,7 @@ public class GamePlayControler : MonoBehaviour
     private void Reset_data()
     {
         SimpelDb.update("1", "level");
+        SimpelDb.update("0", "score");
         Loop_on_levels_card();
     }
 
@@ -252,7 +255,10 @@ public class GamePlayControler : MonoBehaviour
     {
         Time.timeScale = 1;
         All_panel_desactive();
-        begin_game_panel.SetActive(true);
+        if (endlees_begin == false)
+            begin_game_panel.SetActive(true);
+        else
+            begin_game_endlees.SetActive(true);
     }
 
     public void On_home_Click_from_pause_panel()
@@ -262,6 +268,11 @@ public class GamePlayControler : MonoBehaviour
             if(child)
                 Destroy(child.gameObject);
         }
+        if(Parent_of_endless)
+        {
+            Destroy(Parent_of_endless);
+        }
+        
         Time.timeScale = 0;
         All_panel_desactive();
         Totalcoin.SetActive(true);
@@ -361,21 +372,7 @@ public class GamePlayControler : MonoBehaviour
 
     #region Main Menu ------------------------------------------
 
-    public void On_Play_Click()
-    {
-        
-        All_panel_desactive();
-        Totalcoin.SetActive(false);
-        begin_game_panel.SetActive(true);
-        GameObject ball = GameObject.FindWithTag("ball");
-        if (ball != null)
-            Destroy(ball);
-        InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
-        temp.init_ball();
-        Instantiate(Parent_of_endless, new Vector3(0, 5, 0), Parent_of_endless.transform.rotation);
-        Time.timeScale = 1;
 
-    }
     public void On_Levels_Click_from_main()
     {
         All_panel_desactive();
@@ -445,5 +442,124 @@ public class GamePlayControler : MonoBehaviour
         Shop_Panel.SetActive(false);
         About_pannel.SetActive(false);
         reset_dat.gameObject.SetActive(false);
+        Pannel_of_endless.SetActive(false);
+        begin_game_endlees.SetActive(false);
+    }
+}
+public partial class GamePlayControler : MonoBehaviour  //endlees_game
+{
+    [Header("Endless Part \n")]
+    [SerializeField] private GameObject Pannel_of_endless;
+    [SerializeField] private GameObject _Parent_of_endless;
+    [SerializeField] private GameObject begin_game_endlees;//
+
+
+    [SerializeField] private TextMeshProUGUI high_score;
+
+    [SerializeField] private Button returne_fron_endlees;//
+
+    [SerializeField] private GameObject Fiaild_label;
+    [SerializeField] private Button Conrianer_of_buy;
+    [SerializeField] private Button Conrianer_of_watch_to_reward;
+    [SerializeField] private Button home_btn_endlees;
+    [SerializeField] private Button Pause_btn_endlees;
+
+    private GameObject Parent_of_endless;
+
+    public void On_Play_Click()
+    {
+        score = 0;
+        endlees_begin = true;
+        All_panel_desactive();
+        Totalcoin.SetActive(false);
+        Fiaild_label.SetActive(true);
+        begin_game_endlees.SetActive(true);
+        GameObject ball = GameObject.FindWithTag("ball");
+        Parent_of_endless = Instantiate(_Parent_of_endless, new Vector3(0, 5, 0), _Parent_of_endless.transform.rotation);
+        if (ball != null)
+            Destroy(ball);
+        InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
+        temp.init_ball();
+        Time.timeScale = 1;
+    }
+
+    private void Listners_in_endlees()
+    {
+        returne_fron_endlees.onClick.AddListener(() => returne_fron_endlees_event());
+        Conrianer_of_buy.onClick.AddListener(() => Conrianer_of_buy_event());
+        Conrianer_of_watch_to_reward.onClick.AddListener(() => Conrianer_of_watch_to_reward_event());
+        home_btn_endlees.onClick.AddListener(() => home_btn_endlees_event());
+        Pause_btn_endlees.onClick.AddListener(() => OnPauseBtn_click());
+    }
+
+    private void home_btn_endlees_event()
+    {
+        Destroy(Parent_of_endless);
+        Time.timeScale = 0;
+        All_panel_desactive();
+        Totalcoin.SetActive(true);
+        main_panel.SetActive(true);
+        begin_game_endlees.SetActive(false);
+        Pannel_of_endless.SetActive(false);
+        reset_dat.gameObject.SetActive(true);
+    }
+
+    private void Conrianer_of_watch_to_reward_event()
+    {
+        //reward_video
+        Time.timeScale = 1;
+        Destroy(Parent_of_endless);
+        On_Play_Click();
+    }
+
+    private void Conrianer_of_buy_event()
+    {
+        int label_of_buying = int.Parse(Conrianer_of_buy.gameObject.transform.GetChild(0).gameObject.
+                               transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
+        int new_total_coin = int.Parse(SimpelDb.read("TotalCoin")) - label_of_buying;
+        SimpelDb.update(new_total_coin.ToString(), "TotalCoin");
+        Time.timeScale = 1;
+        Destroy(Parent_of_endless);
+        On_Play_Click();
+    }
+
+    private void returne_fron_endlees_event()
+    {
+        Time.timeScale = 1;
+        score = 0;
+        Destroy(Parent_of_endless);
+        On_Play_Click();
+    }
+    public void Game_over_endlees()
+    {
+        Time.timeScale = 0;
+        Fiaild_label.SetActive(true);
+        Destroy(Parent_of_endless);
+        Totalcoin.SetActive(true);
+        endlees_begin = false;
+        Pannel_of_endless.SetActive(true);
+        begin_game_endlees.SetActive(false);
+        if(score < int.Parse(SimpelDb.read("score")))
+            high_score.text = score + "/" + SimpelDb.read("score");
+        else
+        {
+            SimpelDb.update(score.ToString(), "score");
+            high_score.text = score.ToString();
+        }
+        StartCoroutine(continue_if());
+
+    }
+
+    private IEnumerator continue_if()
+    {
+        yield return new WaitForSeconds(2);
+        Fiaild_label.SetActive(false);
+        Conrianer_of_buy.gameObject.transform.parent.gameObject.SetActive(true);
+        int label_of_buying = int.Parse(Conrianer_of_buy.gameObject.transform.GetChild(0).gameObject.
+                               transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
+        if (int.Parse(SimpelDb.read("TotalCoin")) < label_of_buying)
+            Conrianer_of_buy.enabled = false;
+        else
+            Conrianer_of_buy.enabled = true;
     }
 }

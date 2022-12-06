@@ -12,7 +12,7 @@ public class endles_creation : MonoBehaviour
     const int row_count = 12;
     int count_of_cubes = 0;
     int counter = 0;
-    const int time_to_move = 5;
+    const int time_to_move = 50;
     Vector3[] SpawnPositions;
     float index = time_to_move;
     void Awake()
@@ -72,9 +72,6 @@ public class endles_creation : MonoBehaviour
                 child.GetComponent<TextMeshPro>().text = "";
                 child = c.transform.GetChild(1).gameObject;
                 child.GetComponent<TextMeshPro>().text = "";
-
-
-
             }
         }
     }

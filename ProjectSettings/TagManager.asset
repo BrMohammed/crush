@@ -8,6 +8,8 @@ TagManager:
   - ball
   - ball_enter
   - pauseBt
+  - up_hand
+  - ball_to_pass
   layers:
   - Default
   - TransparentFX
