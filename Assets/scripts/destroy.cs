@@ -9,6 +9,9 @@ public class destroy : MonoBehaviour
     [SerializeField] private GameObject Particle;
     private GameObject destroy_particle;
     ParticleSystemRenderer p;
+
+    GameObject parent;
+    public GameObject no_triger;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,26 @@ public class destroy : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "ball_bass_triger")
+        {
+            parent = GameObject.FindGameObjectWithTag("up_hand_parent");
+            Instantiate(no_triger, parent.transform.position, parent.transform.rotation, parent.transform);
+        }
+    }
+
+    //private void OnTriggerExit(Collider collision)
+    //{
+    //    if (collision.gameObject.tag == "up_hand")
+    //    {
+    //        GameObject hand = GameObject.FindGameObjectWithTag("ball_to_pass");
+    //        Destroy(hand);
+            
+    //    }
+    //}
+
 
     private IEnumerator Destroy_particle(GameObject obj)
     {

@@ -471,6 +471,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
         score = 0;
         endlees_begin = true;
         All_panel_desactive();
+
         Totalcoin.SetActive(false);
         Fiaild_label.SetActive(true);
         begin_game_endlees.SetActive(true);
