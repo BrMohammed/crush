@@ -13,6 +13,7 @@ TagManager:
   - ball_test
   - ball_bass_triger
   - up_hand_parent
+  - betwin
   layers:
   - Default
   - TransparentFX

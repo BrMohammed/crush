@@ -10,7 +10,7 @@ public class timer : MonoBehaviour
     public static float timelift;
     //private GameConterolerFromMenu gp;
 
-    void Awake()
+    public void Awake()
     {
         maxtime = Criation_new_map.count_of_cubes * 2;
         timerbar = GetComponent<Image>();

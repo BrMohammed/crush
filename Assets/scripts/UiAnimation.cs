@@ -6,26 +6,37 @@ using UnityEngine.UI;
 public class UiAnimation : MonoBehaviour
 {
 
-    [SerializeField]
-    GameObject startobj, paramobj, sharobj, likeobj, betwin;
-
-    public static UiAnimation ui;
-
-    void Start()
+    static public UiAnimation instance;
+    void Awake()
+    { //called when an instance awakes in the game
+        instance = this; //set our static reference to our newly initialized instance
+    }
+    static public void start_home(GameObject startobj, GameObject paramobj, GameObject shapobj,
+                                GameObject Balls, GameObject levels)
     {
-        ui = this;
-        LeanTween.scale(startobj, new Vector3(1.767763f, 9.080779f, 1.874742f), 1f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(sharobj, new Vector3(0.8221743f, 4.358987f, 0.8221743f), 1f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(paramobj, new Vector3(0.8221743f, 4.358987f, 0.8221743f), 1f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(likeobj, new Vector3(0.8221743f, 4.358987f, 0.8221743f), 1f).setDelay(0.4f).setEase(LeanTweenType.easeOutElastic);
+        make_it_zero(startobj, paramobj, shapobj, Balls, levels);
+        LeanTween.scale(startobj, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(levels, new Vector3(0.48f, 0.48f, 0.6f), 0.8f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(Balls, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.4f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(shapobj, new Vector3(1.6f, 1.6f, 0.6f), 0.8f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(paramobj, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.6f).setEase(LeanTweenType.easeOutElastic);
     }
 
-    public void close()
+    public void close_home(GameObject startobj, GameObject paramobj, GameObject shapobj,
+                                GameObject Balls, GameObject levels)
     {
-        LeanTween.scale(startobj, new Vector3(0, 0, 0), 0.5f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(sharobj, new Vector3(0, 0, 0), 0.5f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(paramobj, new Vector3(0, 0, 0), 0.5f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(likeobj, new Vector3(0, 0, 0), 0.5f).setDelay(0.4f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(startobj, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(levels, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(Balls, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(shapobj, new Vector3(), 0.6f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(paramobj, new Vector3(), 0.6f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic);
+        float[] i = { 1, 0.48f, 1, 1.6f, 1 };
+        IEnumerator origin()
+        {
+            yield return new WaitForSeconds(1);
+            make_it_origine(i, startobj, levels, Balls, shapobj, paramobj);
+        }
+        StartCoroutine(origin());
     }
 
     static public void PausePaneleEAffects(GameObject resumeicoobj, GameObject homeicoobj, GameObject returnicoob)
@@ -86,10 +97,24 @@ public class UiAnimation : MonoBehaviour
         LeanTween.scale(Goretrygameicoobj, new Vector3(0, 0, 0), 0.5f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic);
     }
 
-    public void betwen_scines()
+    static public void betwen_scines_open()
     {
+        GameObject betwin;
+        betwin = GameObject.Find("betwin_sceen");
         Image r = betwin.GetComponent<Image>();
         LeanTween.value(betwin, 0, 1, 0.2f).setOnUpdate((float val) =>
+        {
+            Color c = r.color;
+            c.a = val;
+            r.color = c;
+        }).setEase(LeanTweenType.easeInCirc);
+    }
+    static public void betwen_scines_colose()
+    {
+        GameObject betwin;
+        betwin = GameObject.Find("betwin_sceen");
+        Image r = betwin.GetComponent<Image>();
+        LeanTween.value(betwin, 1, 0, 0.2f).setOnUpdate((float val) =>
         {
             Color c = r.color;
             c.a = val;
@@ -111,5 +136,18 @@ public class UiAnimation : MonoBehaviour
             .setEaseLinear()
             .setLoopPingPong()
             .setDelay(0.1f);
+    }
+
+
+    static private void make_it_zero(params GameObject[] obj)
+    {
+        for(int i = 0; i < obj.Length; i++)
+            obj[i].transform.localScale = new Vector3(0f, 0f, 0f);
+
+    }
+    static private void make_it_origine(float[] origin, params GameObject[] obj)
+    {
+        for (int i = 0; i < obj.Length; i++)
+            obj[i].transform.localScale = new Vector3(origin[i], origin[i], origin[i]);
     }
 }

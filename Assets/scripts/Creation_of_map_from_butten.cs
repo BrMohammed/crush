@@ -25,13 +25,12 @@ public class Creation_of_map_from_butten : MonoBehaviour
         Game_Play.All_panel_desactive();
         Game_Play.Totalcoin.SetActive(false);
         Game_Play.begin_game_panel.SetActive(true);
-        Time.timeScale = 1;
         GameObject ball = GameObject.FindWithTag("ball");
         if (ball != null)
             Destroy(ball);
         InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
         temp.init_ball();
     }
-    // Start is called before the first frame update
+   
 
 }
