@@ -8,11 +8,12 @@ public class timer : MonoBehaviour
     Image timerbar;
     public static float maxtime;
     public static float timelift;
+    [SerializeField] float time_to_end = 1;
     //private GameConterolerFromMenu gp;
 
     public void Awake()
     {
-        maxtime = Criation_new_map.count_of_cubes * 2;
+        maxtime = Criation_new_map.count_of_cubes * time_to_end;
         timerbar = GetComponent<Image>();
         timelift = maxtime;
         //gp = GameObject.Find("Gameplay Controller gp").GetComponent<GameConterolerFromMenu>();

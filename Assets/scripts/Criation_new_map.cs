@@ -19,7 +19,7 @@ public class Criation_new_map : MonoBehaviour
     Color[] pixels;
     int courent_map ;
 
-    [SerializeField] float time_to_end = 1;
+    
 
     private void Awake()
     {
@@ -135,8 +135,6 @@ public class Criation_new_map : MonoBehaviour
             }
             counter++;
         }
-        timer.timelift = count_of_cubes * time_to_end;
-        timer.maxtime = timer.timelift;
     }
 
 }

@@ -54,8 +54,11 @@ public partial class GamePlayControler : MonoBehaviour
     [SerializeField] private Button SoundOnObj;
     [SerializeField] private Button MusicOffObj;
     [SerializeField] private Button MusicOnObj;
+    [SerializeField] private GameObject image_of_winning;
 
     public Button reset_dat;
+
+
 
 
     GameObject c;
@@ -256,17 +259,17 @@ public partial class GamePlayControler : MonoBehaviour
 
     public void OnPauseBtn_click()
     {
-        UiAnimation.betwen_scines(true);
         IEnumerator betwin()
         {
-            yield return new WaitForSeconds(0.2f);
-            UiAnimation.betwen_scines(false);
+            yield return new WaitForSeconds(0.1f);
+            UiAnimation.PausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
+            score = 0;
             All_panel_desactive();
             pause_panel.SetActive(true);
             ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
             ball.isKinematic = true;
         }
-       StartCoroutine(betwin());
+        StartCoroutine(betwin());
     }
 
     #endregion
@@ -274,9 +277,10 @@ public partial class GamePlayControler : MonoBehaviour
     #region Pause Menue ------------------------------------------------
     public void On_resume_Click()
     {
+        UiAnimation.instance.closePausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
         IEnumerator betwin()
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.5f);
             ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
             if (ball)
                 ball.isKinematic = false;
@@ -377,21 +381,27 @@ public partial class GamePlayControler : MonoBehaviour
     private void Winning()
     {
         winning_game = true;
-        int level = int.Parse(SimpelDb.read("level"));
-        if (Criation_new_map.maps_count + 1 < level)
+        IEnumerator betwin()
         {
-            level++;
-            SimpelDb.update(level.ToString(), "level");
-            Loop_on_levels_card();
-            All_panel_desactive();
-            next_btn_winning.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            UiAnimation.PausePaneleEAffects(resume_btn_2.gameObject, next_btn_winning.gameObject, image_of_winning );
+            int level = int.Parse(SimpelDb.read("level"));
+            if (Criation_new_map.maps_count + 1 < level)
+            {
+                level++;
+                SimpelDb.update(level.ToString(), "level");
+                Loop_on_levels_card();
+                All_panel_desactive();
+                next_btn_winning.gameObject.SetActive(true);
+            }
+            else
+                next_btn_winning.gameObject.SetActive(false);
+            winning_panel.SetActive(true);
+            Totalcoin.SetActive(true);
+            ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
+            ball.isKinematic = true;
         }
-        else
-            next_btn_winning.gameObject.SetActive(false);
-        winning_panel.SetActive(true);
-        Totalcoin.SetActive(true);
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        ball.isKinematic = true;
+        StartCoroutine(betwin());
         score = 0;
     }
 
