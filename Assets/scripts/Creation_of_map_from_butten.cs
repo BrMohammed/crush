@@ -23,7 +23,6 @@ public class Creation_of_map_from_butten : MonoBehaviour
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.2f);
-
             UiAnimation.betwen_scines(false);
             Game_Play = GameObject.Find("GamePlayControler").GetComponent<GamePlayControler>();
             Game_Play.All_panel_desactive();
@@ -37,6 +36,7 @@ public class Creation_of_map_from_butten : MonoBehaviour
                 Destroy(ball);
             InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
             temp.init_ball();
+            GamePlayControler.corent_scene = int.Parse(transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text) - 1;
         }
         StartCoroutine(betwin());
     }

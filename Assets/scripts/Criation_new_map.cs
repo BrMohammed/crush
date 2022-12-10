@@ -135,9 +135,12 @@ public class Criation_new_map : MonoBehaviour
                 count_of_cubes++;
             }
             counter++;
-            timer timer_script = GameObject.FindGameObjectWithTag("timer").GetComponent<timer>();
-            timer.maxtime = count_of_cubes * timer_script.time_to_end;
-            timer.timelift = timer.maxtime;
+            if(GameObject.FindGameObjectWithTag("timer"))
+            {
+                timer timer_script = GameObject.FindGameObjectWithTag("timer").GetComponent<timer>();
+                timer.maxtime = count_of_cubes * timer_script.time_to_end;
+                timer.timelift = timer.maxtime;
+            }
         }
     }
 
