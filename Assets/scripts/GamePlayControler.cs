@@ -117,15 +117,13 @@ public partial class GamePlayControler : MonoBehaviour
         else
             begin_game_endlees.transform.GetChild(0).gameObject.transform.GetComponent<Text>().text = score.ToString();
         if (score == Criation_new_map.count_of_cubes 
-            && winning_game == false && endlees_begin == false)
+            && winning_game == false && endlees_begin == false && timer.timelift > 0)
         {
-            score = 0;
             target_score.text = score.ToString();
             Winning();
         }
         if (timer.timelift <= 0 && gameover == false && begin_game_panel.active == true)
         {
-           // Gameover();
             Game_over_endlees();
         }
 
@@ -149,7 +147,7 @@ public partial class GamePlayControler : MonoBehaviour
         Balls_btn_from_home.onClick.AddListener(() => On_Balls_btn_Click__from_home_panel());
         Shop_btn_from_home.onClick.AddListener(() => On_Shop_btn_Click_from_home_panel());
         //levels
-        home_from_levels.onClick.AddListener(() =>OnHomeBtn_click_from_levelse());
+        home_from_levels.onClick.AddListener(() => OnHomeBtn_click_from_levelse());
        
         //settings
         cancel_from_settings.onClick.AddListener(() => On_Cancel_click_form_main());
@@ -177,6 +175,7 @@ public partial class GamePlayControler : MonoBehaviour
 
     private void About_page()
     {
+        UiAnimation.instance.pop_up(About_pannel.transform.GetChild(1).gameObject, false);
         settings_Panel.SetActive(false);
         About_pannel.SetActive(true);
     }
@@ -198,29 +197,51 @@ public partial class GamePlayControler : MonoBehaviour
 
     private void On_Shop_btn_Click_from_home_panel()
     {
-        All_panel_desactive();
-        Shop_Panel.SetActive(true);
+        UiAnimation.betwen_scines(true);
+        IEnumerator betwin()
+        {
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+            All_panel_desactive();
+            Shop_Panel.SetActive(true);
+        }
+        StartCoroutine(betwin());
     }
 
     private void On_Balls_btn_Click__from_home_panel()
     {
-        All_panel_desactive();
-        Balls_Panel.SetActive(true);
-        //balls
-        GameObject panelof_ball_scroll = Balls_Panel.transform.GetChild(1).gameObject;
-        panelof_ball_scroll.transform.GetChild(0).transform.position = new Vector3(panelof_ball_scroll.transform.position.x, 0, 0);
-        //trails
-        panelof_ball_scroll = Balls_Panel.transform.GetChild(3).gameObject;
-        panelof_ball_scroll.transform.GetChild(0).transform.position = new Vector3(panelof_ball_scroll.transform.position.x, 0, 0);
+        UiAnimation.betwen_scines(true);
+        IEnumerator betwin()
+        {
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+            All_panel_desactive();
+            Balls_Panel.SetActive(true);
+            //balls
+            GameObject panelof_ball_scroll = Balls_Panel.transform.GetChild(1).gameObject;
+            panelof_ball_scroll.transform.GetChild(0).transform.position = new Vector3(panelof_ball_scroll.transform.position.x, 0, 0);
+            //trails
+            panelof_ball_scroll = Balls_Panel.transform.GetChild(3).gameObject;
+            panelof_ball_scroll.transform.GetChild(0).transform.position = new Vector3(panelof_ball_scroll.transform.position.x, 0, 0);
+        }
+        StartCoroutine(betwin());
+        
     }
 
     #region Levels_panel ------------------------------------------------
     public void OnHomeBtn_click_from_levelse()
     {
-        score = 0;
-        All_panel_desactive();
-        main_panel.SetActive(true);
-        Totalcoin.SetActive(true);
+        UiAnimation.betwen_scines(true);
+        IEnumerator betwin()
+        {
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+            score = 0;
+            All_panel_desactive();
+            main_panel.SetActive(true);
+            Totalcoin.SetActive(true);
+        }
+        StartCoroutine(betwin());
     }
     public void OnShopBtn_click_from_levelse()
     {
@@ -235,10 +256,17 @@ public partial class GamePlayControler : MonoBehaviour
 
     public void OnPauseBtn_click()
     {
-        All_panel_desactive();
-        pause_panel.SetActive(true);
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        ball.isKinematic = true;
+        UiAnimation.betwen_scines(true);
+        IEnumerator betwin()
+        {
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+            All_panel_desactive();
+            pause_panel.SetActive(true);
+            ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
+            ball.isKinematic = true;
+        }
+       StartCoroutine(betwin());
     }
 
     #endregion
@@ -246,34 +274,48 @@ public partial class GamePlayControler : MonoBehaviour
     #region Pause Menue ------------------------------------------------
     public void On_resume_Click()
     {
-        
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        if (ball)
-            ball.isKinematic = false;
-        All_panel_desactive();
-        if (endlees_begin == false)
-            begin_game_panel.SetActive(true);
-        else
-            begin_game_endlees.SetActive(true);
+        IEnumerator betwin()
+        {
+            yield return new WaitForSeconds(0.2f);
+            ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
+            if (ball)
+                ball.isKinematic = false;
+            All_panel_desactive();
+            if (endlees_begin == false)
+                begin_game_panel.SetActive(true);
+            else
+                begin_game_endlees.SetActive(true);
+        }
+        StartCoroutine(betwin());
+       
     }
 
     public void On_home_Click_from_pause_panel()
     {
-        foreach (Transform child in parent_of_map.transform)
+        
+        UiAnimation.betwen_scines(true);
+        IEnumerator betwin()
         {
-            if(child)
-                Destroy(child.gameObject);
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+            foreach (Transform child in parent_of_map.transform)
+            {
+                if (child)
+                    Destroy(child.gameObject);
+            }
+            if (Parent_of_endless)
+            {
+                Destroy(Parent_of_endless);
+            }
+            score = 0;
+            ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
+            ball.isKinematic = true;
+            All_panel_desactive();
+            Totalcoin.SetActive(true);
+            main_panel.SetActive(true);
         }
-        if(Parent_of_endless)
-        {
-            Destroy(Parent_of_endless);
-        }
-        score = 0;
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        ball.isKinematic = true;
-        All_panel_desactive();
-        Totalcoin.SetActive(true);
-        main_panel.SetActive(true);
+        StartCoroutine(betwin());
+        
     }
     #endregion
 
@@ -296,17 +338,26 @@ public partial class GamePlayControler : MonoBehaviour
     }
     public void On_home_Click_from_Gameover_panel()
     {
-        foreach (Transform child in parent_of_map.transform)
+        UiAnimation.betwen_scines(true);
+        IEnumerator betwin()
         {
-            if(child)
-                Destroy(child.gameObject);
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+            foreach (Transform child in parent_of_map.transform)
+            {
+                if (child)
+                    Destroy(child.gameObject);
+            }
+            if (endlees_begin || gameover || winning_game)
+                ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
+            if (ball)
+                ball.isKinematic = true;
+            All_panel_desactive();
+            Totalcoin.SetActive(true);
+            main_panel.SetActive(true);
         }
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        if (ball)
-            ball.isKinematic = true;
-        All_panel_desactive();
-        Totalcoin.SetActive(true);
-        main_panel.SetActive(true);
+        StartCoroutine(betwin());
+        
     }
 
     public void On_Levels_Click_from_Gameover_panel()
@@ -327,8 +378,6 @@ public partial class GamePlayControler : MonoBehaviour
     {
         winning_game = true;
         int level = int.Parse(SimpelDb.read("level"));
-
-
         if (Criation_new_map.maps_count + 1 < level)
         {
             level++;
@@ -343,6 +392,7 @@ public partial class GamePlayControler : MonoBehaviour
         Totalcoin.SetActive(true);
         ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
         ball.isKinematic = true;
+        score = 0;
     }
 
     private void Loop_on_levels_card()
@@ -375,12 +425,21 @@ public partial class GamePlayControler : MonoBehaviour
 
     public void On_Levels_Click_from_main()
     {
-        All_panel_desactive();
-        levels_panel.SetActive(true);
+        UiAnimation.betwen_scines(true);
+        IEnumerator betwin()
+        {
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+            All_panel_desactive();
+            levels_panel.SetActive(true);
+        }
+        StartCoroutine(betwin());
+        
     }
 
     public void On_setting_click_form_main()
     {
+        UiAnimation.instance.pop_up(settings_Panel.transform.GetChild(1).gameObject,false);
         settings_Panel.SetActive(true);
         play_from_home.gameObject.SetActive(false);
     }
@@ -391,9 +450,16 @@ public partial class GamePlayControler : MonoBehaviour
 
     public void On_Cancel_click_form_main()
     {
-        settings_Panel.SetActive(false);
-        play_from_home.gameObject.SetActive(true);
-        About_pannel.SetActive(false);
+        UiAnimation.instance.pop_up(settings_Panel.transform.GetChild(1).gameObject, true);
+        UiAnimation.instance.pop_up(About_pannel.transform.GetChild(1).gameObject, true);
+        IEnumerator pop_up_in()
+        {
+            yield return new WaitForSeconds(0.3f);
+            settings_Panel.SetActive(false);
+            play_from_home.gameObject.SetActive(true);
+            About_pannel.SetActive(false);
+        }
+        StartCoroutine(pop_up_in());
     }
 
     public void SoundOn()
@@ -466,14 +532,16 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
 
     public void On_Play_Click()
     {
+        
         UiAnimation.instance.close_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
                          , Balls_btn_from_home.gameObject, level_from_home.gameObject);
+        UiAnimation.betwen_scines(true);
         score = 0;
         endlees_begin = true;
         IEnumerator time_for_close()
         {
             yield return new WaitForSeconds(0.2f);
-            UiAnimation.betwen_scines_open();
+            
             All_panel_desactive();
             Totalcoin.SetActive(false);
             Fiaild_label.SetActive(true);
@@ -490,8 +558,8 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
         StartCoroutine(time_for_close());
         IEnumerator betwin()
         {
-            yield return new WaitForSeconds(0.4f);
-            UiAnimation.betwen_scines_colose();
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
         }
         StartCoroutine(betwin());
     }
@@ -507,23 +575,31 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
 
     private void home_btn_endlees_event()
     {
-        Destroy(Parent_of_endless);
-        score = 0;
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        ball.isKinematic = true;
-        All_panel_desactive();
-        Totalcoin.SetActive(true);
-        main_panel.SetActive(true);
-        target_score.text = score.ToString();
-        begin_game_endlees.SetActive(false);
-        Pannel_of_endless.SetActive(false);
-        if (Parent_of_endless)
-            Destroy(Parent_of_endless);
-        else
+        UiAnimation.betwen_scines(true);
+        IEnumerator betwin()
         {
-            On_home_Click_from_Gameover_panel();
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+            score = 0;
+            All_panel_desactive();
+            Destroy(Parent_of_endless);
+            score = 0;
+            ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
+            ball.isKinematic = true;
+            All_panel_desactive();
+            Totalcoin.SetActive(true);
+            main_panel.SetActive(true);
+            target_score.text = score.ToString();
+            begin_game_endlees.SetActive(false);
+            Pannel_of_endless.SetActive(false);
+            if (Parent_of_endless)
+                Destroy(Parent_of_endless);
+            else
+            {
+                On_home_Click_from_Gameover_panel();
+            }
         }
-        
+        StartCoroutine(betwin());
     }
 
     public void Conrianer_of_watch_to_reward_event()
@@ -585,12 +661,13 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
     }
     public void Game_over_endlees()
     {
-        //Time.timeScale = 0;
+        UiAnimation.instance.gameovereffect(returne_fron_endlees.gameObject,
+                                    Fiaild_label.transform.parent.gameObject);
         ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
         ball.isKinematic = true;
-        Fiaild_label.SetActive(true);
-        Conrianer_of_buy.gameObject.transform.parent.gameObject.SetActive(false);
+        Conrianer_of_buy.gameObject.transform.parent.gameObject.SetActive(true);
         Totalcoin.SetActive(true);
+        Fiaild_label.SetActive(true);
         Pannel_of_endless.SetActive(true);
         if (endlees_begin == true)
         {
@@ -611,17 +688,8 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
             begin_game_panel.SetActive(false);
             high_score.text = target_score.text;
         }
-            
-        StartCoroutine(continue_if());
-    }
-
-    private IEnumerator continue_if()
-    {
-        yield return new WaitForSeconds(2);
-        Fiaild_label.SetActive(false);
-        Conrianer_of_buy.gameObject.transform.parent.gameObject.SetActive(true);
         int label_of_buying = int.Parse(Conrianer_of_buy.gameObject.transform.GetChild(0).gameObject.
-                               transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
+                            transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
         if (int.Parse(SimpelDb.read("TotalCoin")) < label_of_buying)
             Conrianer_of_buy.enabled = false;
         else

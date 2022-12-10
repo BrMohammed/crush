@@ -19,6 +19,8 @@ public class Criation_new_map : MonoBehaviour
     Color[] pixels;
     int courent_map ;
 
+    [SerializeField] float time_to_end = 1;
+
     private void Awake()
     {
         courent_map = int.Parse(SimpelDb.read("level")) - 1;
@@ -133,8 +135,8 @@ public class Criation_new_map : MonoBehaviour
             }
             counter++;
         }
-        timer.timelift = count_of_cubes * 2;
-        timer.maxtime = count_of_cubes * 2;
+        timer.timelift = count_of_cubes * time_to_end;
+        timer.maxtime = timer.timelift;
     }
 
 }
