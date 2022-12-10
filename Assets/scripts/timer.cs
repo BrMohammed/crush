@@ -8,7 +8,7 @@ public class timer : MonoBehaviour
     Image timerbar;
     public static float maxtime;
     public static float timelift;
-    [SerializeField] float time_to_end = 1;
+    public float time_to_end = 1;
     //private GameConterolerFromMenu gp;
 
     public void Awake()

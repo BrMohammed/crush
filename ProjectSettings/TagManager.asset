@@ -14,6 +14,7 @@ TagManager:
   - ball_bass_triger
   - up_hand_parent
   - betwin
+  - timer
   layers:
   - Default
   - TransparentFX

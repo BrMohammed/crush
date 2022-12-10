@@ -381,12 +381,16 @@ public partial class GamePlayControler : MonoBehaviour
     private void Winning()
     {
         winning_game = true;
+        
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.1f);
             UiAnimation.PausePaneleEAffects(resume_btn_2.gameObject, next_btn_winning.gameObject, image_of_winning );
             int level = int.Parse(SimpelDb.read("level"));
-            if (Criation_new_map.maps_count + 1 < level)
+            int next_level = level + 1;
+            int corent_level = Criation_new_map.this_map + 1;
+            int count_of_maps = Criation_new_map.maps_count + 1;
+            if (next_level < count_of_maps && corent_level  == level) 
             {
                 level++;
                 SimpelDb.update(level.ToString(), "level");

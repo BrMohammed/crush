@@ -1006,3 +1006,6 @@ Received Import Request.
   path: Assets/Scenes/game.unity
   artifactKey: Guid(31c3e8ad993654638a40a508d2109a16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Scenes/game.unity using Guid(31c3e8ad993654638a40a508d2109a16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5abb4ae5390507800e56640e64606e1c') in 0.008480 seconds 
+2022-12-10 03:01:52.253 Unity[75643:2084973] +[NSXPCSharedListener endpointForReply:withListenerName:]: an error occurred while attempting to obtain endpoint for listener 'ClientCallsAuxiliary': Connection invalid
+2022-12-10 03:01:52.489 Unity[75643:1930035] HIToolbox: received notification of WindowServer event port death.
+2022-12-10 03:01:52.489 Unity[75643:1930035] port matched the WindowServer port created in BindCGSToRunLoop

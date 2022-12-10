@@ -18,6 +18,7 @@ public class Criation_new_map : MonoBehaviour
     Vector3[] Spawnositions;
     Color[] pixels;
     int courent_map ;
+    static public int this_map;
 
     
 
@@ -92,8 +93,8 @@ public class Criation_new_map : MonoBehaviour
         maps_count = ImageRaw.Length;
         pixels = ImageRaw[Number_of_map].GetPixels();
         count_of_cubes = 0;
-
-
+        courent_map = int.Parse(SimpelDb.read("level")) - 1; ;
+        this_map = Number_of_map;
         int wordY = ImageRaw[Number_of_map].height;
         int wordX = ImageRaw[Number_of_map].width;
 
@@ -134,6 +135,9 @@ public class Criation_new_map : MonoBehaviour
                 count_of_cubes++;
             }
             counter++;
+            timer timer_script = GameObject.FindGameObjectWithTag("timer").GetComponent<timer>();
+            timer.maxtime = count_of_cubes * timer_script.time_to_end;
+            timer.timelift = timer.maxtime;
         }
     }
 

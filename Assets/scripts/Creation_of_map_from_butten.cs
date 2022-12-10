@@ -23,14 +23,15 @@ public class Creation_of_map_from_butten : MonoBehaviour
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.2f);
+
             UiAnimation.betwen_scines(false);
-            Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
             Game_Play = GameObject.Find("GamePlayControler").GetComponent<GamePlayControler>();
+            Game_Play.All_panel_desactive();
+            Game_Play.begin_game_panel.SetActive(true);
+            Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
             Criation_of_map_obj.Make_map(int.Parse(transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text) - 1);
             GamePlayControler.corent_scene = int.Parse(transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text) - 1;
-            Game_Play.All_panel_desactive();
             Game_Play.Totalcoin.SetActive(false);
-            Game_Play.begin_game_panel.SetActive(true);
             GameObject ball = GameObject.FindWithTag("ball");
             if (ball != null)
                 Destroy(ball);
