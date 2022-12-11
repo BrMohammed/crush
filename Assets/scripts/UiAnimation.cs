@@ -7,6 +7,7 @@ public class UiAnimation : MonoBehaviour
 {
 
     static public UiAnimation instance;
+    private GameObject Container_of_red;
     void Awake()
     { //called when an instance awakes in the game
         instance = this; //set our static reference to our newly initialized instance
@@ -89,7 +90,7 @@ public class UiAnimation : MonoBehaviour
         LeanTween.moveLocal(faild, new Vector2(0, faild.transform.localPosition.y), 0.2f)
             .setEaseLinear()
             .setDelay(0.1f);
-
+        //label move tp right
         LeanTween.moveLocal(Label, new Vector2(-Screen.width, Label.transform.localPosition.y), 0.3f)
             .setEaseLinear()
             .setDelay(1.5f);
@@ -102,13 +103,7 @@ public class UiAnimation : MonoBehaviour
 
         LeanTween.scale(Retry, new Vector3(1f, 1f, 1f), 0.8f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic);
 
-        //IEnumerator origin()//return Faild to olace and desactivate
-        //{
-        //    yield return new WaitForSeconds(2);
-        //    Label.transform.localPosition = label_posetion;
-        //    Label.SetActive(false);
-        //}
-        //StartCoroutine(origin());
+
         IEnumerator wait()//retry pingpong scale
         {
             yield return new WaitForSeconds(0.8f);
@@ -119,38 +114,43 @@ public class UiAnimation : MonoBehaviour
         }
         instance.StartCoroutine(wait());
 
-        /*wait for end of timing to remve add watch*/
+        /*wait for end of timing to remove add watch*/
         GameObject red = faild.transform.GetChild(0).gameObject;
         float value_locall = 1;
         LeanTween.value(red, 1f, 0f, 5)
             .setOnUpdate((value) =>
             {
-                Debug.Log(value);
                 red.transform.localScale = new Vector3(
                         value, red.transform.localScale.y
                         , red.transform.localScale.z);
                 value_locall = value;
-            });
+            }).setDelay(1.5f);
+        ///wait end_timing to remove contenue
+        IEnumerator return_to_right()
+        {
+            yield return new WaitWhile(() => value_locall > 0);
+            LeanTween.moveLocal(Contaner, new Vector2(Screen.width, Contaner.transform.localPosition.y), 0.3f)
+                     .setEaseLinear();
 
+            LeanTween.moveLocal(Label, new Vector2(0, Label.transform.localPosition.y), 0.3f)
+                     .setEaseLinear()
+                     .setDelay(0.3f);
+        }
+        instance.StartCoroutine(return_to_right());
 
-        /* return to normall */
-
-        //IEnumerator return_to_right()
-        //{
-        //    yield return new WaitWhile(() => value_locall > 0);
-        //    Contaner.transform.localPosition = new Vector2(Screen.width, Contaner.transform.localPosition.y);
-        //    LeanTween.moveLocal(Contaner, new Vector2(Screen.width, 0), 0.3f)
-        //        .setEaseLinear()
-        //        .setDelay(1.8f);
-        //}
-        //instance.StartCoroutine(return_to_right());
-
+        Container_of_red = red;
     }
 
 
     static public void ResetAnimation()
     {
         LeanTween.reset();
+    }
+
+    public void return_red_to_default()
+    {
+        Container_of_red.transform.localScale = new Vector3(1, 1 , 1);
+
     }
 
     static public void betwen_scines(bool open)

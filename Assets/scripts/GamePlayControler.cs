@@ -621,6 +621,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
     private void home_btn_endlees_event()
     {
         UiAnimation.ResetAnimation();
+        
         if (Parent_of_endless)
         {
             endlees_begin = false;
@@ -652,12 +653,13 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
         {
             On_home_Click_from_Gameover_panel();
         }
-        
+        UiAnimation.instance.return_red_to_default();
     }
 
     public void Conrianer_of_watch_to_reward_event()
     {
         //reward_video
+        
         ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
         if (ball)
             ball.isKinematic = false;
@@ -671,10 +673,12 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
             timer.maxtime = 10;
             timer.timelift = timer.maxtime;
         }
+        UiAnimation.instance.return_red_to_default();
     }
 
     public void Conrianer_of_buy_event()
     {
+        
         int label_of_buying = int.Parse(Conrianer_of_buy.gameObject.transform.GetChild(0).gameObject.
                                transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
         int new_total_coin = int.Parse(SimpelDb.read("TotalCoin")) - label_of_buying;
@@ -691,11 +695,14 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
             begin_game_panel.SetActive(true);
             timer.maxtime = 10;
             timer.timelift = timer.maxtime;
+            
         }
+        UiAnimation.instance.return_red_to_default();
     }
 
     private void returne_fron_endlees_event()
     {
+        
         score = 0;
         ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
         if (ball)
@@ -709,6 +716,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
         {
             Returne();
         }
+        UiAnimation.instance.return_red_to_default();
     }
     public void Game_over_endlees()
     {
