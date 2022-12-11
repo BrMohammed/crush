@@ -179,7 +179,7 @@ public partial class GamePlayControler : MonoBehaviour
         About_pannel.SetActive(true);
     }
 
-    private void On_next_btn_Click_from_winning()/////////////////////////////////////////not don
+    private void On_next_btn_Click_from_winning()
     {
         corent_scene++;
         foreach (Transform child in parent_of_map.transform)
@@ -266,18 +266,17 @@ public partial class GamePlayControler : MonoBehaviour
 
     #region GamePaly ------------------------------------------------
 
-    public void OnPauseBtn_click()
+    public void OnPauseBtn_click()//with endlees and normal
     {
-        Time.timeScale = 0;
+        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
+        ball.isKinematic = true;
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.1f);
-            UiAnimation.PausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
-            score = 0;
             All_panel_desactive();
             pause_panel.SetActive(true);
-            ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-            ball.isKinematic = true;
+            UiAnimation.PausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
+            Time.timeScale = 0;
         }
         StartCoroutine(betwin());
     }
@@ -287,12 +286,11 @@ public partial class GamePlayControler : MonoBehaviour
     #region Pause Menue ------------------------------------------------
     public void On_resume_Click()
     {
-        
+        Time.timeScale = 1;
         UiAnimation.instance.closePausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.5f);
-            Time.timeScale = 1;
             ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
             if (ball)
                 ball.isKinematic = false;
@@ -307,12 +305,13 @@ public partial class GamePlayControler : MonoBehaviour
 
     public void On_home_Click_from_pause_panel()
     {
-        
+        Time.timeScale = 1;
         UiAnimation.betwen_scines(true);
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.2f);
-            Time.timeScale = 1;
+            UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
+                                         , Balls_btn_from_home.gameObject, level_from_home.gameObject);
             UiAnimation.betwen_scines(false);
             foreach (Transform child in parent_of_map.transform)
             {
@@ -330,6 +329,7 @@ public partial class GamePlayControler : MonoBehaviour
             All_panel_desactive();
             Totalcoin.SetActive(true);
             main_panel.SetActive(true);
+            endlees_begin = false;
         }
         StartCoroutine(betwin());
         
@@ -365,14 +365,18 @@ public partial class GamePlayControler : MonoBehaviour
         StartCoroutine(betwin());
 
     }
-    public void On_home_Click_from_Gameover_panel()
+    public void On_home_Click_from_Gameover_panel()///
     {
+        UiAnimation.ResetAnimation();
+        Time.timeScale = 1;
         winning_game = false;
         gameover = false;
         UiAnimation.betwen_scines(true);
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.2f);
+            UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
+                          , Balls_btn_from_home.gameObject, level_from_home.gameObject);
             UiAnimation.betwen_scines(false);
             foreach (Transform child in parent_of_map.transform)
             {
@@ -469,6 +473,8 @@ public partial class GamePlayControler : MonoBehaviour
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.2f);
+            UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
+                          , Balls_btn_from_home.gameObject, level_from_home.gameObject);
             UiAnimation.betwen_scines(false);
             All_panel_desactive();
             levels_panel.SetActive(true);
@@ -614,6 +620,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
 
     private void home_btn_endlees_event()
     {
+        UiAnimation.ResetAnimation();
         if (Parent_of_endless)
         {
             endlees_begin = false;
@@ -622,6 +629,8 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
             IEnumerator betwin()
             {
                 yield return new WaitForSeconds(0.2f);
+                UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
+                          , Balls_btn_from_home.gameObject, level_from_home.gameObject);
                 UiAnimation.betwen_scines(false);
                 Time.timeScale = 1;
                 score = 0;
