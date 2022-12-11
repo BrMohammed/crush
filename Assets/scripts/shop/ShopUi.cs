@@ -31,6 +31,12 @@ namespace ShopSystem
         [SerializeField] private Button yes;
         [SerializeField] private Button no;
         [SerializeField] private Button back;
+
+        [Header("Shop_manage : \n")]
+        [SerializeField] private Button remove_ads;
+        [SerializeField] private Button get_cristal;
+        [SerializeField] private Button[] pack_of_cristal;
+
         private bool conferm = false;
         private bool not_conferm = false;
 
@@ -44,6 +50,7 @@ namespace ShopSystem
             curentIndex = SelectedIndex;
             Totalcoin.text = "" + Shopcoin;
             Listners_to_button();
+            Listners_to_button_on_shop();
         }
 
         private void Listners_to_button()
@@ -68,6 +75,65 @@ namespace ShopSystem
 
         }
 
+        private void Listners_to_button_on_shop()
+        {
+            remove_ads.onClick.AddListener(() => remove_ads_event());
+            get_cristal.onClick.AddListener(() => get_cristal_event());
+            foreach (Button card in pack_of_cristal)
+            {
+                Button b = card.GetComponent<Button>();
+                b.onClick.AddListener(() => On_Click_Button_pack(card));
+            }
+        }
+
+        private void On_Click_Button_pack(Button card)
+        {
+            /////////
+            UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, false);
+            conferm_panel.SetActive(true);
+        }
+
+        private void get_cristal_event()
+        {
+            ////////
+            UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, false);
+            conferm_panel.SetActive(true);
+            IEnumerator conferm_buying()
+            {
+               
+                yield return new WaitWhile(() => conferm == false && not_conferm == false);
+                if (conferm)
+                {
+                    Debug.Log("conferm");
+                    Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
+                    Shopcoin += 40;
+                    SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
+                    Totalcoin.text = "" + Shopcoin;
+                    conferm = false;
+                    UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, true);
+                    IEnumerator pop_up_in()
+                    {
+                        yield return new WaitForSeconds(0.2f);
+                        conferm_panel.SetActive(false);
+                    }
+                    StartCoroutine(pop_up_in());
+                }
+                else
+                {
+                    Debug.Log("not_conferm");
+                    not_conferm = false;
+                }
+            }
+            StartCoroutine(conferm_buying());
+        }
+
+        private void remove_ads_event()
+        {
+            /////////
+            UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, false);
+            conferm_panel.SetActive(true);
+        }
+
         private void yes_OnClick()
         {
             conferm = true;
@@ -75,8 +141,14 @@ namespace ShopSystem
 
         private void cancel_OnClick()
         {
+            UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, true);
+            IEnumerator pop_up_in()
+            {
+                yield return new WaitForSeconds(0.2f);
+                conferm_panel.SetActive(false);
+            }
+            StartCoroutine(pop_up_in());
             not_conferm = true;
-            conferm_panel.SetActive(false);
         }
 
         private void On_Click_Button(Button card)
@@ -84,7 +156,19 @@ namespace ShopSystem
             int index = card.transform.GetSiblingIndex();
             if (Shopcoin >= ShopDataUI.ShopItems[index].unlocCost && ShopDataUI.ShopItems[index].unlocCost != 0)
             {
+                UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, false);
                 conferm_panel.SetActive(true);
+                IEnumerator conferm_method_ball(int index)
+                {
+                    yield return new WaitWhile(() => conferm == false && not_conferm == false);
+                    if (conferm)
+                    {
+                        conferm = false;
+                        ConfirmBuy_ball(index);
+                    }
+                    else
+                        not_conferm = false;
+                }
                 StartCoroutine(conferm_method_ball(index));
             }
             else
@@ -124,19 +208,6 @@ namespace ShopSystem
             active_childe_of_card(0, Cards[SelectedIndex]);
         }
 
-
-        IEnumerator conferm_method_ball(int index)
-        {
-            while (conferm == false && not_conferm == false) yield return new WaitForEndOfFrame();
-            if (conferm)
-            {
-                conferm = false;
-                ConfirmBuy_ball(index);
-            }
-            else
-                not_conferm = false;
-        }
-
         private void ConfirmBuy_ball(int index)
         {
 
@@ -148,7 +219,6 @@ namespace ShopSystem
             SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
             ShopDataUI.ShopItems[index].isUnlocked = true;
             saveLodeData.SaveData();
-            conferm_panel.SetActive(false);
             for (int i = 0; i < Cards.Length; i++)
             {
                 if (i != SelectedIndex)
@@ -161,7 +231,13 @@ namespace ShopSystem
                 }
                 setinfo(Cards[i]);
             }
-            conferm_panel.SetActive(false);
+            UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, true);
+            IEnumerator pop_up_in()
+            {
+                yield return new WaitForSeconds(0.2f);
+                conferm_panel.SetActive(false);
+            }
+            StartCoroutine(pop_up_in());
         }
 
         private void On_Click_Button_OnTrails(Button trail)
@@ -169,7 +245,23 @@ namespace ShopSystem
             int index = trail.transform.GetSiblingIndex();
             if (Shopcoin >= ShopTrailDataUI.ShopItems[index].UnlockCost && ShopTrailDataUI.ShopItems[index].UnlockCost != 0)
             {
+                UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, false);
                 conferm_panel.SetActive(true);
+                IEnumerator conferm_method_trail(int index)
+                {
+                    while (conferm == false && not_conferm == false) yield return new WaitForEndOfFrame();
+                    if (conferm)
+                    {
+                        Debug.Log("conferm");
+                        conferm = false;
+                        ConfirmBuy(index);
+                    }
+                    else
+                    {
+                        Debug.Log("not_conferm");
+                        not_conferm = false;
+                    }
+                }
                 StartCoroutine(conferm_method_trail(index));
             }
             else
@@ -192,22 +284,7 @@ namespace ShopSystem
             }
 
         }
-        IEnumerator conferm_method_trail(int index)
-        {
-            while (conferm == false && not_conferm == false) yield return new WaitForEndOfFrame();
-            if (conferm)
-            {
-                Debug.Log("conferm");
-                conferm = false;
-                ConfirmBuy(index);
-            }
-            else
-            {
-                Debug.Log("not_conferm");
-                not_conferm = false;
-            }
-                
-        }
+        
 
         private void ConfirmBuy(int index)
         {
@@ -219,7 +296,6 @@ namespace ShopSystem
             SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
             ShopTrailDataUI.ShopItems[index].IsUnlocked = true;
             saveLodeData.SaveTrailData();
-            conferm_panel.SetActive(false);
             for (int i = 0; i < Trails.Length; i++)
             {
                 if (i != SelectedIndexForTrail)
@@ -232,7 +308,13 @@ namespace ShopSystem
                 }
                 setinfoForTrail(Trails[i]);
             }
-            conferm_panel.SetActive(false);
+            UiAnimation.instance.pop_up(conferm_panel.transform.GetChild(1).gameObject, true);
+            IEnumerator pop_up_in()
+            {
+                yield return new WaitForSeconds(0.2f);
+                conferm_panel.SetActive(false);
+            }
+            StartCoroutine(pop_up_in());
         }
         private void setinfoForTrail(Button card)
         {

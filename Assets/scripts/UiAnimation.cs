@@ -80,10 +80,10 @@ public class UiAnimation : MonoBehaviour
 
      public void gameovereffect(GameObject Retry, GameObject faild)
     {
-        GameObject Label = faild.transform.GetChild(1).gameObject;
+        GameObject Label = faild.transform.GetChild(2).gameObject;
         //label move to right
         Vector2 label_posetion = Label.transform.localPosition;
-        GameObject Contaner = faild.transform.GetChild(2).gameObject;
+        GameObject Contaner = faild.transform.GetChild(3).gameObject;
         Retry.transform.localScale = new Vector3(0f, 0f, 0f);
         faild.transform.localPosition = new Vector2(Screen.width, faild.transform.localPosition.y);
         LeanTween.moveLocal(faild, new Vector2(0, faild.transform.localPosition.y), 0.2f)
@@ -102,13 +102,13 @@ public class UiAnimation : MonoBehaviour
 
         LeanTween.scale(Retry, new Vector3(1f, 1f, 1f), 0.8f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic);
 
-        IEnumerator origin()//return Faild to olace and desactivate
-        {
-            yield return new WaitForSeconds(2);
-            Label.transform.localPosition = label_posetion;
-            Label.SetActive(false);
-        }
-        StartCoroutine(origin());
+        //IEnumerator origin()//return Faild to olace and desactivate
+        //{
+        //    yield return new WaitForSeconds(2);
+        //    Label.transform.localPosition = label_posetion;
+        //    Label.SetActive(false);
+        //}
+        //StartCoroutine(origin());
         IEnumerator wait()//retry pingpong scale
         {
             yield return new WaitForSeconds(0.8f);
@@ -118,7 +118,35 @@ public class UiAnimation : MonoBehaviour
              .setDelay(0.2f);
         }
         instance.StartCoroutine(wait());
+
+        /*wait for end of timing to remve add watch*/
+        GameObject red = faild.transform.GetChild(0).gameObject;
+        float value_locall = 1;
+        LeanTween.value(red, 1f, 0f, 5)
+            .setOnUpdate((value) =>
+            {
+                Debug.Log(value);
+                red.transform.localScale = new Vector3(
+                        value, red.transform.localScale.y
+                        , red.transform.localScale.z);
+                value_locall = value;
+            });
+
+
+        /* return to normall */
+
+        //IEnumerator return_to_right()
+        //{
+        //    yield return new WaitWhile(() => value_locall > 0);
+        //    Contaner.transform.localPosition = new Vector2(Screen.width, Contaner.transform.localPosition.y);
+        //    LeanTween.moveLocal(Contaner, new Vector2(Screen.width, 0), 0.3f)
+        //        .setEaseLinear()
+        //        .setDelay(1.8f);
+        //}
+        //instance.StartCoroutine(return_to_right());
+
     }
+
 
     static public void ResetAnimation()
     {

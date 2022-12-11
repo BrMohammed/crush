@@ -404,7 +404,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Particle: {fileID: 2546369480165414188, guid: 1b8461c2b53da4958a5b7014ad8b6da4, type: 3}
-  no_triger: {fileID: 4205302422474545723, guid: cd6721fe4cb67403da0d78b9bde02635, type: 3}
 --- !u!75 &125295533
 ConstantForce:
   m_ObjectHideFlags: 0
@@ -491,7 +490,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.05
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -545,6 +544,6 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.05
   m_Autodestruct: 0
   m_Emitting: 1
