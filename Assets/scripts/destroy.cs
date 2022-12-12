@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Linq;
+using DG.Tweening;
 
 public class destroy : MonoBehaviour
 {
@@ -39,6 +40,15 @@ public class destroy : MonoBehaviour
                 TMP_Text _cristal = Resources.FindObjectsOfTypeAll<GameObject>()
                                     .FirstOrDefault(g => g.CompareTag("coin"))
                                     .gameObject.GetComponent<TextMeshProUGUI>();
+
+
+               //destroy_particle.transform.LeanMove(_cristal.transform.position, 15)
+               //     .setEaseLinear().setOnComplete(() => {
+               //         //executes whenever coin reach target position
+                        
+               //         Destroy(destroy_particle);
+               //     });
+
                 int Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
                 Shopcoin += cristal_win;
                 SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
