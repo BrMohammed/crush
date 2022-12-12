@@ -86,6 +86,7 @@ public class UiAnimation : MonoBehaviour
         Vector2 label_posetion = Label.transform.localPosition;
         GameObject Contaner = faild.transform.GetChild(3).gameObject;
         Retry.transform.localScale = new Vector3(0f, 0f, 0f);
+        Label.transform.localPosition = new Vector2(0, 0);
         faild.transform.localPosition = new Vector2(Screen.width, faild.transform.localPosition.y);
         LeanTween.moveLocal(faild, new Vector2(0, faild.transform.localPosition.y), 0.2f)
             .setEaseLinear()
@@ -94,7 +95,6 @@ public class UiAnimation : MonoBehaviour
         LeanTween.moveLocal(Label, new Vector2(-Screen.width, Label.transform.localPosition.y), 0.3f)
             .setEaseLinear()
             .setDelay(1.5f);
-
         //contaner move from left to right
         Contaner.transform.localPosition = new Vector2(Screen.width, Contaner.transform.localPosition.y);
         LeanTween.moveLocal(Contaner, new Vector2(0, Contaner.transform.localPosition.y), 0.3f)
@@ -102,7 +102,6 @@ public class UiAnimation : MonoBehaviour
             .setDelay(1.8f);
 
         LeanTween.scale(Retry, new Vector3(1f, 1f, 1f), 0.8f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic);
-
 
         IEnumerator wait()//retry pingpong scale
         {

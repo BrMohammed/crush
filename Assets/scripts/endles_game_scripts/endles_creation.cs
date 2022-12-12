@@ -64,10 +64,19 @@ public class endles_creation : MonoBehaviour
             {
                 GameObject c = Instantiate(cube, pos, cube.transform.rotation,transform);
                 c.GetComponent<MeshRenderer>().material.color = Color.HSVToRGB(HtoR / 360, 1, 70f / 100);
+                Color Nc = c.GetComponent<MeshRenderer>().material.color;
                 MeshRenderer renderer = c.GetComponent<MeshRenderer>();
                 Material material = renderer.material;
-                material.EnableKeyword("_EMISSION");
-                material.SetColor("_EmissionColor", Color.HSVToRGB(HtoR / 360, 1, 70f / 100));
+                LeanTween.value(c, 0, 1, 1f)
+                           .setOnUpdate((value) =>
+                           {
+                               if (value == 1f)
+                               {
+                                   material.EnableKeyword("_EMISSION");
+                                   material.SetColor("_EmissionColor", Color.HSVToRGB(HtoR / 360, 1, 70f / 100));
+                               }
+                               c.GetComponent<MeshRenderer>().material.color = new Color(Nc.r, Nc.g, Nc.b, value);
+                           });
                 GameObject child = c.transform.GetChild(0).gameObject;
                 child.GetComponent<TextMeshPro>().text = "";
                 child = c.transform.GetChild(1).gameObject;
