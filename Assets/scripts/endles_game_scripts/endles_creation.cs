@@ -56,7 +56,7 @@ public class endles_creation : MonoBehaviour
             counter++;
             currentSpawnposetion.x++;
         }
-        float HtoR = UnityEngine.Random.Range(0, 270);
+        float HtoR = UnityEngine.Random.Range(0, 360);
         foreach (Vector3 pos in SpawnPositions)
         {
             int i = UnityEngine.Random.Range(0, 3);
