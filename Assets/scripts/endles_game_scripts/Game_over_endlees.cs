@@ -11,6 +11,8 @@ public class Game_over_endlees : MonoBehaviour
         GameObject ball = GameObject.FindGameObjectWithTag("ball");
         if(ball && destroy.init.shield == true)
             Physics.IgnoreCollision(ball.transform.GetComponent<Collider>(), GetComponent<Collider>());
+        else
+            Physics.IgnoreCollision(ball.transform.GetComponent<Collider>(), GetComponent<Collider>(), false);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,10 +25,7 @@ public class Game_over_endlees : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.gameObject.tag == "ball_bass_triger" && destroy.init.shield == true)
-        {
+        if (destroy.init.shield == true)
             destroy.init.destroy_box(gameObject);
-        }
     }
 }

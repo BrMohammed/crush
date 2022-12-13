@@ -12,6 +12,7 @@ public class destroy : MonoBehaviour
     [SerializeField] private GameObject crista_obj;
     private GameObject destroy_particle;
     ParticleSystemRenderer p;
+    public GameObject shield_effect;
     TMP_Text _cristal;
     public bool shield = false;
 
@@ -22,7 +23,7 @@ public class destroy : MonoBehaviour
         init = this;
         p = Particle.GetComponent<ParticleSystemRenderer>();
         _cristal = Resources.FindObjectsOfTypeAll<GameObject>()
-                                    .FirstOrDefault(g => g.CompareTag("coin"))
+                                    .FirstOrDefault(g => g.CompareTag("coin_from_endless"))
                                     .gameObject.GetComponent<TextMeshProUGUI>();
     }
 
@@ -66,7 +67,10 @@ public class destroy : MonoBehaviour
                         .setEaseInOutCubic()
                         .setOnComplete(() =>
                         {  //executes whenever coin reach target position
-                            Debug.Log("hi");
+                            int Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
+                            Shopcoin++;
+                            SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
+                            _cristal.text = Shopcoin.ToString();
                             Destroy(Particle_cristal);
                         });
         }
@@ -83,18 +87,15 @@ public class destroy : MonoBehaviour
         IEnumerator wait()
         {
             yield return new WaitForSeconds(1);
-            Destroy(destroy_particle);
+            if(destroy_particle)
+                Destroy(destroy_particle);
         }
         StartCoroutine(wait());
-        int _random = UnityEngine.Random.Range(0, 20);
+        int _random = UnityEngine.Random.Range(0, 3);
         if (_random == 1)//chance to get cristal
         {
             for (int i = 0; i < cristal_win; i++)
                 inetial_cristal();
-            int Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
-            Shopcoin += cristal_win;
-            SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
-            _cristal.text = Shopcoin.ToString();
         }
         else if (_random == 2)//chance to get more balls
         {
@@ -110,14 +111,16 @@ public class destroy : MonoBehaviour
             if (index != 0)
                 G.transform.GetChild(index - 1).gameObject.SetActive(true);
         }
-        if(UnityEngine.Random.Range(0, 2) == 1)
+        else if(_random == 3 && shield != true)
         {
             shield = true;
             Debug.Log("shild active");
+            GameObject sh = Instantiate(shield_effect, transform.position, shield_effect.transform.rotation, gameObject.transform);
             IEnumerator wait_child()
             {
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(10);
                 shield = false;
+                Destroy(sh);
                 Debug.Log("shild desactive");
             }
             StartCoroutine(wait_child());

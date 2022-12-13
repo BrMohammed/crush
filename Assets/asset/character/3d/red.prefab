@@ -451,6 +451,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Particle: {fileID: 2546369480165414188, guid: 1b8461c2b53da4958a5b7014ad8b6da4, type: 3}
   crista_obj: {fileID: 4946408102601791651, guid: fe76ff7844fe04010a969361321f6aaa, type: 3}
+  shield_effect: {fileID: 5625911405827011042, guid: d318d847847b34dd581a1fe3b69529b4, type: 3}
+  shield: 0
 --- !u!75 &125295533
 ConstantForce:
   m_ObjectHideFlags: 0

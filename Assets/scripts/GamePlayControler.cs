@@ -56,6 +56,8 @@ public partial class GamePlayControler : MonoBehaviour
     [SerializeField] private Button MusicOnObj;
     [SerializeField] private GameObject image_of_winning;
 
+
+    [SerializeField] TextMeshProUGUI coin_from_game_endlees;
     public Button reset_dat;
 
 
@@ -72,7 +74,7 @@ public partial class GamePlayControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
         UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject , Shop_btn_from_home.gameObject
                           ,Balls_btn_from_home.gameObject, level_from_home.gameObject);
         endlees_begin = false;
@@ -108,8 +110,6 @@ public partial class GamePlayControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (begin_game_panel.active == true)
         {
             winning_game = false;
@@ -578,7 +578,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
 
     public void On_Play_Click()
     {
-        
+        coin_from_game_endlees.text = Totalcoin.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
         UiAnimation.instance.close_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
                          , Balls_btn_from_home.gameObject, level_from_home.gameObject);
         UiAnimation.betwen_scines(true);

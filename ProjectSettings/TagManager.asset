@@ -17,6 +17,7 @@ TagManager:
   - timer
   - cristal
   - coin
+  - coin_from_endless
   layers:
   - Default
   - TransparentFX
