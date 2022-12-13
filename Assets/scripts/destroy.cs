@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Linq;
+using LitJson;
 
 public class destroy : MonoBehaviour
 {
@@ -12,9 +13,13 @@ public class destroy : MonoBehaviour
     private GameObject destroy_particle;
     ParticleSystemRenderer p;
     TMP_Text _cristal;
+    public bool shield = false;
+
+    static public destroy init;
 
     void Start()
     {
+        init = this;
         p = Particle.GetComponent<ParticleSystemRenderer>();
         _cristal = Resources.FindObjectsOfTypeAll<GameObject>()
                                     .FirstOrDefault(g => g.CompareTag("coin"))
@@ -23,33 +28,13 @@ public class destroy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)///make if is in endlees or not
     {
-        if (collision.gameObject.tag == "cube") 
+        if (collision.gameObject.tag == "cube")
         {
+            
             if (collision.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text == "")
             {
 
-                Destroy(collision.gameObject);
-                GamePlayControler.score++;
-                p.material = collision.gameObject.GetComponent<MeshRenderer>().material;
-                destroy_particle =  Instantiate(Particle, transform.position, transform.rotation);
-                int cristal_win = UnityEngine.Random.Range(3, 5);
-                
-                IEnumerator wait()
-                {
-                    yield return new WaitForSeconds(1);
-                    Destroy(destroy_particle);
-                }
-                StartCoroutine(wait());
-
-                if(UnityEngine.Random.Range(0, 50) == 1)//chance to get cristal
-                {
-                    for (int i = 0; i < cristal_win; i++)
-                        inetial_cristal();
-                    int Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
-                    Shopcoin += cristal_win;
-                    SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
-                    _cristal.text = Shopcoin.ToString();
-                }
+                destroy_box(collision.gameObject);
             }
             else
             {
@@ -86,4 +71,58 @@ public class destroy : MonoBehaviour
                         });
         }
     }
+
+    public void destroy_box(GameObject collision)
+    {
+        if(collision)
+            Destroy(collision);
+        GamePlayControler.score++;
+        p.material = collision.GetComponent<MeshRenderer>().material;
+        destroy_particle = Instantiate(Particle, transform.position, transform.rotation);
+        int cristal_win = UnityEngine.Random.Range(2, 4);
+        IEnumerator wait()
+        {
+            yield return new WaitForSeconds(1);
+            Destroy(destroy_particle);
+        }
+        StartCoroutine(wait());
+        int _random = UnityEngine.Random.Range(0, 20);
+        if (_random == 1)//chance to get cristal
+        {
+            for (int i = 0; i < cristal_win; i++)
+                inetial_cristal();
+            int Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
+            Shopcoin += cristal_win;
+            SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
+            _cristal.text = Shopcoin.ToString();
+        }
+        else if (_random == 2)//chance to get more balls
+        {
+            string s = SimpelDb.read("SaveDataShop");
+            JsonData j = JsonMapper.ToObject(s);
+            int index = (int)j["SelectedIndex"];
+
+            GameObject G = Instantiate(InitBall.instiate.ball[index], transform.position
+                    , InitBall.instiate.ball[index].transform.rotation);
+            s = SimpelDb.read("SaveTrailDataShop");
+            j = JsonMapper.ToObject(s);
+            index = (int)j["SelectedIndex"];
+            if (index != 0)
+                G.transform.GetChild(index - 1).gameObject.SetActive(true);
+        }
+        if(UnityEngine.Random.Range(0, 2) == 1)
+        {
+            shield = true;
+            Debug.Log("shild active");
+            IEnumerator wait_child()
+            {
+                yield return new WaitForSeconds(3);
+                shield = false;
+                Debug.Log("shild desactive");
+            }
+            StartCoroutine(wait_child());
+        }
+    }
+
+   
 }

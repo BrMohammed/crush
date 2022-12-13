@@ -72,6 +72,7 @@ public partial class GamePlayControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject , Shop_btn_from_home.gameObject
                           ,Balls_btn_from_home.gameObject, level_from_home.gameObject);
         endlees_begin = false;
@@ -107,7 +108,9 @@ public partial class GamePlayControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(begin_game_panel.active == true)
+
+
+        if (begin_game_panel.active == true)
         {
             winning_game = false;
             gameover = false;
@@ -231,10 +234,7 @@ public partial class GamePlayControler : MonoBehaviour
             Balls_Panel.SetActive(true);
             //balls
             GameObject panelof_ball_scroll = Balls_Panel.transform.GetChild(1).gameObject;
-            panelof_ball_scroll.transform.GetChild(0).transform.position = new Vector3(panelof_ball_scroll.transform.position.x, 0, 0);
-            //trails
-            panelof_ball_scroll = Balls_Panel.transform.GetChild(3).gameObject;
-            panelof_ball_scroll.transform.GetChild(0).transform.position = new Vector3(panelof_ball_scroll.transform.position.x, 0, 0);
+            panelof_ball_scroll.transform.GetChild(0).transform.localPosition = new Vector3(0, 0, 0);
         }
         StartCoroutine(betwin());
         

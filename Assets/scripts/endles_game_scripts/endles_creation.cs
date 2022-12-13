@@ -12,7 +12,7 @@ public class endles_creation : MonoBehaviour
     const int row_count = 12;
     int count_of_cubes = 0;
     int counter = 0;
-    const int time_to_move = 1;
+    const int time_to_move = 10;
     Vector3[] SpawnPositions;
     float index = time_to_move;
     void Awake()
