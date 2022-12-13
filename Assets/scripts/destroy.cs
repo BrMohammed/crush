@@ -8,14 +8,17 @@ using System.Linq;
 public class destroy : MonoBehaviour
 {
     [SerializeField] private GameObject Particle;
-    [SerializeField] private GameObject Particle_cristal;
     [SerializeField] private GameObject crista_obj;
     private GameObject destroy_particle;
     ParticleSystemRenderer p;
-    // Start is called before the first frame update
+    TMP_Text _cristal;
+
     void Start()
     {
         p = Particle.GetComponent<ParticleSystemRenderer>();
+        _cristal = Resources.FindObjectsOfTypeAll<GameObject>()
+                                    .FirstOrDefault(g => g.CompareTag("coin"))
+                                    .gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     private void OnCollisionEnter(Collision collision)///make if is in endlees or not
@@ -27,50 +30,26 @@ public class destroy : MonoBehaviour
 
                 Destroy(collision.gameObject);
                 GamePlayControler.score++;
-                /*   particle_of_cube
-                 
-                    p.material = collision.gameObject.GetComponent<MeshRenderer>().material;
-                    destroy_particle =  Instantiate(Particle, transform.position, transform.rotation);
-
-                 */
-
-
-
-               // destroy_particle = Instantiate(Particle_cristal, transform.position, Particle_cristal.transform.rotation);
-                int cristal_win = UnityEngine.Random.Range(3, 7);
-                Particle_cristal.GetComponent<ParticleSystem>().emission.SetBurst(0, new ParticleSystem.Burst(0, cristal_win));
-                TMP_Text _cristal = Resources.FindObjectsOfTypeAll<GameObject>()
-                                    .FirstOrDefault(g => g.CompareTag("coin"))
-                                    .gameObject.GetComponent<TextMeshProUGUI>();
-                Debug.Log(cristal_win);
-                IEnumerator Destroy_particle()
+                p.material = collision.gameObject.GetComponent<MeshRenderer>().material;
+                destroy_particle =  Instantiate(Particle, transform.position, transform.rotation);
+                int cristal_win = UnityEngine.Random.Range(3, 5);
+                
+                IEnumerator wait()
                 {
-                    yield return new WaitForEndOfFrame();
-                    //Vector3 place = destroy_particle.transform.position; 
-                    Vector3 place = transform.position;
-
-                    Debug.Log("place" + place);
+                    yield return new WaitForSeconds(1);
                     Destroy(destroy_particle);
-                    for (int i = 0; i < cristal_win; i++)
-                    {
-                        Vector3 _random = new Vector3(UnityEngine.Random.Range(1f, -1f)
-                                                 , UnityEngine.Random.Range(1f, -1f)
-                                                 , 0);
-                        destroy_particle = Instantiate(crista_obj, place + _random, crista_obj.transform.rotation);
-                        destroy_particle.transform.LeanMove(_cristal.gameObject.transform.parent.transform.position, 1f)
-                             .setEaseLinear().setOnComplete(() =>
-                             {
-                                 //executes whenever coin reach target position
-                                 Debug.Log("cristal: " + i);
-                                 // Destroy(destroy_particle);
-                             });
-                    }
-                    //int Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
-                    //Shopcoin += cristal_win;
-                    //SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
-                    //_cristal.text = Shopcoin.ToString();
                 }
-                StartCoroutine(Destroy_particle());
+                StartCoroutine(wait());
+
+                if(UnityEngine.Random.Range(0, 50) == 1)//chance to get cristal
+                {
+                    for (int i = 0; i < cristal_win; i++)
+                        inetial_cristal();
+                    int Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
+                    Shopcoin += cristal_win;
+                    SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
+                    _cristal.text = Shopcoin.ToString();
+                }
             }
             else
             {
@@ -87,6 +66,24 @@ public class destroy : MonoBehaviour
                     collision.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().text = "";
                 }
             }
+        }
+    }
+
+    void inetial_cristal()
+    {
+        Vector3 _random = new Vector3(UnityEngine.Random.Range(1f, -1f)
+                                               , UnityEngine.Random.Range(1f, -1f)
+                                               , 0);
+        float random_time = UnityEngine.Random.Range(0.8f, 1.2f);
+        {
+            GameObject Particle_cristal = Instantiate(crista_obj, transform.position + _random, crista_obj.transform.rotation);
+            Particle_cristal.transform.LeanMove(_cristal.gameObject.transform.parent.transform.position, random_time)
+                        .setEaseInOutCubic()
+                        .setOnComplete(() =>
+                        {  //executes whenever coin reach target position
+                            Debug.Log("hi");
+                            Destroy(Particle_cristal);
+                        });
         }
     }
 }
