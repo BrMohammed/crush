@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{00D5F701-3552-C0CB-74D0-7A9307770CB5}</ProjectGuid>
+    <ProjectGuid>{57BDD0A0-E99D-A7CD-421F-BC712F0C5F43}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -64,10 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/ExternalDependencyManager/Editor/external-dependency-manager_version-1.2.169_manifest.txt" />
-    <None Include="Assets/asset/DOTween/Editor/DOTweenEditor.dll" />
     <None Include="Assets/ExternalDependencyManager/Editor/1.2.169/Google.IOSResolver.dll" />
     <None Include="Assets/ExternalDependencyManager/Editor/1.2.169/Google.VersionHandlerImpl.dll" />
-    <None Include="Assets/asset/DOTween/Editor/DOTweenEditor.XML" />
     <None Include="Assets/GoogleMobileAds/Editor/GoogleMobileAds.Editor.dll" />
     <None Include="Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll" />
     <None Include="Assets/ExternalDependencyManager/Editor/1.2.169/Google.JarResolver.dll" />
@@ -340,9 +338,6 @@
     <Reference Include="log4netPlastic">
       <HintPath>Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets/asset/DOTween/DOTween.dll</HintPath>
-    </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library/PackageCache/com.unity.testtools.codecoverage@1.0.1/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
     </Reference>
@@ -360,9 +355,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets/asset/DOTween/Editor/DOTweenEditor.dll</HintPath>
     </Reference>
     <Reference Include="Google.VersionHandlerImpl">
       <HintPath>Assets/ExternalDependencyManager/Editor/1.2.169/Google.VersionHandlerImpl.dll</HintPath>
@@ -967,7 +959,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{A0262AB1-31FA-AEC1-1667-BF972C518C5C}</Project>
+      <Project>{9201194B-D202-AF7A-2E71-05E010EF3910}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>
