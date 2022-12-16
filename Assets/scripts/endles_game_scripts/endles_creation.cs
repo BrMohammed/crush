@@ -15,6 +15,8 @@ public class endles_creation : MonoBehaviour
     const int time_to_move = 10;
     Vector3[] SpawnPositions;
     float index = time_to_move;
+    GameObject[] cube_to_find;
+    bool find_cub;
     void Awake()
     {
         Instantiate_cubs();
@@ -24,6 +26,15 @@ public class endles_creation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        find_cub = false;
+        cube_to_find = GameObject.FindGameObjectsWithTag("cube");
+        if (cube_to_find.Length == 0 && find_cub == false)
+        {
+            Debug.Log("no one");
+            find_cub = false;
+            index = time_to_move;
+            Instantiate_cubs();
+        }
         if (time_to_move <= index)
         {
             StartCoroutine(Mov_parent_on_y());

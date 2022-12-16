@@ -10,9 +10,11 @@ public class destroy : MonoBehaviour
 {
     [SerializeField] private GameObject Particle;
     [SerializeField] private GameObject crista_obj;
+    [SerializeField] private GameObject initial_ball_particle;
     private GameObject destroy_particle;
     ParticleSystemRenderer p;
     public GameObject shield_effect;
+
     TMP_Text _cristal;
     public bool shield = false;
 
@@ -91,7 +93,7 @@ public class destroy : MonoBehaviour
                 Destroy(destroy_particle);
         }
         StartCoroutine(wait());
-        int _random = UnityEngine.Random.Range(0, 3);
+        int _random = UnityEngine.Random.Range(0, 20);
         if (_random == 1)//chance to get cristal
         {
             for (int i = 0; i < cristal_win; i++)
@@ -99,20 +101,29 @@ public class destroy : MonoBehaviour
         }
         else if (_random == 2)//chance to get more balls
         {
-            string s = SimpelDb.read("SaveDataShop");
-            JsonData j = JsonMapper.ToObject(s);
-            int index = (int)j["SelectedIndex"];
-
-            GameObject G = Instantiate(InitBall.instiate.ball[index], transform.position
-                    , InitBall.instiate.ball[index].transform.rotation);
-            s = SimpelDb.read("SaveTrailDataShop");
-            j = JsonMapper.ToObject(s);
-            index = (int)j["SelectedIndex"];
-            if (index != 0)
-                G.transform.GetChild(index - 1).gameObject.SetActive(true);
+            GameObject p_ball = Instantiate(initial_ball_particle, transform.position
+                                ,initial_ball_particle.transform.rotation);
+            IEnumerator wait_ball()
+            {
+                yield return new WaitForSeconds(0.3f);
+                string s = SimpelDb.read("SaveDataShop");
+                JsonData j = JsonMapper.ToObject(s);
+                int index = (int)j["SelectedIndex"];
+                GameObject G = Instantiate(InitBall.instiate.ball[index], transform.position
+                        , InitBall.instiate.ball[index].transform.rotation);
+                s = SimpelDb.read("SaveTrailDataShop");
+                j = JsonMapper.ToObject(s);
+                index = (int)j["SelectedIndex"];
+                if (index != 0)
+                    G.transform.GetChild(index - 1).gameObject.SetActive(true);
+                Destroy(p_ball);
+            }
+            StartCoroutine(wait_ball());
+            
         }
-        else if(_random == 3 && shield != true)
+        else if(_random == 3 && shield != true)//shield effect
         {
+
             shield = true;
             Debug.Log("shild active");
             GameObject sh = Instantiate(shield_effect, transform.position, shield_effect.transform.rotation, gameObject.transform);

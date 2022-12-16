@@ -55,9 +55,10 @@ public partial class GamePlayControler : MonoBehaviour
     [SerializeField] private Button MusicOffObj;
     [SerializeField] private Button MusicOnObj;
     [SerializeField] private GameObject image_of_winning;
+    [SerializeField] private GameObject winning_efect;
 
 
-    [SerializeField] TextMeshProUGUI coin_from_game_endlees;
+    [SerializeField] public TextMeshProUGUI coin_from_game_endlees;
     public Button reset_dat;
 
 
@@ -74,7 +75,7 @@ public partial class GamePlayControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        coin_from_game_endlees.text = SimpelDb.read("TotalCoin");
         UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject , Shop_btn_from_home.gameObject
                           ,Balls_btn_from_home.gameObject, level_from_home.gameObject);
         endlees_begin = false;
@@ -198,6 +199,7 @@ public partial class GamePlayControler : MonoBehaviour
             UiAnimation.betwen_scines(false);
             All_panel_desactive();
             begin_game_panel.SetActive(true);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
             Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
             Criation_of_map_obj.Make_map(corent_scene);
             Totalcoin.SetActive(false);
@@ -295,10 +297,16 @@ public partial class GamePlayControler : MonoBehaviour
             if (ball)
                 ball.isKinematic = false;
             All_panel_desactive();
-            if (endlees_begin == false)
+            if (endlees_begin == false)            {
                 begin_game_panel.SetActive(true);
+                coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
+            }
             else
+            {
+                coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
                 begin_game_endlees.SetActive(true);
+            }
+               
         }
         StartCoroutine(betwin());
     }
@@ -353,6 +361,7 @@ public partial class GamePlayControler : MonoBehaviour
             UiAnimation.betwen_scines(false);
             All_panel_desactive();
             begin_game_panel.SetActive(true);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
             Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
             Criation_of_map_obj.Make_map(corent_scene);
             Totalcoin.SetActive(false);
@@ -411,14 +420,27 @@ public partial class GamePlayControler : MonoBehaviour
 
     private void Winning()
     {
-        winning_game = true;
-        All_panel_desactive();
-        winning_panel.SetActive(true);
-        Totalcoin.SetActive(true);
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.1f);
+            All_panel_desactive();
+            winning_panel.SetActive(true);
+            Totalcoin.SetActive(true);
             UiAnimation.PausePaneleEAffects(resume_btn_2.gameObject, next_btn_winning.gameObject, image_of_winning );
+            GameObject w_effect = null;
+            IEnumerator wait_effect()
+            {
+                yield return new WaitForSeconds(0.3f);
+                w_effect = Instantiate(winning_efect, winning_efect.transform.localPosition
+                                               , winning_efect.transform.localRotation, winning_panel.transform);
+            }
+            StartCoroutine(wait_effect());
+            IEnumerator wait_winning()
+            {
+                yield return new WaitForSeconds(3);
+                Destroy(w_effect);
+            }
+            StartCoroutine(wait_winning());
             int level = int.Parse(SimpelDb.read("level"));
             int next_level = level + 1;
             int corent_level = Criation_new_map.this_map + 1;
@@ -554,6 +576,7 @@ public partial class GamePlayControler : MonoBehaviour
         About_pannel.SetActive(false);
         Pannel_of_endless.SetActive(false);
         begin_game_endlees.SetActive(false);
+        coin_from_game_endlees.transform.parent.gameObject.SetActive(false);
     }
 }
 public partial class GamePlayControler : MonoBehaviour  //endlees_game
@@ -591,6 +614,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
             Totalcoin.SetActive(false);
             Fiaild_label.SetActive(true);
             begin_game_endlees.SetActive(true);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
             GameObject ball = GameObject.FindWithTag("ball");
             Parent_of_endless = Instantiate(_Parent_of_endless, new Vector3(0, 5, 0), _Parent_of_endless.transform.rotation);
             if (ball != null)
@@ -645,6 +669,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
                 main_panel.SetActive(true);
                 target_score.text = score.ToString();
                 begin_game_endlees.SetActive(false);
+                coin_from_game_endlees.transform.parent.gameObject.SetActive(false);
                 Pannel_of_endless.SetActive(false);
             }
             StartCoroutine(betwin());
@@ -670,6 +695,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
             All_panel_desactive();
             Totalcoin.SetActive(false);
             begin_game_panel.SetActive(true);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
             timer.maxtime = 10;
             timer.timelift = timer.maxtime;
         }
@@ -693,6 +719,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
             All_panel_desactive();
             Totalcoin.SetActive(false);
             begin_game_panel.SetActive(true);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
             timer.maxtime = 10;
             timer.timelift = timer.maxtime;
             
@@ -733,6 +760,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
             if(Parent_of_endless)
             Destroy(Parent_of_endless);
             begin_game_endlees.SetActive(false);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(false);
             if (score < int.Parse(SimpelDb.read("score")))
                 high_score.text = score + "/" + SimpelDb.read("score");
             else
@@ -744,6 +772,7 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
         else
         {
             begin_game_panel.SetActive(false);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(false);
             high_score.text = target_score.text;
         }
         int label_of_buying = int.Parse(Conrianer_of_buy.gameObject.transform.GetChild(0).gameObject.
