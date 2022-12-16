@@ -88,6 +88,8 @@ public class endles_creation : MonoBehaviour
             if (i != 0)
             {
                 GameObject c = Instantiate(cube, pos, cube.transform.rotation,transform);
+                //cant pop_up when translate alpha
+                c.GetComponent<Collider>().isTrigger = true;
                 c.GetComponent<MeshRenderer>().material.color = Color.HSVToRGB(HtoR / 360, 1, 70f / 100);
                 Color Nc = c.GetComponent<MeshRenderer>().material.color;
                 MeshRenderer renderer = c.GetComponent<MeshRenderer>();
@@ -99,6 +101,7 @@ public class endles_creation : MonoBehaviour
                                {
                                    material.EnableKeyword("_EMISSION");
                                    material.SetColor("_EmissionColor", Color.HSVToRGB(HtoR / 360, 1, 70f / 100));
+                                   c.GetComponent<Collider>().isTrigger = false;
                                }
                                c.GetComponent<MeshRenderer>().material.color = new Color(Nc.r, Nc.g, Nc.b, value);
                            });

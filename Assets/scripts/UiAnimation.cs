@@ -78,9 +78,14 @@ public class UiAnimation : MonoBehaviour
         LeanTween.scale(b, new Vector3(b.transform.localScale.x / 1.5f, b.transform.localScale.y / 1.5f, b.transform.localScale.z / 1.5f), 0.05f).setIgnoreTimeScale(true);
         LeanTween.scale(b, new Vector3((b.transform.localScale.x / 1.5f) * 1.5f, (b.transform.localScale.y / 1.5f) * 1.5f, (b.transform.localScale.z / 1.5f) * 1.5f), 0.05f).setDelay(0.05f).setIgnoreTimeScale(true);
     }
+    public void score_haver(GameObject b)
+    {
+        LeanTween.scale(b, new Vector3(b.transform.localScale.x * 1.5f, b.transform.localScale.y * 1.5f, b.transform.localScale.z * 1.5f), 0.05f).setIgnoreTimeScale(true);
+        LeanTween.scale(b, new Vector3((b.transform.localScale.x * 1.5f) / 1.5f, (b.transform.localScale.y * 1.5f) / 1.5f, (b.transform.localScale.z * 1.5f) / 1.5f), 0.05f).setDelay(0.2f).setIgnoreTimeScale(true);
+    }
 
 
-     public void gameovereffect(GameObject Retry, GameObject faild)
+    public void gameovereffect(GameObject Retry, GameObject faild)
     {
         GameObject Label = faild.transform.GetChild(2).gameObject;
         //label move to right

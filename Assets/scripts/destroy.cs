@@ -11,13 +11,10 @@ public class destroy : MonoBehaviour
     [SerializeField] private GameObject Particle;
     [SerializeField] private GameObject crista_obj;
     [SerializeField] private GameObject initial_ball_particle;
-    private GameObject destroy_particle;
     ParticleSystemRenderer p;
     public GameObject shield_effect;
-
     TMP_Text _cristal;
     public bool shield = false;
-
     static public destroy init;
 
     void Start()
@@ -84,16 +81,9 @@ public class destroy : MonoBehaviour
             Destroy(collision);
         GamePlayControler.score++;
         p.material = collision.GetComponent<MeshRenderer>().material;
-        destroy_particle = Instantiate(Particle, transform.position, transform.rotation);
-        int cristal_win = UnityEngine.Random.Range(2, 4);
-        IEnumerator wait()
-        {
-            yield return new WaitForSeconds(1);
-            if(destroy_particle)
-                Destroy(destroy_particle);
-        }
-        StartCoroutine(wait());
-        int _random = UnityEngine.Random.Range(0, 20);
+        Instantiate(Particle, transform.position, transform.rotation);
+        int cristal_win = UnityEngine.Random.Range(1, 4);
+        int _random = UnityEngine.Random.Range(0,4);
         if (_random == 1)//chance to get cristal
         {
             for (int i = 0; i < cristal_win; i++)
@@ -101,7 +91,7 @@ public class destroy : MonoBehaviour
         }
         else if (_random == 2)//chance to get more balls
         {
-            GameObject p_ball = Instantiate(initial_ball_particle, transform.position
+            Instantiate(initial_ball_particle, transform.position
                                 ,initial_ball_particle.transform.rotation);
             IEnumerator wait_ball()
             {
@@ -116,7 +106,6 @@ public class destroy : MonoBehaviour
                 index = (int)j["SelectedIndex"];
                 if (index != 0)
                     G.transform.GetChild(index - 1).gameObject.SetActive(true);
-                Destroy(p_ball);
             }
             StartCoroutine(wait_ball());
             
@@ -125,14 +114,11 @@ public class destroy : MonoBehaviour
         {
 
             shield = true;
-            Debug.Log("shild active");
-            GameObject sh = Instantiate(shield_effect, transform.position, shield_effect.transform.rotation, gameObject.transform);
+            Instantiate(shield_effect, transform.position, shield_effect.transform.rotation, gameObject.transform);
             IEnumerator wait_child()
             {
                 yield return new WaitForSeconds(10);
                 shield = false;
-                Destroy(sh);
-                Debug.Log("shild desactive");
             }
             StartCoroutine(wait_child());
         }
