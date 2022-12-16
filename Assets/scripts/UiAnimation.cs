@@ -8,6 +8,7 @@ public class UiAnimation : MonoBehaviour
 
     static public UiAnimation instance;
     private GameObject Container_of_red;
+    [SerializeField] private GameObject particle_for_congrats_endless;
     void Awake()
     { //called when an instance awakes in the game
         instance = this; //set our static reference to our newly initialized instance
@@ -140,6 +141,33 @@ public class UiAnimation : MonoBehaviour
         Container_of_red = red;
     }
 
+    public void congrats_endless(GameObject obj)
+    {
+        obj.transform.localScale = new Vector3(1, 1, 1);
+        obj.transform.localPosition = new Vector3(0, -600, obj.transform.localPosition.z);
+        GameObject particle = null;
+        LeanTween.scale(obj, new Vector3(2.5f, 2.5f, 2.5f), 1f)
+            .setEaseOutElastic();
+        IEnumerator wait()
+        {
+            yield return new WaitForSeconds(0.4f);
+            particle = Instantiate(particle_for_congrats_endless, obj.transform.position
+                                                , particle_for_congrats_endless.transform.rotation
+                                                , obj.transform.parent.gameObject.transform);
+        }
+        StartCoroutine(wait());
+        LeanTween.moveLocal(obj, new Vector2(0, -800), 0.8f)
+                     .setEaseOutElastic();
+
+        LeanTween.scale(obj, new Vector3(1f, 1f, 1f), 0.4f)
+           .setDelay(1f);
+        LeanTween.moveLocal(obj, new Vector2(0, -600), 0.4f)
+                     .setDelay(1f).setOnComplete(() =>
+                     {
+                        Destroy(particle);
+                     }); 
+
+    }
 
     static public void ResetAnimation()
     {

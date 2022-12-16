@@ -121,7 +121,6 @@
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSplineTrack.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanTest.cs" />
     <Compile Include="Assets/scripts/endles_game_scripts/Game_over_endlees.cs" />
-    <Compile Include="Assets/scripts/UiAnimeShop.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSplinePerformance.cs" />
     <Compile Include="Assets/Props Animations/Scripts/RollerBladeScript.cs" />
     <Compile Include="Assets/scripts/timer.cs" />

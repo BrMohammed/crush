@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2783982176465945639}
   - component: {fileID: 2783982176465945636}
   - component: {fileID: 2783982176465945638}
-  - component: {fileID: 2783982176465945659}
   - component: {fileID: 8434439897096579536}
+  - component: {fileID: 694086135}
   m_Layer: 5
   m_Name: Button_for_levels
   m_TagString: Untagged
@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2783982176465945632}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 125.55505, y: -818.8618}
-  m_SizeDelta: {x: 251.1, y: 219.8}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2783982176465945636
 CanvasRenderer:
@@ -90,32 +90,10 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2783982176465945659}
+  m_TargetGraphic: {fileID: 694086135}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2783982176465945659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2783982176465945632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d21eda649df9a499db062bfb23da8283, type: 3}
-  m_PreserveAspect: 1
 --- !u!114 &8434439897096579536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +106,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4572ed056884965aeb1a7dd04b8cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &694086135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783982176465945632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5d9865dadb0224cf897821a3b92fc7e0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2783982177783804985
 GameObject:
   m_ObjectHideFlags: 0

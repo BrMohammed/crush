@@ -17,23 +17,37 @@ public class endles_creation : MonoBehaviour
     float index = time_to_move;
     GameObject[] cube_to_find;
     bool find_cub;
+    static int index_of_congrats;
+    string[] congrats = { "outstanding", "Unstoppable", "dominant", "legend" , "god like"};
     void Awake()
     {
         Instantiate_cubs();
-
+        index_of_congrats = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (index_of_congrats > 4)
+            index_of_congrats = 4;
         find_cub = false;
         cube_to_find = GameObject.FindGameObjectsWithTag("cube");
-        if (cube_to_find.Length == 0 && find_cub == false)
+        if (cube_to_find.Length == 0 && find_cub == false
+            && GamePlayControler.init.congrats_endless.gameObject.active == false)
         {
-            Debug.Log("no one");
-            find_cub = false;
-            index = time_to_move;
-            Instantiate_cubs();
+            find_cub = true;
+            GamePlayControler.init.congrats_endless.gameObject.SetActive(true);
+            GamePlayControler.init.congrats_endless.text = congrats[index_of_congrats];
+            UiAnimation.instance.congrats_endless(GamePlayControler.init.congrats_endless.gameObject);
+            IEnumerator wait_congtats()
+            {
+                yield return new WaitForSeconds(1.2f);
+                index_of_congrats++;
+                GamePlayControler.init.congrats_endless.gameObject.SetActive(false);
+                index = time_to_move;
+                Instantiate_cubs();
+            }
+            StartCoroutine(wait_congtats());
         }
         if (time_to_move <= index)
         {

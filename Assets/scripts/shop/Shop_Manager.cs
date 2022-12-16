@@ -43,7 +43,7 @@ public class Shop_Manager : MonoBehaviour
 
     public void Sound()
     {
-        UiAnimeShop.butten_haver(SoundicoObj.gameObject);
+       // UiAnimeShop.butten_haver(SoundicoObj.gameObject);
         FindObjectOfType<AudioManager>().PlaySound("click");
         if (SoundObj.activeSelf)
             StartCoroutine(deley());

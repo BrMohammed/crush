@@ -62,7 +62,7 @@ public partial class GamePlayControler : MonoBehaviour
     public Button reset_dat;
 
 
-
+    static public GamePlayControler init;
 
     GameObject c;
     static public int score;
@@ -75,6 +75,7 @@ public partial class GamePlayControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        init = this;
         coin_from_game_endlees.text = SimpelDb.read("TotalCoin");
         UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject , Shop_btn_from_home.gameObject
                           ,Balls_btn_from_home.gameObject, level_from_home.gameObject);
@@ -596,6 +597,9 @@ public partial class GamePlayControler : MonoBehaviour  //endlees_game
     [SerializeField] private Button Conrianer_of_watch_to_reward;
     [SerializeField] private Button home_btn_endlees;
     [SerializeField] private Button Pause_btn_endlees;
+
+    public TextMeshProUGUI congrats_endless;
+    
 
     private GameObject Parent_of_endless;
 
