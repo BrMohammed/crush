@@ -12,7 +12,7 @@ public class endles_creation : MonoBehaviour
     const int row_count = 12;
     int count_of_cubes = 0;
     int counter = 0;
-    const int time_to_move = 10;
+    const int time_to_move = 1;
     Vector3[] SpawnPositions;
     float index = time_to_move;
     GameObject[] cube_to_find;
@@ -33,17 +33,17 @@ public class endles_creation : MonoBehaviour
         find_cub = false;
         cube_to_find = GameObject.FindGameObjectsWithTag("cube");
         if (cube_to_find.Length == 0 && find_cub == false
-            && GamePlayControler.init.congrats_endless.gameObject.active == false)
+            && EndlessAndLevelsPlay.init.congrats_endless.gameObject.active == false)
         {
             find_cub = true;
-            GamePlayControler.init.congrats_endless.gameObject.SetActive(true);
-            GamePlayControler.init.congrats_endless.text = congrats[index_of_congrats];
-            UiAnimation.instance.congrats_endless(GamePlayControler.init.congrats_endless.gameObject);
+            EndlessAndLevelsPlay.init.congrats_endless.gameObject.SetActive(true);
+            EndlessAndLevelsPlay.init.congrats_endless.text = congrats[index_of_congrats];
+            UiAnimation.instance.congrats_endless(EndlessAndLevelsPlay.init.congrats_endless.gameObject);
             IEnumerator wait_congtats()
             {
                 yield return new WaitForSeconds(1.2f);
                 index_of_congrats++;
-                GamePlayControler.init.congrats_endless.gameObject.SetActive(false);
+                EndlessAndLevelsPlay.init.congrats_endless.gameObject.SetActive(false);
                 index = time_to_move;
                 Instantiate_cubs();
             }

@@ -1,0 +1,51 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class EndlessPlay : MonoBehaviour
+{
+    public GameObject _Parent_of_endless;
+    public GameObject begin_game_endlees;
+    [SerializeField] private Button Pause_btn_endlees;
+    public TextMeshProUGUI congrats_endless;
+    [NonSerialized] public GameObject Parent_of_endless;
+    // Start is called before the first frame update
+    void Start()
+    {
+        Pause_btn_endlees.onClick.AddListener(() => GamePlayControler.init.OnPauseBtn_click());
+    }
+
+    public void EndlessPalyBegin()
+    {
+        over_score = false;
+        endlees_begin = true;
+        coin_from_game_endlees.text = Totalcoin.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
+        IEnumerator time_for_close()
+        {
+            yield return new WaitForSeconds(0.2f);
+            All_panel_desactive();
+            Totalcoin.SetActive(false);
+            GameOver.init.Fiaild_label.SetActive(true);
+            begin_game_endlees.SetActive(true);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
+            GameObject ball = GameObject.FindWithTag("ball");
+            if (ball != null)
+                Destroy(ball);
+            InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
+            temp.init_ball();
+            if (ball)
+                ball.GetComponent<Rigidbody>().isKinematic = false;
+            Parent_of_endless = Instantiate(_Parent_of_endless, new Vector3(0, 5, 0), _Parent_of_endless.transform.rotation);
+        }
+        StartCoroutine(time_for_close());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

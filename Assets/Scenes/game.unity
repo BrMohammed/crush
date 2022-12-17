@@ -12514,6 +12514,10 @@ GameObject:
   m_Component:
   - component: {fileID: 498275760}
   - component: {fileID: 498275759}
+  - component: {fileID: 498275761}
+  - component: {fileID: 498275763}
+  - component: {fileID: 498275762}
+  - component: {fileID: 498275764}
   m_Layer: 0
   m_Name: GamePlayControler
   m_TagString: Untagged
@@ -12533,17 +12537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b9db69a6f564e2d9af099cea2591f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pause_btn: {fileID: 627447875}
-  resume_btn1: {fileID: 244510649}
-  resume_btn_2: {fileID: 333714910}
-  home_btn: {fileID: 1837823206}
-  home_btn_winning: {fileID: 528204766}
-  next_btn_winning: {fileID: 1534947563}
-  play_from_home: {fileID: 366437311}
-  level_from_home: {fileID: 1754984771}
-  setting_btn_from_home: {fileID: 850052585}
-  Balls_btn_from_home: {fileID: 718217481}
-  Shop_btn_from_home: {fileID: 308054602}
+  endlees_begin: 0
   home_from_levels: {fileID: 114277623}
   cancel_from_settings: {fileID: 496354893}
   back_from_settings: {fileID: 892437538}
@@ -12558,6 +12552,8 @@ MonoBehaviour:
   Balls_Panel: {fileID: 1831843167}
   Shop_Panel: {fileID: 941196082}
   About_pannel: {fileID: 702853080}
+  gameOver_panel: {fileID: 913353504}
+  begin_game_endlees: {fileID: 467878078}
   target_score: {fileID: 1109739393}
   parent_of_map: {fileID: 2012384928}
   maps_parent_panel: {fileID: 402834257}
@@ -12567,22 +12563,7 @@ MonoBehaviour:
   SoundOnObj: {fileID: 1729563958}
   MusicOffObj: {fileID: 2048547492}
   MusicOnObj: {fileID: 699473150}
-  image_of_winning: {fileID: 1395404540}
-  winning_efect: {fileID: 1303749682789173449, guid: cdbdcb96bdbe4472b8329db3ff0d7b21, type: 3}
-  coin_from_game_endlees: {fileID: 257678392}
   reset_dat: {fileID: 231226938}
-  endlees_begin: 0
-  Pannel_of_endless: {fileID: 913353504}
-  _Parent_of_endless: {fileID: 3529493471611499742, guid: 29971539b9def4d14af6c088ac0a553b, type: 3}
-  begin_game_endlees: {fileID: 467878078}
-  high_score: {fileID: 1551012358}
-  returne_fron_endlees: {fileID: 623692058}
-  Fiaild_label: {fileID: 1723924803}
-  Conrianer_of_buy: {fileID: 1204210888}
-  Conrianer_of_watch_to_reward: {fileID: 170133561}
-  home_btn_endlees: {fileID: 53392574}
-  Pause_btn_endlees: {fileID: 1243232285}
-  congrats_endless: {fileID: 891465586}
 --- !u!4 &498275760
 Transform:
   m_ObjectHideFlags: 0
@@ -12598,6 +12579,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &498275761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498275758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bfc6ebe6671242f38b1976fe3c37caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  play_from_home: {fileID: 366437311}
+  level_from_home: {fileID: 1754984771}
+  setting_btn_from_home: {fileID: 850052585}
+  Balls_btn_from_home: {fileID: 718217481}
+  Shop_btn_from_home: {fileID: 308054602}
+--- !u!114 &498275762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498275758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b86fa8d2bdc0429f9715c9972688387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent_of_map: {fileID: 2012384928}
+  home_btn_winning: {fileID: 528204766}
+  next_btn_winning: {fileID: 1534947563}
+  winning_efect: {fileID: 1303749682789173449, guid: cdbdcb96bdbe4472b8329db3ff0d7b21, type: 3}
+  image_of_winning: {fileID: 1395404540}
+--- !u!114 &498275763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498275758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c96ddae7988460b9aa2d875aeafb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Parent_of_endless: {fileID: 3529493471611499742, guid: 29971539b9def4d14af6c088ac0a553b, type: 3}
+  high_score: {fileID: 1551012358}
+  returne: {fileID: 623692058}
+  Fiaild_label: {fileID: 1723924803}
+  Conrianer_of_buy: {fileID: 1204210888}
+  Conrianer_of_watch_to_reward: {fileID: 170133561}
+  home: {fileID: 53392574}
+--- !u!114 &498275764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498275758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767900d4f3b894d689f893107d88b813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Parent_of_endless: {fileID: 3529493471611499742, guid: 29971539b9def4d14af6c088ac0a553b, type: 3}
+  begin_game_endlees: {fileID: 467878078}
+  Pause_btn_endlees: {fileID: 1243232285}
+  congrats_endless: {fileID: 891465586}
+  coin_from_game_endlees: {fileID: 257678392}
+  pause_btn: {fileID: 627447875}
+  resume_btn1: {fileID: 244510649}
+  resume_btn_2: {fileID: 333714910}
+  home_btn: {fileID: 1837823206}
 --- !u!1 &499794897
 GameObject:
   m_ObjectHideFlags: 0
@@ -22436,7 +22491,7 @@ GameObject:
   - component: {fileID: 913353507}
   - component: {fileID: 913353506}
   m_Layer: 5
-  m_Name: gameoverpanel_endlees
+  m_Name: gameoverpanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

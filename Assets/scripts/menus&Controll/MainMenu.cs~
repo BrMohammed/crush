@@ -1,0 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class MainMenu : MonoBehaviour
+{
+    public Button play_from_home;
+    public Button level_from_home;
+    public Button setting_btn_from_home;
+    public Button Balls_btn_from_home;
+    public Button Shop_btn_from_home;
+    // Start is called before the first frame update
+    void Start()
+    {
+        UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
+                           , Balls_btn_from_home.gameObject, level_from_home.gameObject);
+
+        play_from_home.onClick.AddListener(() => On_Play_Click());
+        level_from_home.onClick.AddListener(() => On_Levels_Click_from_main());
+        setting_btn_from_home.onClick.AddListener(() => On_setting_click_form_main());
+        Balls_btn_from_home.onClick.AddListener(() => On_Balls_btn_Click__from_home_panel());
+        Shop_btn_from_home.onClick.AddListener(() => On_Shop_btn_Click_from_home_panel());
+    }
+    public void On_Play_Click()
+    {
+        over_score = false;
+        coin_from_game_endlees.text = Totalcoin.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
+        UiAnimation.instance.close_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
+                         , Balls_btn_from_home.gameObject, level_from_home.gameObject);
+        UiAnimation.betwen_scines(true);
+        endlees_begin = true;
+        IEnumerator time_for_close()
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            All_panel_desactive();
+            Totalcoin.SetActive(false);
+            Fiaild_label.SetActive(true);
+            begin_game_endlees.SetActive(true);
+            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
+            GameObject ball = GameObject.FindWithTag("ball");
+            if (ball != null)
+                Destroy(ball);
+            InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
+            temp.init_ball();
+            if (ball)
+                ball.GetComponent<Rigidbody>().isKinematic = false;
+            Parent_of_endless = Instantiate(_Parent_of_endless, new Vector3(0, 5, 0), _Parent_of_endless.transform.rotation);
+        }
+        StartCoroutine(time_for_close());
+        IEnumerator betwin()
+        {
+            yield return new WaitForSeconds(0.2f);
+            UiAnimation.betwen_scines(false);
+        }
+        StartCoroutine(betwin());
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

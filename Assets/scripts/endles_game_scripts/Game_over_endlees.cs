@@ -18,8 +18,7 @@ public class Game_over_endlees : MonoBehaviour
     {
         if(collision.transform.tag == "up_hand")
         {
-            GamePlayControler go = GameObject.Find("GamePlayControler").GetComponent<GamePlayControler>();
-            go.Game_over_endlees();
+            GameOver.init.Game_over();
         }
     }
 
