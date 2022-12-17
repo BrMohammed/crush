@@ -58,7 +58,7 @@ public class Shop_Manager : MonoBehaviour
     public void SoundOn()
     {
         M_Sound();
-        FindObjectOfType<AudioManager>().PlaySound("click_on");
+        //FindObjectOfType<AudioManager>().PlaySound("click_on");
         SimpelDb.update(0.ToString(), "Sound");
         SounOffObj.SetActive(false);
         SoundOnObj.SetActive(true);
@@ -68,14 +68,14 @@ public class Shop_Manager : MonoBehaviour
     {
         M_Sound();
         SimpelDb.update(1.ToString(), "Sound");
-        FindObjectOfType<AudioManager>().PlaySound("click_off");
+        //FindObjectOfType<AudioManager>().PlaySound("click_off");
         SounOffObj.SetActive(true);
         SoundOnObj.SetActive(false);
     }
     public void MusicOn()
     {
         M_Music();
-        FindObjectOfType<AudioManager>().PlaySound("click_on");
+        //FindObjectOfType<AudioManager>().PlaySound("click_on");
         SimpelDb.update(0.ToString(), "Music");
         Debug.Log(SimpelDb.read("Music"));
         MusicOffObj.SetActive(false);
@@ -86,7 +86,7 @@ public class Shop_Manager : MonoBehaviour
     {
         M_Music();
         SimpelDb.update(1.ToString(), "Music");
-        FindObjectOfType<AudioManager>().PlaySound("click_off");
+        //FindObjectOfType<AudioManager>().PlaySound("click_off");
         MusicOffObj.SetActive(true);
         MusicOnObj.SetActive(false);
     }
@@ -104,7 +104,7 @@ public class Shop_Manager : MonoBehaviour
     }
     public void M_Music()
     {
-        FindObjectOfType<AudioManager>().MuteSound("background");
+       // FindObjectOfType<AudioManager>().MuteSound("background");
     }
     private void On_click_Up_Buttons_trails()
     {

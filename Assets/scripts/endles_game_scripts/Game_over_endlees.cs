@@ -25,7 +25,11 @@ public class Game_over_endlees : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (destroy.init.shield == true)
+        if (destroy.init.shield == true && other.tag == "ball")
+        {
             destroy.init.destroy_box(gameObject);
+            Debug.Log("hi");
+        }
+           
     }
 }

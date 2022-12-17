@@ -57,11 +57,16 @@ public class InitBall : MonoBehaviour
 
     }
 
+   
     private void OnTriggerEnter(Collider other)
     {
-       
         if (other.gameObject.tag == "ball")
-        { 
+        {
+            if(other.gameObject.transform.childCount == 5)
+            {
+                FindObjectOfType<AudioManager>().MuteShield("active_shield", true);
+                destroy.init.shield = false;
+            }
             Destroy(other.gameObject);
             init_ball();
         }

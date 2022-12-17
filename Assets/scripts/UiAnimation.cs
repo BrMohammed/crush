@@ -75,6 +75,7 @@ public class UiAnimation : MonoBehaviour
 
     public void butten_haver(GameObject b)
     {
+        FindObjectOfType<AudioManager>().PlaySound("click");
         LeanTween.scale(b, new Vector3(b.transform.localScale.x / 1.5f, b.transform.localScale.y / 1.5f, b.transform.localScale.z / 1.5f), 0.05f).setIgnoreTimeScale(true);
         LeanTween.scale(b, new Vector3((b.transform.localScale.x / 1.5f) * 1.5f, (b.transform.localScale.y / 1.5f) * 1.5f, (b.transform.localScale.z / 1.5f) * 1.5f), 0.05f).setDelay(0.05f).setIgnoreTimeScale(true);
     }

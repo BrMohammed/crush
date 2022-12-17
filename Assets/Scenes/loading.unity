@@ -1756,8 +1756,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: click
-    clip: {fileID: 8300000, guid: fc1c412b1ed5346f38b98bf2f5497621, type: 3}
-    volum: 1
+    clip: {fileID: 8300000, guid: ce56eeb6cf2884d6d9f8b8b8c0ff05dc, type: 3}
+    volum: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -1768,34 +1768,10 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: background
-    clip: {fileID: 8300000, guid: a20a3fb1b8c38477d8b476ae2acfa4d6, type: 3}
-    volum: 0.097
+    clip: {fileID: 8300000, guid: b80c842ba52c5214abc0750f615fb479, type: 3}
+    volum: 0.419
     pitch: 1
     loop: 1
-    source: {fileID: 0}
-  - name: loos
-    clip: {fileID: 8300000, guid: 39f36b75d845a45aba171bd8fca592a0, type: 3}
-    volum: 1
-    pitch: 1.1
-    loop: 0
-    source: {fileID: 0}
-  - name: femal jump
-    clip: {fileID: 8300000, guid: 8f17823d81c054574b57f9582f402293, type: 3}
-    volum: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: man jump
-    clip: {fileID: 8300000, guid: e1eac3a1dc38245a7af4930a81a8c067, type: 3}
-    volum: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: run
-    clip: {fileID: 8300000, guid: 421de224b3ad94e4daa78bc99204cec9, type: 3}
-    volum: 1
-    pitch: 1.08
-    loop: 0
     source: {fileID: 0}
   - name: coin
     clip: {fileID: 8300000, guid: 8c3c83ad9fc944933a898e672f4a52bc, type: 3}
@@ -1815,9 +1791,27 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: slide
-    clip: {fileID: 8300000, guid: 74b61989885a144bba8bdd89e21f4586, type: 3}
-    volum: 1
+  - name: winning
+    clip: {fileID: 8300000, guid: 200a63e0fe988f3408865693b9975ada, type: 3}
+    volum: 0.585
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ather_ball
+    clip: {fileID: 8300000, guid: 1d7db8e4e11614d41967eca958ffc95b, type: 3}
+    volum: 0.585
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: hit_the_wall
+    clip: {fileID: 8300000, guid: 56643e27ec43e4b178cc4fbcaad4287f, type: 3}
+    volum: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: active_shield
+    clip: {fileID: 8300000, guid: ef08107f827e9469a891cdb5fac82779, type: 3}
+    volum: 0.862
     pitch: 1
     loop: 0
     source: {fileID: 0}

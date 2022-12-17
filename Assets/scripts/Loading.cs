@@ -34,7 +34,7 @@ public class Loading : MonoBehaviour
 			M_Sound();
 		if (int.Parse(SimpelDb.read("Music")) == 0)
 			M_Music();
-		FindObjectOfType<AudioManager>().PlaySound("background");
+		//FindObjectOfType<AudioManager>().PlaySound("background");
 		SceneManager.LoadSceneAsync(1);
 	}
 
@@ -87,7 +87,7 @@ public class Loading : MonoBehaviour
 	}
 	public void M_Music()
 	{
-		FindObjectOfType<AudioManager>().MuteSound("background");
+		//FindObjectOfType<AudioManager>().MuteSound("background");
 	}
 
 }

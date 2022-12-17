@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null)
         {
-           // Debug.LogWarning("Sound: " + name + " not found !");
+            Debug.LogWarning("Sound: " + name + " not found !");
             return;
         }
         s.source.Play();
@@ -42,9 +42,22 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
-            //Debug.LogWarning("Sound: " + name + " not found !");
+            Debug.LogWarning("Sound: " + name + " not found !");
             return;
         }
         s.source.mute = !s.source.mute;
+    }
+    public void MuteShield(string name,bool mute)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Shield soun error");
+            return;
+        }
+        if(mute == true)
+            s.source.mute = true;
+        else
+            s.source.mute = false;
     }
 }

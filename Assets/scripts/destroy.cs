@@ -14,12 +14,13 @@ public class destroy : MonoBehaviour
     ParticleSystemRenderer p;
     public GameObject shield_effect;
     TMP_Text _cristal;
-    public bool shield = false;
+    public bool shield;
     static public destroy init;
 
     void Start()
     {
         init = this;
+        shield = false;
         p = Particle.GetComponent<ParticleSystemRenderer>();
         _cristal = Resources.FindObjectsOfTypeAll<GameObject>()
                                     .FirstOrDefault(g => g.CompareTag("coin_from_endless"))
@@ -110,9 +111,10 @@ public class destroy : MonoBehaviour
             StartCoroutine(wait_ball());
             
         }
-        else if(_random == 3 && shield != true)//shield effect
+        else if(_random == 3 && shield == false)//shield effect
         {
-
+            FindObjectOfType<AudioManager>().MuteShield("active_shield", false);
+            FindObjectOfType<AudioManager>().PlaySound("active_shield");
             shield = true;
             Instantiate(shield_effect, transform.position, shield_effect.transform.rotation, gameObject.transform);
             IEnumerator wait_child()

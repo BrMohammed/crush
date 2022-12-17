@@ -437,6 +437,10 @@ public partial class GamePlayControler : MonoBehaviour
             All_panel_desactive();
             winning_panel.SetActive(true);
             Totalcoin.SetActive(true);
+            GameObject ball01 = GameObject.FindWithTag("ball");
+            if (ball01 != null)
+                Destroy(ball01);
+            FindObjectOfType<AudioManager>().PlaySound("winning");
             UiAnimation.PausePaneleEAffects(resume_btn_2.gameObject, next_btn_winning.gameObject, image_of_winning );
             IEnumerator wait_effect()
             {
@@ -458,8 +462,6 @@ public partial class GamePlayControler : MonoBehaviour
             }
             if(next_level >= count_of_maps)
                 next_btn_winning.gameObject.SetActive(false);
-            ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-            ball.isKinematic = true;
         }
         StartCoroutine(betwin());
         score = 0;
@@ -536,7 +538,7 @@ public partial class GamePlayControler : MonoBehaviour
 
     public void SoundOn()
     {
-        //FindObjectOfType<AudioManager>().PlaySound("click_on");
+       // FindObjectOfType<AudioManager>().PlaySound("click_on");
         SimpelDb.update(0.ToString(), "Sound");
         SounOffObj.gameObject.SetActive(false);
         SoundOnObj.gameObject.SetActive(true);
@@ -544,7 +546,7 @@ public partial class GamePlayControler : MonoBehaviour
     public void SoundOff()
     {
         SimpelDb.update(1.ToString(), "Sound");
-        //FindObjectOfType<AudioManager>().PlaySound("click_off");
+       // FindObjectOfType<AudioManager>().PlaySound("click_off");
         SounOffObj.gameObject.SetActive(true);
         SoundOnObj.gameObject.SetActive(false);
     }
@@ -552,7 +554,7 @@ public partial class GamePlayControler : MonoBehaviour
     {
         //FindObjectOfType<AudioManager>().PlaySound("click_on");
         SimpelDb.update(0.ToString(), "Music");
-        // Debug.Log(SimpelDb.read("Music"));
+        //Debug.Log(SimpelDb.read("Music"));
         MusicOffObj.gameObject.SetActive(false);
         MusicOnObj.gameObject.SetActive(true);
 
