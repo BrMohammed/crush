@@ -12518,6 +12518,7 @@ GameObject:
   - component: {fileID: 498275763}
   - component: {fileID: 498275762}
   - component: {fileID: 498275764}
+  - component: {fileID: 498275765}
   m_Layer: 0
   m_Name: GamePlayControler
   m_TagString: Untagged
@@ -12538,11 +12539,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endlees_begin: 0
-  home_from_levels: {fileID: 114277623}
-  cancel_from_settings: {fileID: 496354893}
-  back_from_settings: {fileID: 892437538}
-  About_from_settings: {fileID: 1987285029}
-  cancel_about: {fileID: 1742637093}
   begin_game_panel: {fileID: 1247441264}
   pause_panel: {fileID: 2016584009}
   winning_panel: {fileID: 1480934009}
@@ -12653,6 +12649,25 @@ MonoBehaviour:
   resume_btn1: {fileID: 244510649}
   resume_btn_2: {fileID: 333714910}
   home_btn: {fileID: 1837823206}
+--- !u!114 &498275765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498275758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf29cf4ba005f4c30937d9b90fcd936c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  home_from_levels: {fileID: 114277623}
+  home_from_Shop: {fileID: 1448088423}
+  home_from_Balls: {fileID: 370205681}
+  cancel_from_settings: {fileID: 496354893}
+  back_from_settings: {fileID: 892437538}
+  About_from_settings: {fileID: 1987285029}
+  cancel_about: {fileID: 1742637093}
 --- !u!1 &499794897
 GameObject:
   m_ObjectHideFlags: 0

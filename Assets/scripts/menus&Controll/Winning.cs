@@ -17,7 +17,7 @@ public class Winning : MonoBehaviour
     void Start()
     {
         init = this;
-        home_btn_winning.onClick.AddListener(() => GamePlayControler.init.On_home_Click_from_Gameover_panel());
+        home_btn_winning.onClick.AddListener(() => GamePlayControler.init.On_home_Click());
         next_btn_winning.onClick.AddListener(() => On_next_btn_Click_from_winning());
     }
 

@@ -67,7 +67,7 @@ public class GameOver : MonoBehaviour
         }
         else
         {
-            GamePlayControler.init.On_home_Click_from_Gameover_panel();
+            GamePlayControler.init.On_home_Click();
         }
         UiAnimation.instance.return_red_to_default();
     }

@@ -12,23 +12,12 @@ public partial class GamePlayControler : MonoBehaviour
     static public GamePlayControler init;
     static public int score;
     static public int corent_scene;
-    GameObject c;
+    GameObject levels_make;
     private bool gameover;
     private Criation_new_map Criation_of_map_obj;
     private bool winning_game;
     public bool endlees_begin;
     Rigidbody ball;
-    //bool over_score;
-
-    [Header("Buttons :\n")]
-
-    [SerializeField] private Button home_from_levels;
-
-    [SerializeField] private Button cancel_from_settings;
-    [SerializeField] private Button back_from_settings;
-    [SerializeField] private Button About_from_settings;
-
-    [SerializeField] private Button cancel_about;
 
     [Header("menus : \n")]
     public GameObject begin_game_panel;
@@ -55,16 +44,12 @@ public partial class GamePlayControler : MonoBehaviour
     [SerializeField] private Button MusicOnObj;
 
 
-    //public TextMeshProUGUI coin_from_game_endlees;
     public Button reset_dat;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //over_score = false;
-        init = this;
-        //coin_from_game_endlees.text = SimpelDb.read("TotalCoin");
         
+        init = this;
         endlees_begin = false;
         Listners();
         winning_game = false;
@@ -72,15 +57,15 @@ public partial class GamePlayControler : MonoBehaviour
         //loop on levels
         for (int i = 0; i < Criation_new_map.maps_count; i++)
         {
-            c = Instantiate(level_pref, maps_parent_panel.transform.position, maps_parent_panel.transform.rotation, maps_parent_panel.transform);
-            GameObject child = c.transform.GetChild(0).gameObject;
+            levels_make  = Instantiate(level_pref, maps_parent_panel.transform.position, maps_parent_panel.transform.rotation, maps_parent_panel.transform);
+            GameObject child = levels_make.transform.GetChild(0).gameObject;
             child.GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
             if (int.Parse(SimpelDb.read("level")) >= i + 1)
-                c.transform.GetChild(0).gameObject.SetActive(true);
+                levels_make.transform.GetChild(0).gameObject.SetActive(true);
             else
             {
-                c.transform.GetChild(1).gameObject.SetActive(true);
-                c.GetComponent<Button>().interactable = false;
+                levels_make.transform.GetChild(1).gameObject.SetActive(true);
+                levels_make.GetComponent<Button>().interactable = false;
             }
         }
         score = 0;
@@ -93,15 +78,10 @@ public partial class GamePlayControler : MonoBehaviour
         else
             SoundOff();
     }
-
     // Update is called once per frame
     void Update()
     {
-        //if (score > int.Parse(SimpelDb.read("score")) && over_score == false)
-        //{
-        //    over_score = true;
-        //    UiAnimation.instance.score_haver(begin_game_endlees.transform.GetChild(0).gameObject);
-        //} 
+
         if (begin_game_panel.active == true)
         {
             winning_game = false;
@@ -123,52 +103,13 @@ public partial class GamePlayControler : MonoBehaviour
         }
     }
 
-    //public void EndlessPalyBegin()
-    //{
-    //    over_score = false;
-    //    endlees_begin = true;
-    //    coin_from_game_endlees.text = Totalcoin.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
-    //    IEnumerator time_for_close()
-    //    {
-    //        yield return new WaitForSeconds(0.2f);
-    //        All_panel_desactive();
-    //        Totalcoin.SetActive(false);
-    //        GameOver.init.Fiaild_label.SetActive(true);
-    //        begin_game_endlees.SetActive(true);
-    //        coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
-    //        GameObject ball = GameObject.FindWithTag("ball");
-    //        if (ball != null)
-    //            Destroy(ball);
-    //        InitBall temp = GameObject.Find("init_ball").GetComponent<InitBall>();
-    //        temp.init_ball();
-    //        if (ball)
-    //            ball.GetComponent<Rigidbody>().isKinematic = false;
-    //        Parent_of_endless = Instantiate(_Parent_of_endless, new Vector3(0, 5, 0), _Parent_of_endless.transform.rotation);
-    //    }
-    //    StartCoroutine(time_for_close());
-    //}
     private void Listners()
     {
-        //pause_pannel
-        //pause_btn.onClick.AddListener(() => OnPauseBtn_click());
-        //resume_btn1.onClick.AddListener(() => On_resume_Click());
-        //resume_btn_2.onClick.AddListener(() => On_resume_Click());
-        //begingam pannel
-        //home_btn.onClick.AddListener(() => On_home_Click_from_pause_panel());
-        //levels
-        home_from_levels.onClick.AddListener(() => OnHomeBtn_click_from_levelse());
-        //settings
-        cancel_from_settings.onClick.AddListener(() => On_Cancel_click_form_main());
-        back_from_settings.onClick.AddListener(() => On_Cancel_click_form_main());
+        reset_dat.onClick.AddListener(() => Reset_data());
         SounOffObj.onClick.AddListener(() => SoundOn());
         SoundOnObj.onClick.AddListener(() => SoundOff());
         MusicOffObj.onClick.AddListener(() => MusicOn());
         MusicOnObj.onClick.AddListener(() => MusicOff());
-        About_from_settings.onClick.AddListener(() => About_page());
-        //About
-        cancel_about.onClick.AddListener(() => On_Cancel_click_form_main());
-        ///reset
-        reset_dat.onClick.AddListener(() => Reset_data());
     }
 
     private void Reset_data()
@@ -185,117 +126,6 @@ public partial class GamePlayControler : MonoBehaviour
         settings_Panel.SetActive(false);
         About_pannel.SetActive(true);
     }
-
-    
-
-
-
-
-    #region Levels_panel ------------------------------------------------
-    public void OnHomeBtn_click_from_levelse()
-    {
-        UiAnimation.betwen_scines(true);
-        IEnumerator betwin()
-        {
-            yield return new WaitForSeconds(0.2f);
-            UiAnimation.betwen_scines(false);
-            score = 0;
-            All_panel_desactive();
-            main_panel.SetActive(true);
-            Totalcoin.SetActive(true);
-        }
-        StartCoroutine(betwin());
-    }
-    public void OnShopBtn_click_from_levelse()
-    {
-        All_panel_desactive();
-        Totalcoin.SetActive(true);
-        main_panel.SetActive(true);
-    }
-
-    #endregion
-
-    #region GamePaly ------------------------------------------------
-
-    //public void OnPauseBtn_click()//with endlees and normal
-    //{
-    //    ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-    //    ball.isKinematic = true;
-    //    IEnumerator betwin()
-    //    {
-    //        yield return new WaitForSeconds(0.1f);
-    //        All_panel_desactive();
-    //        pause_panel.SetActive(true);
-    //        UiAnimation.PausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
-    //        Time.timeScale = 0;
-    //    }
-    //    StartCoroutine(betwin());
-    //}
-
-    #endregion
-
-    #region Pause Menue ------------------------------------------------
-    //public void On_resume_Click()
-    //{
-    //    Time.timeScale = 1;
-    //    UiAnimation.instance.closePausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
-    //    IEnumerator betwin()
-    //    {
-    //        yield return new WaitForSeconds(0.5f);
-    //        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-    //        if (ball)
-    //            ball.isKinematic = false;
-    //        All_panel_desactive();
-    //        if (endlees_begin == false)            {
-    //            begin_game_panel.SetActive(true);
-    //            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            coin_from_game_endlees.transform.parent.gameObject.SetActive(true);
-    //            begin_game_endlees.SetActive(true);
-    //        }
-               
-    //    }
-    //    StartCoroutine(betwin());
-    //}
-
-    //public void On_home_Click_from_pause_panel()
-    //{
-    //    Time.timeScale = 1;
-    //    UiAnimation.betwen_scines(true);
-    //    IEnumerator betwin()
-    //    {
-    //        yield return new WaitForSeconds(0.2f);
-    //        UiAnimation.start_home(MainMenu.init.play_from_home.gameObject, MainMenu.init.setting_btn_from_home.gameObject, MainMenu.init.Shop_btn_from_home.gameObject
-    //                                     , MainMenu.init.Balls_btn_from_home.gameObject, MainMenu.init.level_from_home.gameObject);
-    //        UiAnimation.betwen_scines(false);
-    //        foreach (Transform child in parent_of_map.transform)
-    //        {
-    //            if (child)
-    //                Destroy(child.gameObject);
-    //        }
-    //        if(endlees_begin == true)
-    //        {
-    //            if (score > int.Parse(SimpelDb.read("score")))
-    //                SimpelDb.update(score.ToString(), "score");
-    //            if (Parent_of_endless)
-    //                Destroy(Parent_of_endless);
-    //        }
-    //        score = 0;
-    //        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-    //        ball.isKinematic = true;
-    //        All_panel_desactive();
-    //        Totalcoin.SetActive(true);
-    //        main_panel.SetActive(true);
-    //        endlees_begin = false;
-    //    }
-    //    StartCoroutine(betwin());
-        
-    //}
-    #endregion
-
-    #region Game Over Menu------------------------------------------------
 
     public void ReturnFromLevels()
     {
@@ -325,7 +155,7 @@ public partial class GamePlayControler : MonoBehaviour
         StartCoroutine(betwin());
 
     }
-    public void On_home_Click_from_Gameover_panel()///
+    public void On_home_Click()
     {
         UiAnimation.ResetAnimation();
         Time.timeScale = 1;
@@ -355,33 +185,16 @@ public partial class GamePlayControler : MonoBehaviour
         endlees_begin = false;
     }
 
-    public void On_Levels_Click_from_Gameover_panel()
-    {
-        foreach (Transform child in parent_of_map.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        All_panel_desactive();
-        levels_panel.SetActive(true);
-    }
-    #endregion
-
-    #region Seting_pannel -------------------------------------
-
-    public void On_Cancel_click_form_main()
-    {
-        UiAnimation.instance.pop_up(settings_Panel.transform.GetChild(1).gameObject, true);
-        UiAnimation.instance.pop_up(About_pannel.transform.GetChild(1).gameObject, true);
-        IEnumerator pop_up_in()
-        {
-            yield return new WaitForSeconds(0.3f);
-            settings_Panel.SetActive(false);
-            MainMenu.init.play_from_home.gameObject.SetActive(true);
-            About_pannel.SetActive(false);
-        }
-        StartCoroutine(pop_up_in());
-    }
-
+    //public void On_Levels_Click_from_Gameover_panel()
+    //{
+    //    foreach (Transform child in parent_of_map.transform)
+    //    {
+    //        Destroy(child.gameObject);
+    //    }
+    //    All_panel_desactive();
+    //    levels_panel.SetActive(true);
+    //}
+  
     public void SoundOn()
     {
        // FindObjectOfType<AudioManager>().PlaySound("click_on");
@@ -413,7 +226,7 @@ public partial class GamePlayControler : MonoBehaviour
         MusicOnObj.gameObject.SetActive(false);
     }
 
-    #endregion
+ 
 
     public void Loop_on_levels_card()
     {
@@ -454,23 +267,4 @@ public partial class GamePlayControler : MonoBehaviour
         EndlessAndLevelsPlay.init.coin_from_game_endlees.transform.parent.gameObject.SetActive(false);
     }
 }
-public partial class GamePlayControler : MonoBehaviour 
-{
-    //[Header("Endless Part \n")]
 
-    //public GameObject _Parent_of_endless;
-
-
-    //[SerializeField] private Button Pause_btn_endlees;
-
-    //public TextMeshProUGUI congrats_endless;
-
-
-    //[NonSerialized] public GameObject Parent_of_endless;
-
-    //private void Listners_in_endlees()
-    //{
-       
-    //   // Pause_btn_endlees.onClick.AddListener(() => OnPauseBtn_click());
-    //}
-}
