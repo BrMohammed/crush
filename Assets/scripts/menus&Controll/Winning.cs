@@ -12,6 +12,7 @@ public class Winning : MonoBehaviour
     private Criation_new_map Criation_of_map_obj;
     [SerializeField] private GameObject winning_efect;
     [SerializeField] private GameObject image_of_winning;
+    GameObject[] ball;
 
     // Start is called before the first frame update
     void Start()
@@ -52,10 +53,10 @@ public class Winning : MonoBehaviour
     public  void WinningOnGame()
     {
         FindObjectOfType<AudioManager>().MuteShield("active_shield", true);
-        GameObject[] ball = GameObject.FindGameObjectsWithTag("ball");
-        for(int i = 0; i < ball.Length;i++)
+        ball = GameObject.FindGameObjectsWithTag("ball");
+        for (int i = 0; i < ball.Length; i++)
         {
-            if (ball[i] != null)
+            if (ball[i])
                 Destroy(ball[i]);
         }
         IEnumerator betwin()
@@ -64,6 +65,13 @@ public class Winning : MonoBehaviour
             GamePlayControler.init.All_panel_desactive();
             GamePlayControler.init.winning_panel.SetActive(true);
             GamePlayControler.init.Totalcoin.SetActive(true);
+            ManageAudio.instance.M_Music();
+            IEnumerator wait_sound()
+            {
+                yield return new WaitForSeconds(3);
+                ManageAudio.instance.M_Music();
+            }
+            StartCoroutine(wait_sound());
             FindObjectOfType<AudioManager>().PlaySound("winning");
             UiAnimation.PausePaneleEAffects(home_btn_winning.gameObject, next_btn_winning.gameObject, image_of_winning);
             IEnumerator wait_effect()

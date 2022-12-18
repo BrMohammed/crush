@@ -17,20 +17,20 @@ public class UiAnimation : MonoBehaviour
                                 GameObject Balls, GameObject levels)
     {
         make_it_zero(startobj, paramobj, shapobj, Balls, levels);
-        LeanTween.scale(startobj, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(startobj, new Vector3(1f, 1f, 1f), 0.6f)
+            .setDelay(0.1f)
+            .setEase(LeanTweenType.easeOutElastic)
+            .setIgnoreTimeScale(true).setOnComplete(() =>
+            {
+                LeanTween.scale(startobj, new Vector3(1.08f, 1.08f, 0), 0.9f)
+                        .setEaseLinear()
+                        .setLoopPingPong()
+                        .setDelay(0.2f);
+            });
         LeanTween.scale(levels, new Vector3(0.48f, 0.48f, 0.6f), 0.8f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         LeanTween.scale(Balls, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         LeanTween.scale(shapobj, new Vector3(1.6f, 1.6f, 0.6f), 0.8f).setDelay(0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         LeanTween.scale(paramobj, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        IEnumerator wait()
-        {
-            yield return new WaitForSeconds(0.3f);
-            LeanTween.scale(startobj, new Vector3(1.08f, 1.08f, 0), 0.9f)
-             .setEaseLinear()
-             .setLoopPingPong()
-             .setDelay(0.2f);
-        }
-        instance.StartCoroutine(wait());
     }
 
     public void close_home(GameObject startobj, GameObject paramobj, GameObject shapobj,

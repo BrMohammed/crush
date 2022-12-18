@@ -14,7 +14,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] private Button Conrianer_of_buy;
     [SerializeField] private Button Conrianer_of_watch_to_reward;
     [SerializeField] private Button home;
-    Rigidbody ball;
+    GameObject[] ball;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +36,11 @@ public class GameOver : MonoBehaviour
     {
         UiAnimation.ResetAnimation();
         GamePlayControler.score = 0;
+        for (int i = 0; i < ball.Length; i++)
+        {
+            if (ball[i])
+                Destroy(ball[i]);
+        }
         if (EndlessAndLevelsPlay.init.Parent_of_endless)
         {
             GamePlayControler.init.endlees_begin = false;
@@ -49,9 +54,7 @@ public class GameOver : MonoBehaviour
                 UiAnimation.betwen_scines(false);
                 Time.timeScale = 1;
                 GamePlayControler.init.All_panel_desactive();
-                Destroy(EndlessAndLevelsPlay.init.Parent_of_endless);   
-                ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-                ball.isKinematic = true;
+                Destroy(EndlessAndLevelsPlay.init.Parent_of_endless);
                 GamePlayControler.init.All_panel_desactive();
                 GamePlayControler.init.Totalcoin.SetActive(true);
                 GamePlayControler.init.main_panel.SetActive(true);
@@ -74,9 +77,12 @@ public class GameOver : MonoBehaviour
     {
         //reward_video
 
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        if (ball)
-            ball.isKinematic = false;
+        ball = GameObject.FindGameObjectsWithTag("ball");
+        for (int i = 0; i < ball.Length; i++)
+        {
+            if(ball[i])
+                ball[i].GetComponent<Rigidbody>().isKinematic = false;
+        }
         if (EndlessAndLevelsPlay.init.Parent_of_endless)
             MainMenu.init.On_Play_Click();
         else
@@ -97,9 +103,12 @@ public class GameOver : MonoBehaviour
                                transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
         int new_total_coin = int.Parse(SimpelDb.read("TotalCoin")) - label_of_buying;
         SimpelDb.update(new_total_coin.ToString(), "TotalCoin");
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        if (ball)
-            ball.isKinematic = false;
+        ball = GameObject.FindGameObjectsWithTag("ball");
+        for (int i = 0; i < ball.Length; i++)
+        {
+            if (ball[i])
+                ball[i].GetComponent<Rigidbody>().isKinematic = false;
+        }
         if (EndlessAndLevelsPlay.init.Parent_of_endless)
             MainMenu.init.On_Play_Click();
         else
@@ -118,12 +127,15 @@ public class GameOver : MonoBehaviour
     {
 
         GamePlayControler.score = 0;
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        if (ball)
-            ball.isKinematic = false;
+        ball = GameObject.FindGameObjectsWithTag("ball");
+        for (int i = 0; i < ball.Length; i++)
+        {
+            if (ball[i])
+                Destroy(ball[i]);
+        }
         if (GamePlayControler.init.endlees_begin == true)
         {
-            Debug.Log(GamePlayControler.init.endlees_begin);
+           // Debug.Log(GamePlayControler.init.endlees_begin);
             MainMenu.init.On_Play_Click();
         }
         else
@@ -135,10 +147,22 @@ public class GameOver : MonoBehaviour
 
     public void Game_over()
     {
+        ManageAudio.instance.M_Music();
         UiAnimation.instance.gameovereffect(returne.gameObject,
                                     Fiaild_label.transform.parent.gameObject);
-        ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-        ball.isKinematic = true;
+        FindObjectOfType<AudioManager>().PlaySound("game_over");
+        IEnumerator wait_sound()
+        {
+            yield return new WaitForSeconds(2.6f);
+            ManageAudio.instance.M_Music();
+        }
+        StartCoroutine(wait_sound());
+        ball = GameObject.FindGameObjectsWithTag("ball");
+        for (int i = 0; i < ball.Length; i++)
+        {
+            if (ball[i])
+                ball[i].GetComponent<Rigidbody>().isKinematic = true;
+        }
         Conrianer_of_buy.gameObject.transform.parent.gameObject.SetActive(true);
         GamePlayControler.init.Totalcoin.SetActive(true);
         Fiaild_label.SetActive(true);

@@ -1768,12 +1768,6 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: coin
-    clip: {fileID: 8300000, guid: 8c3c83ad9fc944933a898e672f4a52bc, type: 3}
-    volum: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
   - name: click_on
     clip: {fileID: 8300000, guid: 84e5a7db8464b4eb8bfc278ec76fae76, type: 3}
     volum: 1
@@ -1793,20 +1787,50 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: ather_ball
-    clip: {fileID: 8300000, guid: 1d7db8e4e11614d41967eca958ffc95b, type: 3}
+    clip: {fileID: 8300000, guid: 7ddf96d80de2741178c88f9bf14f5903, type: 3}
     volum: 0.585
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: hit_the_wall
-    clip: {fileID: 8300000, guid: 56643e27ec43e4b178cc4fbcaad4287f, type: 3}
-    volum: 0.4
+    clip: {fileID: 8300000, guid: 59b259eaae3854f40b862603cdc627df, type: 3}
+    volum: 0.25
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: active_shield
     clip: {fileID: 8300000, guid: ef08107f827e9469a891cdb5fac82779, type: 3}
     volum: 0.862
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: cristal_win
+    clip: {fileID: 8300000, guid: 0ce2e821484567048aa5cdebe7051a92, type: 3}
+    volum: 0.862
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: game_over
+    clip: {fileID: 8300000, guid: 78b6ba80f4cf34d1695b9f6aab0ee6a9, type: 3}
+    volum: 0.862
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: pop_box
+    clip: {fileID: 8300000, guid: 1d7db8e4e11614d41967eca958ffc95b, type: 3}
+    volum: 0.862
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: congrats_endles
+    clip: {fileID: 8300000, guid: fe88ecad071c84786bbf13a0b6521059, type: 3}
+    volum: 0.862
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: soun_of_failed
+    clip: {fileID: 8300000, guid: c173bb60e447349a1ab4509eef64764c, type: 3}
+    volum: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}

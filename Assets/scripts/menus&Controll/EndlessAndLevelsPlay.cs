@@ -126,6 +126,12 @@ public class EndlessAndLevelsPlay : MonoBehaviour
     public void On_home_Click_from_pause_panel()
     {
         Time.timeScale = 1;
+        GameObject[] ball01 = GameObject.FindGameObjectsWithTag("ball");
+        for (int i = 0; i < ball01.Length; i++)
+        {
+            if (ball01[i])
+                Destroy(ball01[i]);
+        }
         UiAnimation.betwen_scines(true);
         IEnumerator betwin()
         {
@@ -146,8 +152,6 @@ public class EndlessAndLevelsPlay : MonoBehaviour
                     Destroy(Parent_of_endless);
             }
             GamePlayControler.score = 0;
-            ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
-            ball.isKinematic = true;
             GamePlayControler.init.All_panel_desactive();
             GamePlayControler.init.Totalcoin.SetActive(true);
             GamePlayControler.init.main_panel.SetActive(true);
@@ -164,6 +168,7 @@ public class EndlessAndLevelsPlay : MonoBehaviour
         float random_time = UnityEngine.Random.Range(0.8f, 1.2f);
         {
             GameObject Particle_cristal = Instantiate(crista_obj, obj + _random, crista_obj.transform.rotation);
+            FindObjectOfType<AudioManager>().PlaySound("cristal_win");
             Particle_cristal.transform.LeanMove(_cristal.gameObject.transform.parent.transform.position, random_time)
                         .setEaseInOutCubic()
                         .setOnComplete(() =>
@@ -186,12 +191,14 @@ public class EndlessAndLevelsPlay : MonoBehaviour
         p.material = collision.GetComponent<MeshRenderer>().material;
         Instantiate(Particle, DestroyPosetion, Particle.transform.rotation);
         int cristal_win = UnityEngine.Random.Range(1, 4);
-        int _random = UnityEngine.Random.Range(0, 3);
+        int _random = UnityEngine.Random.Range(0, 30);
         Destroy(collision);
         if (_random == 1)//chance to get cristal
         {
             for (int i = 0; i < cristal_win; i++)
+            {
                 initial_cristal(DestroyPosetion);
+            }
         }
         else if (_random == 2)//chance to get more balls
         {
@@ -227,8 +234,9 @@ public class EndlessAndLevelsPlay : MonoBehaviour
                 GamePlayControler.init.shield = false;
             }
             StartCoroutine(wait_child());
-
         }
+        else
+            FindObjectOfType<AudioManager>().PlaySound("pop_box");
     }
 
 }

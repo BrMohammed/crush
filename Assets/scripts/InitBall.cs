@@ -66,6 +66,7 @@ public class InitBall : MonoBehaviour
                 FindObjectOfType<AudioManager>().MuteShield("active_shield", true);
                 GamePlayControler.init.shield = false;
             }
+            FindObjectOfType<AudioManager>().PlaySound("soun_of_failed");
             Destroy(other.gameObject);
             init_ball();
         }

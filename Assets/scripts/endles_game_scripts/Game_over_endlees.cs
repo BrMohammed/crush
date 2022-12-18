@@ -10,7 +10,7 @@ public class Game_over_endlees : MonoBehaviour
         GameObject ball = GameObject.FindGameObjectWithTag("ball");
         if(ball && GamePlayControler.init.shield == true)
             Physics.IgnoreCollision(ball.transform.GetComponent<Collider>(), GetComponent<Collider>());
-        else
+        else if(ball)
             Physics.IgnoreCollision(ball.transform.GetComponent<Collider>(), GetComponent<Collider>(), false);
     }
     private void OnCollisionEnter(Collision collision)

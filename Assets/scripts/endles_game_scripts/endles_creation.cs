@@ -12,7 +12,7 @@ public class endles_creation : MonoBehaviour
     const int row_count = 12;
     int count_of_cubes = 0;
     int counter = 0;
-    const int time_to_move = 1;
+    const int time_to_move = 6;
     Vector3[] SpawnPositions;
     float index = time_to_move;
     GameObject[] cube_to_find;
@@ -40,6 +40,7 @@ public class endles_creation : MonoBehaviour
             EndlessAndLevelsPlay.init.congrats_endless.gameObject.SetActive(true);
             EndlessAndLevelsPlay.init.congrats_endless.text = congrats[index_of_congrats];
             UiAnimation.instance.congrats_endless(EndlessAndLevelsPlay.init.congrats_endless.gameObject);
+            FindObjectOfType<AudioManager>().PlaySound("congrats_endles");
             IEnumerator wait_congtats()
             {
                 yield return new WaitForSeconds(1.2f);
