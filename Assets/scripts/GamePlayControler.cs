@@ -6,7 +6,7 @@ using TMPro;
 using System;
 using System.IO;
 using LitJson;
-
+using UnityEngine.EventSystems;
 
 public partial class GamePlayControler : MonoBehaviour
 {
@@ -86,6 +86,31 @@ public partial class GamePlayControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //control with fingers
+        if ( Input.touchCount > 0 &&( begin_game_panel.active || begin_game_endlees.active))
+        {
+            Touch touch = Input.GetTouch(0);
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+               
+                if (touch.position.x < Screen.width / 2 && !EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                {
+                    if (touch.phase == TouchPhase.Began  )
+                        FlipControlLeft.isKeyPress = true;
+                    if (touch.phase == TouchPhase.Ended  )
+                        FlipControlLeft.isKeyPress = false;
+                }
+                else if (touch.position.x > Screen.width / 2 && !EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                {
+                    if (touch.phase == TouchPhase.Began )
+                        FlipControlRight.isKeyPress = true;
+                    if (touch.phase == TouchPhase.Ended)
+                        FlipControlRight.isKeyPress = false;
+                }
+            }
+            
+        }
+
         if (endlees_begin == false)
             target_score.text = score + "/" + Criation_new_map.count_of_cubes.ToString();
         else

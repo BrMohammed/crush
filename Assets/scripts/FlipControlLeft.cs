@@ -28,6 +28,10 @@ public class FlipControlLeft : MonoBehaviour
         }
 
     }
+    public void left_press()
+    {
+
+    }
 
     void FixedUpdate()
     {

@@ -131,6 +131,51 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!1 &3618304034992941484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2405375116196438562}
+  - component: {fileID: 910751257608289216}
+  m_Layer: 0
+  m_Name: trigger (1)
+  m_TagString: ball_pass_triger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2405375116196438562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3618304034992941484}
+  m_LocalRotation: {x: -0, y: 0.7059204, z: -0, w: -0.70829123}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6666664, y: 1.6666665, z: 1.6666664}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7535985931460344909}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &910751257608289216
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3618304034992941484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.28
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7448820095189065710
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +353,7 @@ Transform:
   - {fileID: 1139877549177092829}
   - {fileID: 4067223506986587018}
   - {fileID: 4651576041945463019}
+  - {fileID: 2405375116196438562}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 449.80798, z: 0}
@@ -403,11 +449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f43ae924f48410886dc98117e4c909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Particle: {fileID: 2546369480165414188, guid: 1b8461c2b53da4958a5b7014ad8b6da4, type: 3}
-  crista_obj: {fileID: 4946408102601791651, guid: fe76ff7844fe04010a969361321f6aaa, type: 3}
-  initial_ball_particle: {fileID: 183076104944065064, guid: 9d9e523cb13be4428992e76ab0669ff3, type: 3}
-  shield_effect: {fileID: 5625911405827011042, guid: d318d847847b34dd581a1fe3b69529b4, type: 3}
-  shield: 0
 --- !u!75 &125295533
 ConstantForce:
   m_ObjectHideFlags: 0
