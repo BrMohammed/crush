@@ -130,6 +130,7 @@
     <Compile Include="Assets/Props Animations/Scripts/RollerBladeScript.cs" />
     <Compile Include="Assets/scripts/timer.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralBasic.cs" />
+    <Compile Include="Assets/scripts/Audio/ManageAudio.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

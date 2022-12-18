@@ -29,12 +29,10 @@ public class Loading : MonoBehaviour
 
 	void StartGame()
 	{
-
 		if (int.Parse(SimpelDb.read("Sound")) == 0)
-			M_Sound();
+			ManageAudio.instance.M_Sound();
 		if (int.Parse(SimpelDb.read("Music")) == 0)
-			M_Music();
-		//FindObjectOfType<AudioManager>().PlaySound("background");
+			ManageAudio.instance.M_Music();
 		SceneManager.LoadSceneAsync(1);
 	}
 
@@ -61,7 +59,7 @@ public class Loading : MonoBehaviour
 
 	public void OnUserClickCancel()
 	{
-		FindObjectOfType<AudioManager>().PlaySound("cancel");
+		FindObjectOfType<AudioManager>().PlaySound("click");
 		//hide gdpr popup
 		GDPR_Popup.SetActive(false);
 		//play the game
@@ -74,20 +72,6 @@ public class Loading : MonoBehaviour
 		Application.OpenURL(""); //your privacy url
 	}
 
-	public void M_Sound()
-	{
-		FindObjectOfType<AudioManager>().MuteSound("cancel");
-		FindObjectOfType<AudioManager>().MuteSound("loos");
-		FindObjectOfType<AudioManager>().MuteSound("femal jump");
-		FindObjectOfType<AudioManager>().MuteSound("man jump");
-		FindObjectOfType<AudioManager>().MuteSound("run");
-		FindObjectOfType<AudioManager>().MuteSound("coin");
-		FindObjectOfType<AudioManager>().MuteSound("slide");
-		FindObjectOfType<AudioManager>().MuteSound("click");
-	}
-	public void M_Music()
-	{
-		//FindObjectOfType<AudioManager>().MuteSound("background");
-	}
+	
 
 }

@@ -186,7 +186,7 @@ public class EndlessAndLevelsPlay : MonoBehaviour
         p.material = collision.GetComponent<MeshRenderer>().material;
         Instantiate(Particle, DestroyPosetion, Particle.transform.rotation);
         int cristal_win = UnityEngine.Random.Range(1, 4);
-        int _random = UnityEngine.Random.Range(0, 20);
+        int _random = UnityEngine.Random.Range(0, 3);
         Destroy(collision);
         if (_random == 1)//chance to get cristal
         {
@@ -197,6 +197,7 @@ public class EndlessAndLevelsPlay : MonoBehaviour
         {
             Instantiate(initial_ball_particle, DestroyPosetion
                                 , initial_ball_particle.transform.rotation);
+            FindObjectOfType<AudioManager>().PlaySound("ather_ball");
             IEnumerator wait_ball()
             {
                 yield return new WaitForSeconds(0.3f);

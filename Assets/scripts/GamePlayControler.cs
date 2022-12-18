@@ -18,6 +18,7 @@ public partial class GamePlayControler : MonoBehaviour
     public bool endlees_begin;
     public bool shield;
     Rigidbody ball;
+    bool gamebegin;
 
     [Header("menus : \n")]
     public GameObject begin_game_panel;
@@ -50,6 +51,7 @@ public partial class GamePlayControler : MonoBehaviour
 
     void Start()
     {
+        gamebegin = false;
         shield = false;
         init = this;
         endlees_begin = false;
@@ -70,15 +72,16 @@ public partial class GamePlayControler : MonoBehaviour
             }
         }
         score = 0;
-        //if (int.Parse(SimpelDb.read("Music")) == 0)
-        //    MusicOn();
-        //else
-        //    MusicOff();
-        //if (int.Parse(SimpelDb.read("Sound")) == 0)
-        //    SoundOn();
-        //else
-        //    SoundOff();
-        
+        FindObjectOfType<AudioManager>().PlaySound("background");
+        if (int.Parse(SimpelDb.read("Music")) == 0)
+            MusicOn(true);
+        else
+            MusicOff(true);
+        if (int.Parse(SimpelDb.read("Sound")) == 0)
+            SoundOn(true);
+        else
+            SoundOff();
+
     }
     // Update is called once per frame
     void Update()
@@ -102,10 +105,10 @@ public partial class GamePlayControler : MonoBehaviour
     private void Listners()
     {
         reset_dat.onClick.AddListener(() => Reset_data());
-        SounOffObj.onClick.AddListener(() => SoundOn());
+        SounOffObj.onClick.AddListener(() => SoundOn(false));
         SoundOnObj.onClick.AddListener(() => SoundOff());
-        MusicOffObj.onClick.AddListener(() => MusicOn());
-        MusicOnObj.onClick.AddListener(() => MusicOff());
+        MusicOffObj.onClick.AddListener(() => MusicOn(false));
+        MusicOnObj.onClick.AddListener(() => MusicOff(false));
     }
 
     private void Reset_data()
@@ -173,33 +176,37 @@ public partial class GamePlayControler : MonoBehaviour
     }
 
   
-    public void SoundOn()
+    public void SoundOn(bool start)
     {
-        FindObjectOfType<AudioManager>().PlaySound("click_on");
+        if(start == false)
+            FindObjectOfType<AudioManager>().PlaySound("click_on");
         SimpelDb.update(0.ToString(), "Sound");
+        ManageAudio.instance.M_Sound();
         SounOffObj.gameObject.SetActive(false);
         SoundOnObj.gameObject.SetActive(true);
     }
     public void SoundOff()
     {
         SimpelDb.update(1.ToString(), "Sound");
-        FindObjectOfType<AudioManager>().PlaySound("click_off");
+        ManageAudio.instance.M_Sound();
         SounOffObj.gameObject.SetActive(true);
         SoundOnObj.gameObject.SetActive(false);
     }
-    public void MusicOn()
+    public void MusicOn(bool start)
     {
-        FindObjectOfType<AudioManager>().PlaySound("click_on");
+        if (start == false)
+            FindObjectOfType<AudioManager>().PlaySound("click_on");
         SimpelDb.update(0.ToString(), "Music");
-        //Debug.Log(SimpelDb.read("Music"));
+        ManageAudio.instance.M_Music();
         MusicOffObj.gameObject.SetActive(false);
         MusicOnObj.gameObject.SetActive(true);
-
     }
-    public void MusicOff()
+    public void MusicOff(bool start)
     {
+        if (start == false)
+            FindObjectOfType<AudioManager>().PlaySound("click_off");
         SimpelDb.update(1.ToString(), "Music");
-        FindObjectOfType<AudioManager>().PlaySound("click_off");
+        ManageAudio.instance.M_Music();
         MusicOffObj.gameObject.SetActive(true);
         MusicOnObj.gameObject.SetActive(false);
     }
