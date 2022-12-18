@@ -7,16 +7,16 @@ using System;
 using System.IO;
 using LitJson;
 
+
 public partial class GamePlayControler : MonoBehaviour
 {
     static public GamePlayControler init;
     static public int score;
     static public int corent_scene;
     GameObject levels_make;
-    private bool gameover;
     private Criation_new_map Criation_of_map_obj;
-    private bool winning_game;
     public bool endlees_begin;
+    public bool shield;
     Rigidbody ball;
 
     [Header("menus : \n")]
@@ -43,16 +43,17 @@ public partial class GamePlayControler : MonoBehaviour
     [SerializeField] private Button MusicOffObj;
     [SerializeField] private Button MusicOnObj;
 
+   
+
 
     public Button reset_dat;
 
     void Start()
     {
-        
+        shield = false;
         init = this;
         endlees_begin = false;
         Listners();
-        winning_game = false;
         Criation_of_map_obj = GameObject.Find("parent_of_map").GetComponent<Criation_new_map>();
         //loop on levels
         for (int i = 0; i < Criation_new_map.maps_count; i++)
@@ -69,35 +70,30 @@ public partial class GamePlayControler : MonoBehaviour
             }
         }
         score = 0;
-        if (int.Parse(SimpelDb.read("Music")) == 0)
-            MusicOn();
-        else
-            MusicOff();
-        if (int.Parse(SimpelDb.read("Sound")) == 0)
-            SoundOn();
-        else
-            SoundOff();
+        //if (int.Parse(SimpelDb.read("Music")) == 0)
+        //    MusicOn();
+        //else
+        //    MusicOff();
+        //if (int.Parse(SimpelDb.read("Sound")) == 0)
+        //    SoundOn();
+        //else
+        //    SoundOff();
+        
     }
     // Update is called once per frame
     void Update()
     {
-
-        if (begin_game_panel.active == true)
-        {
-            winning_game = false;
-            gameover = false;
-        }
         if (endlees_begin == false)
             target_score.text = score + "/" + Criation_new_map.count_of_cubes.ToString();
         else
             begin_game_endlees.transform.GetChild(0).gameObject.transform.GetComponent<Text>().text = score.ToString();
         if (score == Criation_new_map.count_of_cubes 
-            && winning_game == false && endlees_begin == false && timer.timelift > 0)
+            && endlees_begin == false && timer.timelift > 0)
         {
             target_score.text = score.ToString();
             Winning.init.WinningOnGame();
         }
-        if (timer.timelift <= 0 && gameover == false && begin_game_panel.active == true)
+        if (timer.timelift <= 0 && begin_game_panel.active == true)
         {
             GameOver.init.Game_over();
         }
@@ -118,13 +114,6 @@ public partial class GamePlayControler : MonoBehaviour
         SimpelDb.update("0", "score");
         SimpelDb.update("0", "TotalCoin");
         Loop_on_levels_card();
-    }
-
-    private void About_page()
-    {
-        UiAnimation.instance.pop_up(About_pannel.transform.GetChild(1).gameObject, false);
-        settings_Panel.SetActive(false);
-        About_pannel.SetActive(true);
     }
 
     public void ReturnFromLevels()
@@ -159,8 +148,6 @@ public partial class GamePlayControler : MonoBehaviour
     {
         UiAnimation.ResetAnimation();
         Time.timeScale = 1;
-        winning_game = false;
-        gameover = false;
         UiAnimation.betwen_scines(true);
         IEnumerator betwin()
         {
@@ -173,7 +160,7 @@ public partial class GamePlayControler : MonoBehaviour
                 if (child)
                     Destroy(child.gameObject);
             }
-            if (endlees_begin || gameover || winning_game)
+            if (endlees_begin)
                 ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
             if (ball)
                 ball.isKinematic = true;
@@ -185,19 +172,10 @@ public partial class GamePlayControler : MonoBehaviour
         endlees_begin = false;
     }
 
-    //public void On_Levels_Click_from_Gameover_panel()
-    //{
-    //    foreach (Transform child in parent_of_map.transform)
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
-    //    All_panel_desactive();
-    //    levels_panel.SetActive(true);
-    //}
   
     public void SoundOn()
     {
-       // FindObjectOfType<AudioManager>().PlaySound("click_on");
+        FindObjectOfType<AudioManager>().PlaySound("click_on");
         SimpelDb.update(0.ToString(), "Sound");
         SounOffObj.gameObject.SetActive(false);
         SoundOnObj.gameObject.SetActive(true);
@@ -205,13 +183,13 @@ public partial class GamePlayControler : MonoBehaviour
     public void SoundOff()
     {
         SimpelDb.update(1.ToString(), "Sound");
-       // FindObjectOfType<AudioManager>().PlaySound("click_off");
+        FindObjectOfType<AudioManager>().PlaySound("click_off");
         SounOffObj.gameObject.SetActive(true);
         SoundOnObj.gameObject.SetActive(false);
     }
     public void MusicOn()
     {
-        //FindObjectOfType<AudioManager>().PlaySound("click_on");
+        FindObjectOfType<AudioManager>().PlaySound("click_on");
         SimpelDb.update(0.ToString(), "Music");
         //Debug.Log(SimpelDb.read("Music"));
         MusicOffObj.gameObject.SetActive(false);
@@ -221,7 +199,7 @@ public partial class GamePlayControler : MonoBehaviour
     public void MusicOff()
     {
         SimpelDb.update(1.ToString(), "Music");
-        //FindObjectOfType<AudioManager>().PlaySound("click_off");
+        FindObjectOfType<AudioManager>().PlaySound("click_off");
         MusicOffObj.gameObject.SetActive(true);
         MusicOnObj.gameObject.SetActive(false);
     }
@@ -266,5 +244,10 @@ public partial class GamePlayControler : MonoBehaviour
         begin_game_endlees.SetActive(false);
         EndlessAndLevelsPlay.init.coin_from_game_endlees.transform.parent.gameObject.SetActive(false);
     }
+
+
+
+    
+
 }
 

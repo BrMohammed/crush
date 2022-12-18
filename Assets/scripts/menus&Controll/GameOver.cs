@@ -35,7 +35,7 @@ public class GameOver : MonoBehaviour
     private void home_event()
     {
         UiAnimation.ResetAnimation();
-
+        GamePlayControler.score = 0;
         if (EndlessAndLevelsPlay.init.Parent_of_endless)
         {
             GamePlayControler.init.endlees_begin = false;
@@ -48,10 +48,8 @@ public class GameOver : MonoBehaviour
                           , MainMenu.init.Balls_btn_from_home.gameObject, MainMenu.init.level_from_home.gameObject);
                 UiAnimation.betwen_scines(false);
                 Time.timeScale = 1;
-                GamePlayControler.score = 0;
                 GamePlayControler.init.All_panel_desactive();
-                Destroy(EndlessAndLevelsPlay.init.Parent_of_endless);
-                GamePlayControler.score = 0;
+                Destroy(EndlessAndLevelsPlay.init.Parent_of_endless);   
                 ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
                 ball.isKinematic = true;
                 GamePlayControler.init.All_panel_desactive();
@@ -134,8 +132,6 @@ public class GameOver : MonoBehaviour
         }
         UiAnimation.instance.return_red_to_default();
     }
-
-   
 
     public void Game_over()
     {

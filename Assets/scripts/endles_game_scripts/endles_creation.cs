@@ -32,6 +32,7 @@ public class endles_creation : MonoBehaviour
             index_of_congrats = 4;
         find_cub = false;
         cube_to_find = GameObject.FindGameObjectsWithTag("cube");
+        /* congarts for pop_up all boxes */
         if (cube_to_find.Length == 0 && find_cub == false
             && EndlessAndLevelsPlay.init.congrats_endless.gameObject.active == false)
         {

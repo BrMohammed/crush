@@ -6,18 +6,12 @@ public class FlipControlRight : MonoBehaviour
 {
     public static bool isKeyPress = false;
     public static bool isTouched = false;
-
-
-    //#1
     public float speed = 0f;
     private HingeJoint myHingeJoint;
     private JointMotor motor;
 
-
     void Start()
     {
-
-        // #2
         myHingeJoint = GetComponent<HingeJoint>();
         motor = myHingeJoint.motor;
     }
@@ -25,11 +19,6 @@ public class FlipControlRight : MonoBehaviour
 
     void Update()
     {
-
-
-        /////////////
-
-
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             isKeyPress = true;
@@ -47,14 +36,11 @@ public class FlipControlRight : MonoBehaviour
         // on press keyboard or touch Screen
         if (isKeyPress == true && isTouched == false || isKeyPress == false && isTouched == true)
         {
-
-            // #3
             motor.targetVelocity = speed;
             myHingeJoint.motor = motor;
         }
         else
         {
-            // #4
             motor.targetVelocity = -speed;
             myHingeJoint.motor = motor;
         }

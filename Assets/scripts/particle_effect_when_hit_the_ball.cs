@@ -14,7 +14,5 @@ public class particle_effect_when_hit_the_ball : MonoBehaviour
             FindObjectOfType<AudioManager>().PlaySound("hit_the_wall");
             Instantiate(Particle, collision.contacts[0].point, Particle.transform.rotation);
         }
-
     }
-
 }

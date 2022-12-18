@@ -64,12 +64,13 @@
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSplineEndless.cs" />
     <Compile Include="Assets/scripts/particle_effect_when_hit_the_ball.cs" />
     <Compile Include="Assets/scripts/ads/inter.cs" />
-    <Compile Include="Assets/scripts/destroy.cs" />
+    <Compile Include="Assets/scripts/DestroyBox.cs" />
     <Compile Include="Assets/Props Animations/Scripts/General/CameraControl.cs" />
     <Compile Include="Assets/scripts/ads/Adreward.cs" />
     <Compile Include="Assets/scripts/Creation_of_map_from_butten.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathBezier2d.cs" />
     <Compile Include="Assets/Props Animations/Scripts/CharacterMovementController.cs" />
+    <Compile Include="Assets/scripts/menus&amp;Controll/MainMenu.cs" />
     <Compile Include="Assets/LeanTween/Framework/LTDescrOptional.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralSequencer.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/LogoCinematic.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSpline2d.cs" />
     <Compile Include="Assets/scripts/Criation_new_map.cs" />
     <Compile Include="Assets/scripts/SimpelDb.cs" />
+    <Compile Include="Assets/scripts/menus&amp;Controll/SettingAndShopAndBalls.cs" />
     <Compile Include="Assets/LeanTween/Examples/Archived/TestingRigidbodyCS.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/Following.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanTween.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Assets/Props Animations/Scripts/PropsUnityObject.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralEasingTypes.cs" />
     <Compile Include="Assets/LeanTween/Examples/Archived/OldGUIExamplesCS.cs" />
+    <Compile Include="Assets/scripts/menus&amp;Controll/GameOver.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralCameraShake.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanAudio.cs" />
     <Compile Include="Assets/scripts/endles_game_scripts/endles_creation.cs" />
@@ -116,20 +119,17 @@
     <Compile Include="Assets/Props Animations/Scripts/GUIScript.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSpline.cs" />
     <Compile Include="Assets/scripts/FlipControlLeft.cs" />
+    <Compile Include="Assets/scripts/menus&amp;Controll/EndlessAndLevelsPlay.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanSmooth.cs" />
     <Compile Include="Assets/Props Animations/Scripts/SmoothCameraAdvanced.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSplineTrack.cs" />
     <Compile Include="Assets/LeanTween/Framework/LeanTest.cs" />
     <Compile Include="Assets/scripts/endles_game_scripts/Game_over_endlees.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/PathSplinePerformance.cs" />
+    <Compile Include="Assets/scripts/menus&amp;Controll/Winning.cs" />
     <Compile Include="Assets/Props Animations/Scripts/RollerBladeScript.cs" />
     <Compile Include="Assets/scripts/timer.cs" />
     <Compile Include="Assets/LeanTween/Examples/Scripts/GeneralBasic.cs" />
-    <Compile Include="Assets/scripts/menus&amp;Controll/MainMenu.cs" />
-    <Compile Include="Assets/scripts/menus&amp;Controll/Winning.cs" />
-    <Compile Include="Assets/scripts/menus&amp;Controll/GameOver.cs" />
-    <Compile Include="Assets/scripts/menus&amp;Controll/EndlessAndLevelsPlay.cs" />
-    <Compile Include="Assets/scripts/menus&amp;Controll/SettingAndShopAndBalls.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

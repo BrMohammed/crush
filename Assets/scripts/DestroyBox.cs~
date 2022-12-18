@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using LitJson;
 
-public class destroy : MonoBehaviour
+public class DestroyBox : MonoBehaviour
 {
     [SerializeField] private GameObject Particle;
     [SerializeField] private GameObject crista_obj;

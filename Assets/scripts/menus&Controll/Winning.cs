@@ -21,12 +21,6 @@ public class Winning : MonoBehaviour
         next_btn_winning.onClick.AddListener(() => On_next_btn_Click_from_winning());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void On_next_btn_Click_from_winning()
     {
         GamePlayControler.corent_scene++;
@@ -57,15 +51,19 @@ public class Winning : MonoBehaviour
     }
     public  void WinningOnGame()
     {
+        FindObjectOfType<AudioManager>().MuteShield("active_shield", true);
+        GameObject[] ball = GameObject.FindGameObjectsWithTag("ball");
+        for(int i = 0; i < ball.Length;i++)
+        {
+            if (ball[i] != null)
+                Destroy(ball[i]);
+        }
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.1f);
             GamePlayControler.init.All_panel_desactive();
             GamePlayControler.init.winning_panel.SetActive(true);
             GamePlayControler.init.Totalcoin.SetActive(true);
-            GameObject ball = GameObject.FindWithTag("ball");
-            if (ball != null)
-                Destroy(ball);
             FindObjectOfType<AudioManager>().PlaySound("winning");
             UiAnimation.PausePaneleEAffects(home_btn_winning.gameObject, next_btn_winning.gameObject, image_of_winning);
             IEnumerator wait_effect()

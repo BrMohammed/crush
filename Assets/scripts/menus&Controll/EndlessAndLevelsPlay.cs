@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using LitJson;
 
 public class EndlessAndLevelsPlay : MonoBehaviour
 {
@@ -21,6 +23,14 @@ public class EndlessAndLevelsPlay : MonoBehaviour
     [SerializeField] private Button home_btn;
     bool over_score;
     Rigidbody ball;
+
+    [Header("Effect of box\n")]
+    [SerializeField] private GameObject Particle;
+    [SerializeField] private GameObject crista_obj;
+    [SerializeField] private GameObject initial_ball_particle;
+    ParticleSystemRenderer p;
+    public GameObject shield_effect;
+    TMP_Text _cristal;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +43,10 @@ public class EndlessAndLevelsPlay : MonoBehaviour
         resume_btn_2.onClick.AddListener(() => On_resume_Click());
         Pause_btn_endlees.onClick.AddListener(() => OnPauseBtn_click());
         home_btn.onClick.AddListener(() => On_home_Click_from_pause_panel());
+        p = Particle.GetComponent<ParticleSystemRenderer>();
+        _cristal = Resources.FindObjectsOfTypeAll<GameObject>()
+                                    .FirstOrDefault(g => g.CompareTag("coin_from_endless"))
+                                    .gameObject.GetComponent<TextMeshProUGUI>();
     }
     void Update()
     {
@@ -142,6 +156,78 @@ public class EndlessAndLevelsPlay : MonoBehaviour
         StartCoroutine(betwin());
 
     }
-    // Update is called once per frame
+    void initial_cristal(Vector3 obj)
+    {
+        Vector3 _random = new Vector3(UnityEngine.Random.Range(1f, -1f)
+                                               , UnityEngine.Random.Range(1f, -1f)
+                                               , 0);
+        float random_time = UnityEngine.Random.Range(0.8f, 1.2f);
+        {
+            GameObject Particle_cristal = Instantiate(crista_obj, obj + _random, crista_obj.transform.rotation);
+            Particle_cristal.transform.LeanMove(_cristal.gameObject.transform.parent.transform.position, random_time)
+                        .setEaseInOutCubic()
+                        .setOnComplete(() =>
+                        {  //executes whenever coin reach target position
+                            int Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
+                            Shopcoin++;
+                            SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
+                            _cristal.text = Shopcoin.ToString();
+                            if (Particle_cristal)
+                                Destroy(Particle_cristal);
+                        });
+            Particle_cristal.LeanScale(new Vector3(0.06f, 0.06f, 0.06f), random_time).setEaseInOutCubic();
+        }
+    }
+
+    public void destroy_box(GameObject collision,GameObject ball_obj)
+    {
+        Vector3 DestroyPosetion = collision.transform.position;
+        GamePlayControler.score++;
+        p.material = collision.GetComponent<MeshRenderer>().material;
+        Instantiate(Particle, DestroyPosetion, Particle.transform.rotation);
+        int cristal_win = UnityEngine.Random.Range(1, 4);
+        int _random = UnityEngine.Random.Range(0, 20);
+        Destroy(collision);
+        if (_random == 1)//chance to get cristal
+        {
+            for (int i = 0; i < cristal_win; i++)
+                initial_cristal(DestroyPosetion);
+        }
+        else if (_random == 2)//chance to get more balls
+        {
+            Instantiate(initial_ball_particle, DestroyPosetion
+                                , initial_ball_particle.transform.rotation);
+            IEnumerator wait_ball()
+            {
+                yield return new WaitForSeconds(0.3f);
+                string s = SimpelDb.read("SaveDataShop");
+                JsonData j = JsonMapper.ToObject(s);
+                int index = (int)j["SelectedIndex"];
+                GameObject G = Instantiate(InitBall.instiate.ball[index], DestroyPosetion
+                        , InitBall.instiate.ball[index].transform.rotation);
+                s = SimpelDb.read("SaveTrailDataShop");
+                j = JsonMapper.ToObject(s);
+                index = (int)j["SelectedIndex"];
+                if (index != 0)
+                    G.transform.GetChild(index - 1).gameObject.SetActive(true);
+            }
+            StartCoroutine(wait_ball());
+
+        }
+        else if (_random == 3 && GamePlayControler.init.shield == false)//shield effect
+        {
+            FindObjectOfType<AudioManager>().MuteShield("active_shield", false);
+            FindObjectOfType<AudioManager>().PlaySound("active_shield");
+            GamePlayControler.init.shield = true;
+            Instantiate(shield_effect, ball_obj.transform.position, shield_effect.transform.rotation, ball_obj.transform);
+            IEnumerator wait_child()
+            {
+                yield return new WaitForSeconds(10);
+                GamePlayControler.init.shield = false;
+            }
+            StartCoroutine(wait_child());
+
+        }
+    }
 
 }
