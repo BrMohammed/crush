@@ -50,7 +50,7 @@ public class GameOver : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.2f);
                 UiAnimation.start_home(MainMenu.init.play_from_home.gameObject, MainMenu.init.setting_btn_from_home.gameObject, MainMenu.init.Shop_btn_from_home.gameObject
-                          , MainMenu.init.Balls_btn_from_home.gameObject, MainMenu.init.level_from_home.gameObject);
+                          , MainMenu.init.Balls_btn_from_home.gameObject, MainMenu.init.level_from_home.gameObject,GamePlayControler.init.Totalcoin);
                 UiAnimation.betwen_scines(false);
                 Time.timeScale = 1;
                 GamePlayControler.init.All_panel_desactive();
@@ -76,7 +76,7 @@ public class GameOver : MonoBehaviour
     public void Conrianer_of_watch_to_reward_event()
     {
         //reward_video
-
+        FindObjectOfType<AudioManager>().MuteShield("active_shield", false);
         ball = GameObject.FindGameObjectsWithTag("ball");
         for (int i = 0; i < ball.Length; i++)
         {
@@ -98,7 +98,7 @@ public class GameOver : MonoBehaviour
     }
     public void Conrianer_of_buy_event()
     {
-
+        FindObjectOfType<AudioManager>().MuteShield("active_shield", false);
         int label_of_buying = int.Parse(Conrianer_of_buy.gameObject.transform.GetChild(0).gameObject.
                                transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text);
         int new_total_coin = int.Parse(SimpelDb.read("TotalCoin")) - label_of_buying;
@@ -125,7 +125,7 @@ public class GameOver : MonoBehaviour
     }
     private void return_event()
     {
-
+        FindObjectOfType<AudioManager>().StopeSound("active_shield");
         GamePlayControler.score = 0;
         ball = GameObject.FindGameObjectsWithTag("ball");
         for (int i = 0; i < ball.Length; i++)
@@ -147,6 +147,7 @@ public class GameOver : MonoBehaviour
 
     public void Game_over()
     {
+        FindObjectOfType<AudioManager>().MuteShield("active_shield",true);
         ManageAudio.instance.M_Music();
         UiAnimation.instance.gameovereffect(returne.gameObject,
                                     Fiaild_label.transform.parent.gameObject);

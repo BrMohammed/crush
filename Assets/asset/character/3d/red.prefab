@@ -449,11 +449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f43ae924f48410886dc98117e4c909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Particle: {fileID: 2546369480165414188, guid: 1b8461c2b53da4958a5b7014ad8b6da4, type: 3}
-  crista_obj: {fileID: 4946408102601791651, guid: fe76ff7844fe04010a969361321f6aaa, type: 3}
-  initial_ball_particle: {fileID: 183076104944065064, guid: 9d9e523cb13be4428992e76ab0669ff3, type: 3}
-  shield_effect: {fileID: 5625911405827011042, guid: d318d847847b34dd581a1fe3b69529b4, type: 3}
-  shield: 0
 --- !u!75 &125295533
 ConstantForce:
   m_ObjectHideFlags: 0
@@ -519,7 +514,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c60063ccad83143d0abe8b4a3fbb5553, type: 2}
+  - {fileID: 2100000, guid: 55c8b5e6fafc34bf5b026a1b75450948, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -540,7 +535,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.05
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -594,6 +589,6 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.05
   m_Autodestruct: 0
   m_Emitting: 1

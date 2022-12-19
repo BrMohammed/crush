@@ -85,6 +85,7 @@ public class EndlessAndLevelsPlay : MonoBehaviour
     public void On_resume_Click()
     {
         Time.timeScale = 1;
+        FindObjectOfType<AudioManager>().PlaySound("active_shield");
         UiAnimation.instance.closePausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
         IEnumerator betwin()
         {
@@ -110,6 +111,7 @@ public class EndlessAndLevelsPlay : MonoBehaviour
 
     public void OnPauseBtn_click()//with endlees and normal
     {
+        FindObjectOfType<AudioManager>().PauseSound("active_shield");
         ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
         ball.isKinematic = true;
         IEnumerator betwin()
@@ -136,8 +138,9 @@ public class EndlessAndLevelsPlay : MonoBehaviour
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.2f);
-            UiAnimation.start_home(MainMenu.init.play_from_home.gameObject, MainMenu.init.setting_btn_from_home.gameObject, MainMenu.init.Shop_btn_from_home.gameObject
-                                         , MainMenu.init.Balls_btn_from_home.gameObject, MainMenu.init.level_from_home.gameObject);
+            UiAnimation.start_home(MainMenu.init.play_from_home.gameObject, MainMenu.init.setting_btn_from_home.gameObject
+                       , MainMenu.init.Shop_btn_from_home.gameObject, MainMenu.init.Balls_btn_from_home.gameObject
+                       , MainMenu.init.level_from_home.gameObject, GamePlayControler.init.Totalcoin);
             UiAnimation.betwen_scines(false);
             foreach (Transform child in GamePlayControler.init.parent_of_map.transform)
             {

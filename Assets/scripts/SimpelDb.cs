@@ -87,7 +87,7 @@ public class SimpelDb : MonoBehaviour
                 command.ExecuteNonQuery();
                 if(read("score") == "")
                 {
-                    command.CommandText = "INSERT INTO Data VALUES (1,500,0,0,'','',1,1,1);";
+                    command.CommandText = "INSERT INTO Data VALUES (1,500,0,0,'','',0,0,1);";
                     command.ExecuteNonQuery();
                 }
 

@@ -12,12 +12,13 @@ public class MainMenu : MonoBehaviour
     public Button setting_btn_from_home;
     public Button Balls_btn_from_home;
     public Button Shop_btn_from_home;
+
     // Start is called before the first frame update
     void Start()
     {
         init = this;
         UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
-                           , Balls_btn_from_home.gameObject, level_from_home.gameObject);
+                           , Balls_btn_from_home.gameObject, level_from_home.gameObject,GamePlayControler.init.Totalcoin);
 
         play_from_home.onClick.AddListener(() => On_Play_Click());
         level_from_home.onClick.AddListener(() => On_Levels_Click_from_main());
@@ -29,7 +30,7 @@ public class MainMenu : MonoBehaviour
     {
        
         UiAnimation.instance.close_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
-                         , Balls_btn_from_home.gameObject, level_from_home.gameObject);
+                         , Balls_btn_from_home.gameObject, level_from_home.gameObject, GamePlayControler.init.Totalcoin);
         UiAnimation.betwen_scines(true);
         EndlessAndLevelsPlay.init.EndlessPalyBegin();
         IEnumerator betwin()
@@ -54,7 +55,7 @@ public class MainMenu : MonoBehaviour
         {
             yield return new WaitForSeconds(0.2f);
             UiAnimation.start_home(play_from_home.gameObject, setting_btn_from_home.gameObject, Shop_btn_from_home.gameObject
-                          , Balls_btn_from_home.gameObject, level_from_home.gameObject);
+                          , Balls_btn_from_home.gameObject, level_from_home.gameObject, GamePlayControler.init.Totalcoin);
             UiAnimation.betwen_scines(false);
             GamePlayControler.init.All_panel_desactive();
             GamePlayControler.init.levels_panel.SetActive(true);

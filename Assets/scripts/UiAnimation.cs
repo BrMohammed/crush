@@ -14,9 +14,9 @@ public class UiAnimation : MonoBehaviour
         instance = this; //set our static reference to our newly initialized instance
     }
     static public void start_home(GameObject startobj, GameObject paramobj, GameObject shapobj,
-                                GameObject Balls, GameObject levels)
+                                GameObject Balls, GameObject levels, GameObject Totalcoin)
     {
-        make_it_zero(startobj, paramobj, shapobj, Balls, levels);
+        make_it_zero(startobj, paramobj, shapobj, Balls, levels , Totalcoin);
         LeanTween.scale(startobj, new Vector3(1f, 1f, 1f), 0.6f)
             .setDelay(0.1f)
             .setEase(LeanTweenType.easeOutElastic)
@@ -31,10 +31,11 @@ public class UiAnimation : MonoBehaviour
         LeanTween.scale(Balls, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         LeanTween.scale(shapobj, new Vector3(1.6f, 1.6f, 0.6f), 0.8f).setDelay(0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         LeanTween.scale(paramobj, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(Totalcoin, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.6f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
     }
 
     public void close_home(GameObject startobj, GameObject paramobj, GameObject shapobj,
-                                GameObject Balls, GameObject levels)
+                                GameObject Balls, GameObject levels, GameObject Totalcoin)
     {
         ResetAnimation();
         LeanTween.scale(startobj, new Vector3(), 0.6f).setDelay(0f).setEase(LeanTweenType.easeOutElastic);
@@ -42,11 +43,12 @@ public class UiAnimation : MonoBehaviour
         LeanTween.scale(Balls, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.scale(shapobj, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
         LeanTween.scale(paramobj, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
-        float[] i = { 1, 0.48f, 1, 1.6f, 1 };
+        LeanTween.scale(Totalcoin, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        float[] i = { 1, 0.48f, 1, 1.6f, 1 ,1};
         IEnumerator origin()
         {
             yield return new WaitForSeconds(1);
-            make_it_origine(i, startobj, levels, Balls, shapobj, paramobj);
+            make_it_origine(i, startobj, levels, Balls, shapobj, paramobj, Totalcoin);
         }
         StartCoroutine(origin());
     }

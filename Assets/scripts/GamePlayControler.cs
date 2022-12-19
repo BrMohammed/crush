@@ -18,7 +18,6 @@ public partial class GamePlayControler : MonoBehaviour
     public bool endlees_begin;
     public bool shield;
     Rigidbody ball;
-    bool gamebegin;
 
     [Header("menus : \n")]
     public GameObject begin_game_panel;
@@ -51,7 +50,6 @@ public partial class GamePlayControler : MonoBehaviour
 
     void Start()
     {
-        gamebegin = false;
         shield = false;
         init = this;
         endlees_begin = false;
@@ -180,8 +178,10 @@ public partial class GamePlayControler : MonoBehaviour
         IEnumerator betwin()
         {
             yield return new WaitForSeconds(0.2f);
-            UiAnimation.start_home(MainMenu.init.play_from_home.gameObject, MainMenu.init.setting_btn_from_home.gameObject, MainMenu.init.Shop_btn_from_home.gameObject
-                          , MainMenu.init.Balls_btn_from_home.gameObject, MainMenu.init.level_from_home.gameObject);
+            UiAnimation.start_home(MainMenu.init.play_from_home.gameObject
+                       , MainMenu.init.setting_btn_from_home.gameObject, MainMenu.init.Shop_btn_from_home.gameObject
+                       , MainMenu.init.Balls_btn_from_home.gameObject
+                       , MainMenu.init.level_from_home.gameObject, Totalcoin);
             UiAnimation.betwen_scines(false);
             foreach (Transform child in parent_of_map.transform)
             {

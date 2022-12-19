@@ -52,7 +52,7 @@ public class Winning : MonoBehaviour
     }
     public  void WinningOnGame()
     {
-        FindObjectOfType<AudioManager>().MuteShield("active_shield", true);
+        FindObjectOfType<AudioManager>().StopeSound("active_shield");
         ball = GameObject.FindGameObjectsWithTag("ball");
         for (int i = 0; i < ball.Length; i++)
         {
