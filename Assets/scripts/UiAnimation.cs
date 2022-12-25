@@ -17,33 +17,33 @@ public class UiAnimation : MonoBehaviour
                                 GameObject Balls, GameObject levels, GameObject Totalcoin)
     {
         make_it_zero(startobj, paramobj, shapobj, Balls, levels , Totalcoin);
-        LeanTween.scale(startobj, new Vector3(1f, 1f, 1f), 0.6f)
+        LeanTween.scale(startobj, new Vector3(1f, 1f, 1f), 0.4f)
             .setDelay(0.1f)
             .setEase(LeanTweenType.easeOutElastic)
             .setIgnoreTimeScale(true).setOnComplete(() =>
             {
-                LeanTween.scale(startobj, new Vector3(1.08f, 1.08f, 0), 0.9f)
+                LeanTween.scale(startobj, new Vector3(1.08f, 1.08f, 1.08f), 0.9f)
                         .setEaseLinear()
                         .setLoopPingPong()
                         .setDelay(0.2f);
             });
-        LeanTween.scale(levels, new Vector3(0.48f, 0.48f, 0.6f), 0.8f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        LeanTween.scale(Balls, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        LeanTween.scale(shapobj, new Vector3(1.6f, 1.6f, 0.6f), 0.8f).setDelay(0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        LeanTween.scale(paramobj, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        LeanTween.scale(Totalcoin, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.6f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(levels, new Vector3(0.48f, 0.48f, 0.4f), 0.8f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(Balls, new Vector3(1f, 1f, 1f), 0.4f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(shapobj, new Vector3(1.6f, 1.6f, 0.4f), 0.8f).setDelay(0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(paramobj, new Vector3(1f, 1f, 1f), 0.4f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(Totalcoin, new Vector3(1f, 1f, 1f), 0.4f).setDelay(0.6f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
     }
 
     public void close_home(GameObject startobj, GameObject paramobj, GameObject shapobj,
                                 GameObject Balls, GameObject levels, GameObject Totalcoin)
     {
         ResetAnimation();
-        LeanTween.scale(startobj, new Vector3(), 0.6f).setDelay(0f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(levels, new Vector3(), 0.6f).setDelay(0f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(Balls, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(shapobj, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(paramobj, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
-        LeanTween.scale(Totalcoin, new Vector3(), 0.6f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(startobj, new Vector3(), 0.4f).setDelay(0f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(levels, new Vector3(), 0.4f).setDelay(0f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(Balls, new Vector3(), 0.4f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(shapobj, new Vector3(), 0.4f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(paramobj, new Vector3(), 0.4f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(Totalcoin, new Vector3(), 0.4f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
         float[] i = { 1, 0.48f, 1, 1.6f, 1 ,1};
         IEnumerator origin()
         {
@@ -56,20 +56,20 @@ public class UiAnimation : MonoBehaviour
     static public void PausePaneleEAffects(GameObject resumeicoobj, GameObject homeicoobj, GameObject returnicoob)
     {
         make_it_zero(resumeicoobj, homeicoobj, returnicoob);
-        LeanTween.scale(resumeicoobj, new Vector3(1, 1, 1), 0.4f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        LeanTween.scale(homeicoobj, new Vector3(1, 1, 1), 0.4f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        LeanTween.scale(returnicoob, new Vector3(1, 1, 1), 0.4f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(resumeicoobj, new Vector3(1, 1, 1), 0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(homeicoobj, new Vector3(1, 1, 1), 0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(returnicoob, new Vector3(1, 1, 1), 0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
     }
 
     public void closePausePaneleEAffects(GameObject resumeicoobj, GameObject homeicoobj, GameObject returnicoob)
     {
-        LeanTween.scale(resumeicoobj, new Vector3(0, 0, 0), 0.4f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        LeanTween.scale(homeicoobj, new Vector3(0, 0, 0), 0.4f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
-        LeanTween.scale(returnicoob, new Vector3(0, 0, 0), 0.4f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(resumeicoobj, new Vector3(0, 0, 0), 0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(homeicoobj, new Vector3(0, 0, 0), 0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+        LeanTween.scale(returnicoob, new Vector3(0, 0, 0), 0.4f).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         float[] i = { 1f, 1, 1 };
         IEnumerator origin()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             make_it_origine(i, resumeicoobj, homeicoobj, returnicoob);
         }
         StartCoroutine(origin());
@@ -101,26 +101,22 @@ public class UiAnimation : MonoBehaviour
             .setEaseLinear()
             .setDelay(0.1f);
         //label move tp right
-        LeanTween.moveLocal(Label, new Vector2(-Screen.width, Label.transform.localPosition.y), 0.3f)
+        LeanTween.moveLocal(Label, new Vector2(-Screen.width, Label.transform.localPosition.y), 0.2f)
             .setEaseLinear()
             .setDelay(1.5f);
         //contaner move from left to right
         Contaner.transform.localPosition = new Vector2(Screen.width, Contaner.transform.localPosition.y);
-        LeanTween.moveLocal(Contaner, new Vector2(0, Contaner.transform.localPosition.y), 0.3f)
+        LeanTween.moveLocal(Contaner, new Vector2(0, Contaner.transform.localPosition.y), 0.2f)
             .setEaseLinear()
             .setDelay(1.8f);
 
-        LeanTween.scale(Retry, new Vector3(1f, 1f, 1f), 0.8f).setDelay(0.3f).setEase(LeanTweenType.easeOutElastic);
-
-        IEnumerator wait()//retry pingpong scale
+        LeanTween.scale(Retry, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic).setOnComplete(() =>
         {
-            yield return new WaitForSeconds(0.8f);
-            LeanTween.scale(Retry, new Vector3(1.08f, 1.08f, 0), 0.9f)
-             .setEaseLinear()
-             .setLoopPingPong()
-             .setDelay(0.2f);
-        }
-        instance.StartCoroutine(wait());
+            LeanTween.scale(Retry, new Vector3(1.08f, 1.08f, 1.08f), 0.9f)
+            .setEaseLinear()
+            .setLoopPingPong()
+            .setDelay(0.2f);
+        });
 
         /*wait for end of timing to remove add watch*/
         GameObject red = faild.transform.GetChild(0).gameObject;
@@ -214,17 +210,17 @@ public class UiAnimation : MonoBehaviour
     }
 
 
-    public void pop_up(GameObject obj,bool revers)
+    public void pop_up(GameObject obj, bool revers)
     {
         if (revers == false)
         {
             obj.transform.localScale = new Vector3(0f, 0f, 0f);
-            LeanTween.scale(obj, new Vector3(1f, 1f, 1f), 0.6f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic);
+            LeanTween.scale(obj, new Vector3(1f, 1f, 1f), 0.4f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
         }
         else
         {
-            LeanTween.scale(obj, new Vector3(), 0.6f).setDelay(0.2f).setEase(LeanTweenType.easeOutElastic);
-            float[] i = { 1f};
+            LeanTween.scale(obj, new Vector3(), 0.4f).setDelay(0.1f).setEase(LeanTweenType.easeOutElastic);
+            float[] i = { 1f };
             IEnumerator origin()
             {
                 yield return new WaitForSeconds(0.5f);

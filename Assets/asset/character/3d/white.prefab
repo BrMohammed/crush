@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 7535985931460344907}
   - component: {fileID: 408504487}
   - component: {fileID: 125295533}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: white
   m_TagString: ball
   m_Icon: {fileID: 0}
@@ -406,7 +406,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7535985931460344897}
   serializedVersion: 2
-  m_Mass: 0.2
+  m_Mass: 0.12
   m_Drag: 0
   m_AngularDrag: 0.0001
   m_UseGravity: 1

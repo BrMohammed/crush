@@ -125,7 +125,9 @@ public class GameOver : MonoBehaviour
     }
     private void return_event()
     {
-        FindObjectOfType<AudioManager>().StopeSound("active_shield");
+        UiAnimation.ResetAnimation();
+        if (GamePlayControler.init.shield == true)
+            FindObjectOfType<AudioManager>().StopeSound("active_shield");
         GamePlayControler.score = 0;
         ball = GameObject.FindGameObjectsWithTag("ball");
         for (int i = 0; i < ball.Length; i++)

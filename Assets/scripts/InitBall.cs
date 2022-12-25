@@ -8,7 +8,7 @@ public class InitBall : MonoBehaviour
 
     [SerializeField] public GameObject[] ball;
     private GameObject[] balls_detect;
-    [SerializeField] private Material[] flags;
+    [SerializeField] public Material[] flags;
     Vector3 ball_pos;
     [SerializeField] private float fors_y = 1;
     [SerializeField] private float fors_x = 1;
@@ -39,7 +39,7 @@ public class InitBall : MonoBehaviour
             s = SimpelDb.read("SaveTrailDataShop");
             j = JsonMapper.ToObject(s);
             index = (int)j["SelectedIndex"];
-            Debug.Log(index);
+            //Debug.Log(index);
             int index_of_flagse = 0;
             if (index != 0)
             {

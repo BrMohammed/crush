@@ -43,9 +43,9 @@ public class MainMenu : MonoBehaviour
 
     public void On_setting_click_form_main()
     {
-        UiAnimation.instance.pop_up(GamePlayControler.init.settings_Panel.transform.GetChild(1).gameObject, false);
-        GamePlayControler.init.settings_Panel.SetActive(true);
         play_from_home.gameObject.SetActive(false);
+        GamePlayControler.init.settings_Panel.SetActive(true);
+        UiAnimation.instance.pop_up(GamePlayControler.init.settings_Panel.transform.GetChild(1).gameObject, false);
     }
 
     public void On_Levels_Click_from_main()

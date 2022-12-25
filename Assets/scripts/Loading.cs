@@ -69,7 +69,7 @@ public class Loading : MonoBehaviour
 	public void OnUserClickPrivacyPolicy()
 	{
 		FindObjectOfType<AudioManager>().PlaySound("click");
-		Application.OpenURL(""); //your privacy url
+		Application.OpenURL("https://sites.google.com/view/crushbox3d"); //your privacy url
 	}
 
 	

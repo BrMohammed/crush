@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44406828, g: 0.49334002, b: 0.572396, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -346,7 +346,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 6278187}
   m_OnClick:
     m_PersistentCalls:
@@ -2095,7 +2095,7 @@ GameObject:
   - component: {fileID: 64769257}
   - component: {fileID: 64769256}
   - component: {fileID: 64769255}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2675,7 +2675,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 75657825}
   m_OnClick:
     m_PersistentCalls:
@@ -4684,7 +4684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1117f6381fbab0b4587c48161546d236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time_to_end: 4
+  time_to_end: 10
 --- !u!114 &154760830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5319,7 +5319,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 170133559}
   m_OnClick:
     m_PersistentCalls:
@@ -9280,7 +9280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 379209645}
   - component: {fileID: 379209646}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: leeft_up_holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10815,7 +10815,7 @@ GameObject:
   - component: {fileID: 431353945}
   - component: {fileID: 431353944}
   - component: {fileID: 431353943}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19996,7 +19996,7 @@ GameObject:
   m_Component:
   - component: {fileID: 736569313}
   - component: {fileID: 736569314}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: leeft_up_holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20968,7 +20968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 777077290}
   - component: {fileID: 777077291}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: leeft_up_holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23330,7 +23330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895581592}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: 'left_hand '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23503,7 +23503,7 @@ GameObject:
   - component: {fileID: 903685463}
   - component: {fileID: 903685462}
   - component: {fileID: 903685461}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24271,7 +24271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941089438}
   - component: {fileID: 941089439}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24745,7 +24745,7 @@ GameObject:
   - component: {fileID: 948617628}
   - component: {fileID: 948617627}
   - component: {fileID: 948617630}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24759,15 +24759,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948617626}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 948617629}
+  volumeTrigger: {fileID: 0}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -26548,7 +26548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1008258877}
   - component: {fileID: 1008258878}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27436,7 +27436,7 @@ GameObject:
   - component: {fileID: 1025451021}
   - component: {fileID: 1025451020}
   - component: {fileID: 1025451019}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29701,7 +29701,7 @@ GameObject:
   - component: {fileID: 1097867179}
   - component: {fileID: 1097867178}
   - component: {fileID: 1097867177}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: left_bar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29812,7 +29812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1101104071}
   - component: {fileID: 1101104072}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: down_hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32629,7 +32629,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1177040134}
   m_OnClick:
     m_PersistentCalls:
@@ -36746,7 +36746,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1278529083}
   m_OnClick:
     m_PersistentCalls:
@@ -38428,7 +38428,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1346000709}
   m_OnClick:
     m_PersistentCalls:
@@ -40132,7 +40132,7 @@ GameObject:
   - component: {fileID: 1407935545}
   - component: {fileID: 1407935544}
   - component: {fileID: 1407935543}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: right_bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40942,7 +40942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1440170813}
   - component: {fileID: 1440170812}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45708,7 +45708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1564416536}
   - component: {fileID: 1564416537}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: leeft_up_holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45834,7 +45834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1571173119}
   - component: {fileID: 1571173120}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46587,7 +46587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1589046013}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: 'left_hand '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47981,7 +47981,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1630705035}
   m_OnClick:
     m_PersistentCalls:
@@ -50741,7 +50741,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1718721322}
   m_OnClick:
     m_PersistentCalls:
@@ -51965,7 +51965,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1760042946}
   m_OnClick:
     m_PersistentCalls:
@@ -53468,13 +53468,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802083975}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sharedProfile: {fileID: 11400000, guid: 5ef8cb03beec14054b565ca192cb3cfb, type: 2}
-  isGlobal: 1
+  isGlobal: 0
   blendDistance: 0
   weight: 1
   priority: 0
@@ -56317,7 +56317,7 @@ GameObject:
   - component: {fileID: 1886205557}
   - component: {fileID: 1886205556}
   - component: {fileID: 1886205555}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60064,7 +60064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2012384930}
   - component: {fileID: 2012384929}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: parent_of_map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61092,7 +61092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2036031264}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: right_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62569,7 +62569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2080160928}
   - component: {fileID: 2080160929}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: up_hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64168,7 +64168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109137395}
   - component: {fileID: 2109137396}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64923,7 +64923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2131940471}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: right_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66231,7 +66231,7 @@ GameObject:
   - component: {fileID: 346740967}
   - component: {fileID: 346740964}
   - component: {fileID: 7122674909980248435}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: hand
   m_TagString: hand
   m_Icon: {fileID: 0}
@@ -66254,7 +66254,7 @@ GameObject:
   - component: {fileID: 176660672}
   - component: {fileID: 176660675}
   - component: {fileID: 7122674909877678422}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: hand
   m_TagString: hand
   m_Icon: {fileID: 0}
@@ -66278,7 +66278,7 @@ GameObject:
   - component: {fileID: 5600213}
   - component: {fileID: 5600214}
   - component: {fileID: 7122674909763494465}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: hand
   m_TagString: hand
   m_Icon: {fileID: 0}
@@ -66301,7 +66301,7 @@ GameObject:
   - component: {fileID: 615238514}
   - component: {fileID: 615238513}
   - component: {fileID: 7122674910248622825}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: hand
   m_TagString: hand
   m_Icon: {fileID: 0}

@@ -104,7 +104,7 @@ namespace ShopSystem
                 yield return new WaitWhile(() => conferm == false && not_conferm == false);
                 if (conferm)
                 {
-                    Debug.Log("conferm");
+                    //Debug.Log("conferm");
                     Shopcoin = int.Parse(SimpelDb.read("TotalCoin"));
                     Shopcoin += 40;
                     SimpelDb.update(Shopcoin.ToString(), "TotalCoin");
@@ -120,7 +120,7 @@ namespace ShopSystem
                 }
                 else
                 {
-                    Debug.Log("not_conferm");
+                    //Debug.Log("not_conferm");
                     not_conferm = false;
                 }
             }
@@ -252,13 +252,13 @@ namespace ShopSystem
                     while (conferm == false && not_conferm == false) yield return new WaitForEndOfFrame();
                     if (conferm)
                     {
-                        Debug.Log("conferm");
+                        //Debug.Log("conferm");
                         conferm = false;
                         ConfirmBuy(index);
                     }
                     else
                     {
-                        Debug.Log("not_conferm");
+                        //Debug.Log("not_conferm");
                         not_conferm = false;
                     }
                 }

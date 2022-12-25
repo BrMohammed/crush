@@ -52,7 +52,8 @@ public class Winning : MonoBehaviour
     }
     public  void WinningOnGame()
     {
-        FindObjectOfType<AudioManager>().StopeSound("active_shield");
+        if (GamePlayControler.init.shield == true)
+            FindObjectOfType<AudioManager>().StopeSound("active_shield");
         ball = GameObject.FindGameObjectsWithTag("ball");
         for (int i = 0; i < ball.Length; i++)
         {

@@ -15,7 +15,7 @@ public class SimpelDb : MonoBehaviour
     void Start()
     {
 
-        //dbname = Application.persistentDataPath + "/" + DATABASE_NAME;
+        dbname = Application.persistentDataPath + "/" + fileName;
         StartCoroutine(RunDbCode());
         creatdB();
     }
@@ -54,18 +54,18 @@ public class SimpelDb : MonoBehaviour
 
             //Copy the data to the persistentDataPath where the database API can freely access the file
             File.WriteAllBytes(dbDestination, result);
-            Debug.Log("Copied db file");
+            //Debug.Log("Copied db file");
         }
 
         try
         {
             //Tell the db final location for debugging
-            Debug.Log("DB Path: " + dbDestination.Replace("/", "\\"));
+            //Debug.Log("DB Path: " + dbDestination.Replace("/", "\\"));
             //Add "URI=file:" to the front of the url beore using it with the Sqlite API
             dbDestination = "URI=file:" + dbDestination;
 
             dbname = dbDestination;
-            Debug.Log("Success!");
+            //Debug.Log("Success!");
         }
         catch (Exception e)
         {
@@ -87,7 +87,7 @@ public class SimpelDb : MonoBehaviour
                 command.ExecuteNonQuery();
                 if(read("score") == "")
                 {
-                    command.CommandText = "INSERT INTO Data VALUES (1,500,0,0,'','',0,0,1);";
+                    command.CommandText = "INSERT INTO Data VALUES (1,10,0,0,'','',0,0,1);";
                     command.ExecuteNonQuery();
                 }
 

@@ -85,11 +85,12 @@ public class EndlessAndLevelsPlay : MonoBehaviour
     public void On_resume_Click()
     {
         Time.timeScale = 1;
-        FindObjectOfType<AudioManager>().PlaySound("active_shield");
+        if(GamePlayControler.init.shield == true)
+            FindObjectOfType<AudioManager>().PlaySound("active_shield");
         UiAnimation.instance.closePausePaneleEAffects(resume_btn_2.gameObject, home_btn.gameObject, resume_btn1.gameObject);
         IEnumerator betwin()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.4f);
             ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody>();
             if (ball)
                 ball.isKinematic = false;
@@ -219,8 +220,19 @@ public class EndlessAndLevelsPlay : MonoBehaviour
                 s = SimpelDb.read("SaveTrailDataShop");
                 j = JsonMapper.ToObject(s);
                 index = (int)j["SelectedIndex"];
+                int index_of_flagse = 0;
                 if (index != 0)
-                    G.transform.GetChild(index - 1).gameObject.SetActive(true);
+                {
+                    if (index >= 3)
+                    {
+                        index_of_flagse = index - 3;
+                        G.transform.GetChild(2).gameObject.SetActive(true);
+                        G.transform.GetChild(2).gameObject.GetComponent<TrailRenderer>()
+                           .material = InitBall.instiate.flags[index_of_flagse];
+                    }
+                    else
+                        G.transform.GetChild(index - 1).gameObject.SetActive(true);
+                }
             }
             StartCoroutine(wait_ball());
 

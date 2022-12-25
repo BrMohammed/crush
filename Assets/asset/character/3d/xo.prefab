@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 7535985931460344907}
   - component: {fileID: 408504487}
   - component: {fileID: 125295533}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: xo
   m_TagString: ball
   m_Icon: {fileID: 0}
